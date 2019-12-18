@@ -95,6 +95,11 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
+   <from-outcome>charges-pago-de-estudios</from-outcome>
+   <to-view-id>/dtecimax/ar/PagoDeEstudios.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
    <from-outcome>as-citas</from-outcome>
    <to-view-id>/dtecimax/as/Citas.xhtml</to-view-id>
    <redirect/>

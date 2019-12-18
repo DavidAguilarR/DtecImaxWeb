@@ -45,15 +45,15 @@
     TARGET="rules:#dtecimax#admin#AsignacionRoles.xhtml"
     TITLE="admin-asignacion-roles" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
+    ID="admin-Formato1::#dtecimax#admin#as#Formato1.xhtml"
+    NAME="output5" PATH="/dtecimax/admin/as/Formato1.xhtml"
+    TARGET="rules:#dtecimax#admin#as#Formato1.xhtml"
+    TITLE="admin-Formato1" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
     ID="admin-Formato2::#dtecimax#admin#as#Formato2.xhtml"
-    NAME="output5" PATH="/dtecimax/admin/as/Formato2.xhtml"
+    NAME="output6" PATH="/dtecimax/admin/as/Formato2.xhtml"
     TARGET="rules:#dtecimax#admin#as#Formato2.xhtml"
     TITLE="admin-Formato2" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="admin-Formato1RO::#dtecimax#admin#as#Formato1RO.xhtml"
-    NAME="output6" PATH="/dtecimax/admin/as/Formato1RO.xhtml"
-    TARGET="rules:#dtecimax#admin#as#Formato1RO.xhtml"
-    TITLE="admin-Formato1RO" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="admin-Formato2RO::#dtecimax#admin#as#Formato2RO.xhtml"
     NAME="output7" PATH="/dtecimax/admin/as/Formato2RO.xhtml"
@@ -76,33 +76,35 @@
     NAME="output11" PATH="/dtecimax/ar/Pacientes.xhtml"
     TARGET="rules:#dtecimax#ar#Pacientes.xhtml" TITLE="ar-pacientes" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
+    ID="charges-pago-de-estudios::#dtecimax#ar#PagoDeEstudios.xhtml"
+    NAME="output12" PATH="/dtecimax/ar/PagoDeEstudios.xhtml"
+    TARGET="rules:#dtecimax#ar#PagoDeEstudios.xhtml"
+    TITLE="charges-pago-de-estudios" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
     ID="as-resumen-citas::#dtecimax#as#ResumenCitas.xhtml"
-    NAME="output12" PATH="/dtecimax/as/ResumenCitas.xhtml"
+    NAME="output13" PATH="/dtecimax/as/ResumenCitas.xhtml"
     TARGET="rules:#dtecimax#as#ResumenCitas.xhtml"
     TITLE="as-resumen-citas" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="as-estudios::#dtecimax#as#Estudios.xhtml"
-    NAME="output13" PATH="/dtecimax/as/Estudios.xhtml"
-    TARGET="rules:#dtecimax#as#Estudios.xhtml" TITLE="as-estudios" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="as-ordenes-simples::#dtecimax#as#OrdenesSimples.xhtml"
+    NAME="output14" PATH="/dtecimax/as/OrdenesSimples.xhtml"
+    TARGET="rules:#dtecimax#as#OrdenesSimples.xhtml"
+    TITLE="as-ordenes-simples" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="as-ordenes-especiales::#dtecimax#as#OrdenesEspeciales.xhtml"
+    NAME="output15" PATH="/dtecimax/as/OrdenesEspeciales.xhtml"
+    TARGET="rules:#dtecimax#as#OrdenesEspeciales.xhtml"
+    TITLE="as-ordenes-especiales" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="as-ordenes-contrastados::#dtecimax#as#OrdenesContrastados.xhtml"
-    NAME="output14" PATH="/dtecimax/as/OrdenesContrastados.xhtml"
+    NAME="output16" PATH="/dtecimax/as/OrdenesContrastados.xhtml"
     TARGET="rules:#dtecimax#as#OrdenesContrastados.xhtml"
     TITLE="as-ordenes-contrastados" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="as-ordenes-dentales::#dtecimax#as#OrdenesDentales.xhtml"
-    NAME="output15" PATH="/dtecimax/as/OrdenesDentales.xhtml"
+    NAME="output17" PATH="/dtecimax/as/OrdenesDentales.xhtml"
     TARGET="rules:#dtecimax#as#OrdenesDentales.xhtml"
     TITLE="as-ordenes-dentales" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="email-notificaciones::#dtecimax#email#Notificaciones.xhtml"
-    NAME="output16" PATH="/dtecimax/email/Notificaciones.xhtml"
-    TARGET="rules:#dtecimax#email#Notificaciones.xhtml"
-    TITLE="email-notificaciones" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="chart-estudios-agendados::#dtecimax#chart#EstudiosAgendados.xhtml"
-    NAME="output17" PATH="/dtecimax/chart/EstudiosAgendados.xhtml"
-    TARGET="rules:#dtecimax#chart#EstudiosAgendados.xhtml"
-    TITLE="chart-estudios-agendados" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="chart-citas-agendadas::#dtecimax#chart#CitasAgendadas.xhtml"
     NAME="output18" PATH="/dtecimax/chart/CitasAgendadas.xhtml"
@@ -158,4 +160,6 @@
   PATH="/dtecimax/admin/as/Formato2RO.xhtml" SHAPE="304,1169,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#dtecimax#admin#AsignacionRoles.xhtml"
   PATH="/dtecimax/admin/AsignacionRoles.xhtml" SHAPE="304,1169,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#dtecimax#ar#PagoDeEstudios.xhtml"
+  PATH="/dtecimax/ar/PagoDeEstudios.xhtml" SHAPE="304,1169,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

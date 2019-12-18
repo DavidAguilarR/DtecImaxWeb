@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/template.xhtml">
+<ui:define name="content">
+  <h:form id="SearchForm">
+  <f:passThroughAttribute name="autocomplete" value="off"/>
+  <p:panel id="SearchPanel" >
+  <div class="ui-g">
+   <div class="ui-g-12">
+     <div class="ui-g-4">
+        <p:outputLabel  for="nombre_paciente" value="Nombre:" />
+        <p:inputText id="nombre_paciente"  style="width: 90%; margin-top: 5px;" value="#{pagoDeEstudiosForm.searchNomPaci}" maxlength="50" />
+        <p:message for="nombre_paciente"/>
+     </div>
+     <div class="ui-g-4">
+         <p:outputLabel  for="apellido_paterno_paciente" value="Apellido Paterno:" />
+         <p:inputText id="apellido_paterno_paciente"  style="width: 90%; margin-top: 5px;" value="#{pagoDeEstudiosForm.searchApellPatPaci}" maxlength="50" />
+         <p:message for="apellido_paterno_paciente"/>
+     </div>
+      <div class="ui-g-4">
+         <p:outputLabel  for="apellido_materno_paciente" value="Apellido Materno:" />
+         <p:inputText id="apellido_materno_paciente"  style="width: 90%; margin-top: 5px;" value="#{pagoDeEstudiosForm.searchApellMatPaci}" maxlength="50" />
+         <p:message for="apellido_materno_paciente"/>
+     </div>
+   </div>
+  
+  <div class="ui-g-9 ui-g-nopad">
+     <div class="ui-g-6">
+      <p:outputLabel for="fechaDesde" value="Fecha Desde" />
+        <p:calendar id="fechaDesde"  pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{pagoDeEstudiosForm.searchFechaDesde}"/>
+        <p:message for="fechaDesde"/>
+     </div>
+     <div class="ui-g-6">
+        <p:outputLabel for="fechaHasta" value="Fecha Hasta" />
+         <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{pagoDeEstudiosForm.searchFechaHasta}"/>
+         <p:message for="fechaHasta"/>
+     </div>
+  </div>
+  </div><!-- END ui-g  -->
+   <div class="ui-g">
+      <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: left;">
+       <p:commandButton value="Consultar" update="SearchPanel" action="#{pagoDeEstudiosForm.filtraPorFechas()}" oncomplete="$('.ui-message-error').delay(1800).fadeOut(500);"/>
+      </div>
+   </div><!-- END ui-g  -->
+   </p:panel>
+  </h:form>
+</ui:define>
+</ui:composition>
