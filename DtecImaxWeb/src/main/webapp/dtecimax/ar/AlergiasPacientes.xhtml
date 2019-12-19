@@ -39,12 +39,12 @@
                            
 								<p:dataTable var="alergia" value="#{alergiasPacientesForm.listAlergiasPacientes}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 								     <f:facet name="header">
-								      Alergias
+								      Enfermedades o Condiciones
 								     </f:facet>
-								      <p:column headerText="Nombre Alergia:">
+								      <p:column headerText="Enfermedad o Condicion:">
 								        <h:outputText value="#{alergia.nombreAlergia}" />
 								    </p:column>
-								     <p:column headerText="Descripcion Alergia:">
+								     <p:column headerText="Descripcion:">
 								        <h:outputText value="#{alergia.descripcion}" />
 								    </p:column>
 								    <p:column headerText="Opciones:">
@@ -74,12 +74,12 @@
 <p:panel id="panelCreate">
 <div class="ui-g ui-fluid">
 <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  <p:outputLabel for="nombre_alergia" value="Nombre Alergia:" />
+  <p:outputLabel for="nombre_alergia" value="Enfermedad o Condicion:" />
   <p:inputText id="nombre_alergia" name="nombre_alergia" style="width: 100%; margin-top: 5px;" value="#{alergiasPacientes.nombreAlergia}" required="true" maxlength="50"  />
   <p:message for="nombre_alergia" />
 </div>
 <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  <p:outputLabel for="descripcion_alergia" value="Descripcion Alergia:" />
+  <p:outputLabel for="descripcion_alergia" value="Descripcion:" />
   <p:inputText id="descripcion_alergia" name="descripcion_alergia" style="width: 100%; margin-top: 5px;" value="#{alergiasPacientes.descripcion}" required="true" maxlength="50"  />
   <p:message for="descripcion_alergia" />
 </div>
