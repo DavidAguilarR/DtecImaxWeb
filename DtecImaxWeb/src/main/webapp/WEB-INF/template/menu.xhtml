@@ -51,7 +51,9 @@
                        <p:menuitem id="apl_chart_estudios_agendados" value="Estudios Agendados" icon="fa fa-line-chart" outcome="chart-estudios-agendados" />
                        <p:menuitem id="apl_chart_citas_agendadas" value="Citas Agendadas" icon="fa fa-line-chart" outcome="chart-citas-agendadas" />
                       </p:submenu>
-                      
+                       <p:submenu id="apl_charges" label="Cobros" icon="fa fa-usd" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
+                       <p:menuitem id="apl_charges_pago_de_estudios" value="Pago de Estudios" icon="fa fa-money" outcome="charges-pago-de-estudios" />
+                      </p:submenu>
                   </pa:menu>      
                  </h:form>
                 </div>

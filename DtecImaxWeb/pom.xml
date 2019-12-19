@@ -6,8 +6,8 @@
     <groupId>mx.com.dtecimax</groupId>
 	<artifactId>DtecImaxWeb</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
-	<name>DtecImaxWeb Maven Webapp</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>DtecImaxWeb</name>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
