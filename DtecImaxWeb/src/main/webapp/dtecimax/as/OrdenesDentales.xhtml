@@ -404,7 +404,7 @@
 <p:panel id="panelUpdate">
 
  <div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-lg-12" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
     <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
     <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroPaciente}" >
     <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -413,10 +413,7 @@
     </p:selectOneMenu>
     <p:message for="numero_paciente"/>
   </div>
- </div> 
-
- <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel for="edad" value="Edad"/>
   <p:inputText id="edad" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.edad}" readonly="true"/>
   <p:message for="edad"/>
@@ -428,27 +425,10 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
- </div>
+ </div> 
 
-</div>
-<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor Referente" for="numero_doctor_referente" /> 
-   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctorReferente}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor_referente"/>
- </div>
  <div class="ui-g ui-fluid">
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
   		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -457,22 +437,50 @@
  		</p:selectOneMenu>
  		<p:message for="numero_estudio"/>
   	</div>
-	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   		<p:outputLabel for="costo_estudio" value="Costo de Estudio"/>
   		<p:inputText id="costo_estudio" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.costoEstudio}" readonly="true">
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
- 
+  	 <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
+    <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.tipoPago}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectTipoPagoItems}"  />
+	</p:selectOneMenu>
+	<p:message for="tipo_pago"/>
+  </div>
+    
+</div>
+ <div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Nombre Doctor Referente" for="numero_doctor_referente" /> 
+   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctorReferente}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor_referente"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
 	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroUbicacion}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
 	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
 	</p:selectOneMenu>
 	<p:message for="numero_ubicacion"/>
-  </div>
+</div>
  </div>
+
+
  
  <div class="ui-g ui-fluid">
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
@@ -489,13 +497,6 @@
     <p:outputLabel value="Requiere Factura" for="requiere_factura" />
     <p:selectBooleanCheckbox id="requiere_factura" style="width: 100%; margin-top: 5px;" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.requiereFactura}" />
     <p:message for="requiere_factura"/>
-  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Alergias" for="alergias_pacientes" /> 
-    <p:selectManyMenu id="alergias_pacientes" multiple="true" panelStyle="width:250px" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.selectedAlergiasPacientes}" showCheckbox="true">
-    <f:selectItems value="#{ordenesDentalesForm.alergiasPacientesItems}"  />
-    </p:selectManyMenu>
-    <p:message for="alergias_pacientes"/>
   </div>
  </div>
 
