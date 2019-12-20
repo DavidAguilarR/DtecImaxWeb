@@ -1,6 +1,8 @@
 package com.dtecimax.ejb.backing.hr;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import org.primefaces.PrimeFaces;
 
 import com.dtecimax.ejb.model.hr.Doctores;
 import com.dtecimax.ejb.model.hr.DoctoresReferentes;
+import com.dtecimax.ejb.services.email.SessionBeanLocal;
 import com.dtecimax.ejb.services.hr.DoctoresReferentesLocal;
 import com.dtecimax.jpa.dto.hr.DoctoresDto;
 import com.dtecimax.jpa.dto.hr.DoctoresReferentesDto;
@@ -33,9 +36,11 @@ public class DoctoresReferentesForm {
 	private String searchNomDoct; 
 	private String searchApellPatDoct; 
 	private String searchApellMatDoct; 
-	
+	private String toemail;
+	private String subjectemail; 
 	@Inject
 	DoctoresReferentesLocal doctoresReferentesLocal;
+	SessionBeanLocal sessionBeanLocal; 
 	
 	@PostConstruct 
 	public void init() { 
@@ -66,9 +71,36 @@ public class DoctoresReferentesForm {
 	  doctoresReferentes.setFechaCreacion(doctoresReferentesDto.getFechaCreacion()); 
 	  doctoresReferentes.setFechaUltimaActualizacion(doctoresReferentesDto.getFechaUltimaActualizacion());
 	  doctoresReferentes.setComentarios(doctoresReferentesDto.getComentarios());
+	  Calendar fecha = Calendar.getInstance();
+	  System.out.println ("fecha completa "+fecha);
+	  int diaAct = fecha.get(Calendar.DAY_OF_MONTH);
+	  int mesAct = fecha.get(Calendar.MONTH);
+	  mesAct = mesAct+1;
+	  System.out.println ("dia act "+diaAct);
+	  System.out.println ("mes act "+mesAct);
+	
+	  
+	 Timestamp fechaNacimiento =  doctoresReferentesDto.getFechaNacimientoDoctorReferente();
+     System.out.println("fecha completa Nacimiento "+fechaNacimiento);
+	 Calendar fechaNac = Calendar.getInstance();
+	 fechaNac.setTime(fechaNacimiento);
+	 int mesDoctRef =fechaNac.get(Calendar.MONTH);
+	 int diaDoctRef = fechaNac.get(Calendar.DAY_OF_MONTH);
+	 mesDoctRef = mesDoctRef+1;
+     System.out.println("diaaa "+diaDoctRef);
+     System.out.println("messs "+mesDoctRef);
+    
+     if(diaDoctRef==diaAct && mesDoctRef==mesAct) {
+        doctoresReferentes.setColorRegistro("dtecimaxgreen"); 
+	  } 
+     else if(diaDoctRef>diaAct&&mesDoctRef==mesAct){
+		  doctoresReferentes.setColorRegistro("dtecimaxolive"); 
+	  }
 	  listDoctoresReferentes.add(doctoresReferentes); }
 	  
-	  }
+	     listDoctoresReferentes.add(doctoresReferentes); }
+	  
+	 
 	 
 
 	  public void insertDoctoresReferentes() {
@@ -218,7 +250,23 @@ public class DoctoresReferentesForm {
 	        System.out.println("Sale search");
 	  	}
 	  	
-	  	
+	   
+//		    public void selectForEmail(DoctoresReferentes pDoctoresReferentes) {
+//			 	   doctoresReferentes = new DoctoresReferentes();
+//			 		
+//			 	   doctoresReferentes.setNumeroDoctorReferente(pDoctoresReferentes.getNumeroDoctorReferente());
+//			 	  doctoresReferentes.setComentarios(pDoctoresReferentes.getComentarios());
+//			 	//doctoresReferentesSelected.setInfoAdicional(pOrdenesEstudiosEspeciales.getInfoAdicional());
+//			 		
+//			    }
+//
+//			    
+//			    public void enviarIndicaciones() {
+//			    	System.out.println("Comienza enviarIndicaciones");
+//			    	sessionBeanLocal.sendEmail(this.toemail, this.subjectemail, this.doctoresReferentesSelected.getIndicacionesDoctorReferente());
+//			    	System.out.println("Finaliza enviarIndicaciones");
+//			    }
+			  	
 	  	
 	  	
 	public DoctoresReferentes getDoctoresReferentes() {
@@ -252,7 +300,21 @@ public class DoctoresReferentesForm {
 	public void setSearchNomDoct(String searchNomDoct) {
 		this.searchNomDoct = searchNomDoct;
 	}
+	public String getToemail() {
+		return toemail;
+	}
 
+	public void setToemail(String toemail) {
+		this.toemail = toemail;
+	}
+
+	public String getSubjectemail() {
+		return subjectemail;
+	}
+
+	public void setSubjectemail(String subjectemail) {
+		this.subjectemail = subjectemail;
+	}
 	public String getSearchApellPatDoct() {
 		return searchApellPatDoct;
 	}

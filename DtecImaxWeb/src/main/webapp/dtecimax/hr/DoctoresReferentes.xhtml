@@ -5,7 +5,18 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template/template.xhtml">
 <ui:define name="content">
- 
+<style type="text/css">
+   .dtecimaxgreen{
+     background-color:green !important;
+     background-color-image:none !important; 
+     color: #000000 !important; 
+   }
+   .dtecimaxolive{
+    background-color:olive!important;
+     background-color-image:none !important; 
+     color: #000000 !important; 
+   }
+</style>
  <script type="text/javascript">
     function handleGuardarRequest(xhr, status, args) {
         if(args.validationFailed || !args.loggedIn) {
@@ -81,7 +92,7 @@
                    
                             <div class="ui-g">
                             <div class="ui-g-12 ui-lg-12">
-                            <p:dataTable var="doctorReferente" value="#{doctoresReferentesForm.listDoctoresReferentes}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                            <p:dataTable var="doctorReferente" value="#{doctoresReferentesForm.listDoctoresReferentes}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rowStyleClass="#{doctorReferente.colorRegistro}">
 						     <f:facet name="header">
 						      Doctores Referentes
 						     </f:facet>
@@ -105,18 +116,19 @@
                               <p:column headerText="Correo">
                                <h:outputText value="#{doctorReferente.correoDoctorReferente}" />
                              </p:column>
-                              <p:column headerText="CURP">
-                               <h:outputText value="#{doctorReferente.curpDoctorReferente}" />
-                             </p:column>
-                              <p:column headerText="Cedula">
-                               <h:outputText value="#{doctorReferente.cedulaDoctorReferente}" />
-                             </p:column>
+<!--                               <p:column headerText="CURP"> -->
+<!--                                <h:outputText value="#{doctorReferente.curpDoctorReferente}" /> -->
+<!--                              </p:column> -->
+<!--                               <p:column headerText="Cedula"> -->
+<!--                                <h:outputText value="#{doctorReferente.cedulaDoctorReferente}" /> -->
+<!--                              </p:column> -->
                              <p:column headerText="lugar de Trabajo">
                                <h:outputText value="#{doctorReferente.lugarTrabajo}" />
                              </p:column>
                               <p:column headerText="Opciones:">
-	 						    <p:commandButton icon="fa fa-edit" update="DoctoresReferentesFormUpdate DoctoresReferentesFormReadOnly" oncomplete="PF('DoctoresReferentesDialogUpdate').show();" ajax="true"  style="margin-left: 15px;" actionListener="#{doctoresReferentesForm.selectForUpdate(doctorReferente)}"/>
-						        <p:commandButton icon="fa fa-trash" update=":DoctoresReferentesFormDelete:eliminar-doctor-referente-dialog" oncomplete="PF('eliminarDoctorReferenteDlg').show();" ajax="true"  style="margin-left: 15px;" actionListener="#{doctoresReferentesForm.selectForDelete(doctorReferente)}"/>                       
+	 						    <p:commandButton icon="fa fa-edit" update="DoctoresReferentesFormUpdate DoctoresReferentesFormReadOnly" oncomplete="PF('DoctoresReferentesDialogUpdate').show();" ajax="true"  style="margin-left: 8px;" actionListener="#{doctoresReferentesForm.selectForUpdate(doctorReferente)}"/>
+						        <p:commandButton icon="fa fa-trash" update=":DoctoresReferentesFormDelete:eliminar-doctor-referente-dialog" oncomplete="PF('eliminarDoctorReferenteDlg').show();" ajax="true"  style="margin-left: 8px;" actionListener="#{doctoresReferentesForm.selectForDelete(doctorReferente)}"/>    
+						         <p:commandButton icon="fa fa-mail-forward" update="IndicacionesForm"  oncomplete="PF('IndicacionesDialog').show();" ajax= "true" actionListener="#{doctoresReferentesForm.selectForEmail(doctorReferente)}" style="margin-left: 8px;" />                                
  						     </p:column>
 							</p:dataTable>
                             </div>
@@ -172,11 +184,11 @@
      <p:inputText id="correo_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.correoDoctorReferente}" required="true" maxlength="50"/>
      <p:message for="correo_doctor_referente"/>
  </div>
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-     <p:outputLabel for="curp_doctor_referente" value="CURP:"/>
-     <p:inputText id="curp_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.curpDoctorReferente}" required="true" maxlength="25"/>
-     <p:message for="curp_doctor_referente"/>
- </div>
+<!--  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!--      <p:outputLabel for="curp_doctor_referente" value="CURP:"/> -->
+<!--      <p:inputText id="curp_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.curpDoctorReferente}" required="true" maxlength="25"/> -->
+<!--      <p:message for="curp_doctor_referente"/> -->
+<!--  </div> -->
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="domicilio_doctor_referente" value="Domicilio:"/>
      <p:inputText id="domicilio_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.domicilioDoctorReferente}" required="true" maxlength="50"/>
@@ -195,11 +207,11 @@
      <p:inputText id="area_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.areaDoctorReferente}" required="true" maxlength="20"/>
      <p:message for="area_doctor_referente"/>
  </div>
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-     <p:outputLabel for="cedula_doctor_referente" value="Cedula:"/>
-     <p:inputText id="cedula_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.cedulaDoctorReferente}" required="true" maxlength="20"/>
-     <p:message for="cedula_doctor_referente"/>
- </div>
+<!--  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!--      <p:outputLabel for="cedula_doctor_referente" value="Cedula:"/> -->
+<!--      <p:inputText id="cedula_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.cedulaDoctorReferente}" required="true" maxlength="20"/> -->
+<!--      <p:message for="cedula_doctor_referente"/> -->
+<!--  </div> -->
 </div>
 
 <div class="ui-g ui-fluid">
@@ -354,7 +366,18 @@
     </p:dialog>
  </h:form>
  
- 
+ <h:form id="IndicacionesForm">
+ <p:dialog id="indicaciones-dialog" widgetVar="IndicacionesDialog" modal="true" closable="true" closeOnEscape="true" draggable="false" resizable="false" width="1000" header="Enviar Email doctor Referente">
+   <p:outputLabel for="to" value="Para:" /><p:inputText id="to" name="to" value="#{doctoresReferentesForm.toemail}" />
+   <br/>
+   <p:outputLabel for="subject" value="Asunto:" /><p:inputText id="subject" name="subject" value="#{doctoresReferentesForm.subjectemail}" />
+   <br/>
+   <p:inputTextarea id="body" name="body" cols="60" rows="15" value="#{doctoresReferentesForm.doctoresReferentesSelected.indicacionesDoctorReferente}"/>
+   <br/>
+   <p:commandButton value="Cancelar" ajax="true" immediate="true" style="margin-right:20px;" onclick="PF('IndicacionesDialog').hide();"/>
+   <p:commandButton value="Enviar" style="margin-right:20px;" styleClass="ui-priority-primary" oncomplete="PF('IndicacionesDialog').hide();" actionListener="#{doctoresReferentesForm.enviarIndicaciones}"/>
+ </p:dialog>
+</h:form>
  
 </ui:define>
                 

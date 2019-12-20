@@ -12,7 +12,7 @@ public class DoctoresReferentes implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Date sysdate = new Date();
-	
+	private  String indicacionesDoctorReferente;
 	private long numeroDoctorReferente;
 	private String apellidoMaternoDoctorReferente;
 	private String apellidoPaternoDoctorReferente;
@@ -29,7 +29,7 @@ public class DoctoresReferentes implements Serializable {
 	private Timestamp fechaCreacion;
 	private Timestamp fechaNacimientoDoctorReferente;
 	private Timestamp fechaUltimaActualizacion;
-	
+	private  String colorRegistro;
 	private long usuarioUltimaActualizacion;
 	
 	private Date utilFechaNacimientoDoctorReferente = sysdate;
@@ -47,6 +47,14 @@ public class DoctoresReferentes implements Serializable {
 		this.numeroDoctorReferente = numeroDoctorReferente;
 		
 	}
+	public String getColorRegistro() {
+		return colorRegistro;
+	}
+
+	public void setColorRegistro(String colorRegistro) {
+		this.colorRegistro = colorRegistro;
+	}
+
 	
 	public String getNombreDoctorReferente() {
 		return this.nombreDoctorReferente;
@@ -81,7 +89,14 @@ public class DoctoresReferentes implements Serializable {
 	public void setCedulaDoctorReferente(String cedulaDoctorReferente) {
 		this.cedulaDoctorReferente = cedulaDoctorReferente;
 	}
+	public String getIndicacionesDoctorReferente() {
+		return this.indicacionesDoctorReferente;
+	}
 
+	public void setIndicacionesDoctorReferente(String indicacionesDoctorReferente) {
+		this.indicacionesDoctorReferente = indicacionesDoctorReferente;
+		
+	}
 	public String getCelularDoctorReferente() {
 		return this.celularDoctorReferente;
 	}
