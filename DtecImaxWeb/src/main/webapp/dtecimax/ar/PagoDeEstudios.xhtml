@@ -42,10 +42,65 @@
   </div><!-- END ui-g  -->
    <div class="ui-g">
       <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: left;">
-       <p:commandButton value="Consultar" update="SearchPanel" action="#{pagoDeEstudiosForm.filtraPorFechas()}" oncomplete="$('.ui-message-error').delay(1800).fadeOut(500);"/>
+       <p:commandButton value="Consultar" update="SearchPanel PagoDeEstudiosFormReadOnly" action="#{pagoDeEstudiosForm.filtraPorFechas()}" oncomplete="$('.ui-message-error').delay(1800).fadeOut(500);"/>
       </div>
    </div><!-- END ui-g  -->
    </p:panel>
   </h:form>
+  
+  <h:form id="PagoDeEstudiosFormReadOnly">
+    <div class="ui-g">
+    <div class="ui-g-12 ui-lg-12">
+    <div class="card no-margin">
+           <div class="ui-g">
+           <div class="ui-g-12 ui-lg-12">
+              <p:dataTable var="pagoDeEstudio" value="#{pagoDeEstudiosForm.listPagosOrdenesEstudiosV1}" emptyMessage="Sin resultados" tableStyle="width:auto"  paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
+				  <f:facet name="header">
+			       Pago de Estudios
+			      </f:facet>
+			       <p:column headerText="Nombre" style="text-overflow: ellipsis; white-space: nowrap;">
+			        <h:outputText value="#{pagoDeEstudio.nombreCompletoPaciente}" />
+			       </p:column> 
+			       <p:column headerText="Estudio">
+			         <h:outputText value="#{pagoDeEstudio.nombreEstudio}" />
+			       </p:column>
+			       <p:column headerText="Estudio">
+			         <h:outputText value="#{pagoDeEstudio.costoEstudio}" />
+			       </p:column>
+			        <p:column headerText="Fecha">
+			         <h:outputText value="#{pagoDeEstudio.castFechaCreacion}" >
+			          <f:convertDateTime type="date" pattern= "yyyy-MM-dd" />
+			         </h:outputText>
+			       </p:column>
+			       <p:column headerText="Descuento">
+			         <h:outputText value="#{pagoDeEstudio.descuento}" />
+			       </p:column>
+			        <p:column headerText="Total">
+			           <h:outputText value="#{pagoDeEstudio.total}" />
+			       </p:column>
+			  </p:dataTable> 
+           </div>
+           </div>
+     </div>
+     </div>
+   </div>   
+   
+   <p:panel id="TotalsPanel" >
+     <div class="ui-g">
+      <div class="ui-g-12">
+         <p:outputLabel  for="pacientes_atendidos" value="Pacientes Atendidos:" />
+         <p:inputText id="pacientes_atendidos" value="#{pagoDeEstudiosForm.pacientesAtendidos}" readonly="true"/>
+      </div>
+      <div class="ui-g-12">
+         <p:outputLabel  for="total_por_cobrar" value="Total por Cobrar:" />
+         <p:inputText id="total_por_cobrar" value="#{pagoDeEstudiosForm.totalPorCobrar}" readonly="true"/>
+      </div>
+      <div class="ui-g-12">
+      </div>
+     </div>
+    </p:panel>
+        
+  </h:form>              
+  
 </ui:define>
 </ui:composition>
