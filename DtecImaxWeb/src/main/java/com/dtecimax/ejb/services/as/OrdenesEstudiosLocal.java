@@ -1,5 +1,6 @@
 package com.dtecimax.ejb.services.as;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -36,4 +37,15 @@ public interface OrdenesEstudiosLocal {
 	public String findFormatoText(long pNumeroOrden); 
 	
 	public OrdenesEstudiosDto findByNumeroOrdenEstudio(long pNumeroOrden); 
+	
+	 public void aplicarDescuento(long pNumeroOrden
+             ,BigDecimal pDescuento
+             ,String pObservDesc
+             );
+	public void aplicarPago(long pNumeroOrden
+	        ,BigDecimal pPago
+	        ,String pObservPago
+	        );
+	
 }
+

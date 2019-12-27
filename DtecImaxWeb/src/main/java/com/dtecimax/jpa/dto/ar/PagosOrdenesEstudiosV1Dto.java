@@ -1,6 +1,8 @@
 package com.dtecimax.jpa.dto.ar;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 import java.sql.Date;
@@ -81,6 +83,24 @@ public class PagosOrdenesEstudiosV1Dto implements Serializable {
 	@Column(name="TIPO_PAGO")
 	private short tipoPago;
 
+	@Column(name="ESTATUS_PAGO")
+	private String estatusPago;
+	
+	@Column(name="COSTO")
+	private BigDecimal costo; 
+	
+	@Column(name="DESCUENTO")
+	private BigDecimal descuento; 
+	
+	@Column(name="TOTAL")
+	private BigDecimal total;
+	
+	@Column(name="OBSERV_PAGO")
+	private String observPago;
+	
+	@Column(name="OBSERV_DESC")
+	private String observDesc;
+	
 	public PagosOrdenesEstudiosV1Dto() {
 	}
 
@@ -250,6 +270,54 @@ public class PagosOrdenesEstudiosV1Dto implements Serializable {
 
 	public void setTipoPago(short tipoPago) {
 		this.tipoPago = tipoPago;
+	}
+
+	public BigDecimal getCosto() {
+		return costo;
+	}
+
+	public void setCosto(BigDecimal costo) {
+		this.costo = costo;
+	}
+
+	public BigDecimal getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(BigDecimal descuento) {
+		this.descuento = descuento;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public String getObservPago() {
+		return observPago;
+	}
+
+	public void setObservPago(String observPago) {
+		this.observPago = observPago;
+	}
+
+	public String getObservDesc() {
+		return observDesc;
+	}
+
+	public void setObservDesc(String observDesc) {
+		this.observDesc = observDesc;
+	}
+
+	public String getEstatusPago() {
+		return estatusPago;
+	}
+
+	public void setEstatusPago(String estatusPago) {
+		this.estatusPago = estatusPago;
 	}
 
 }

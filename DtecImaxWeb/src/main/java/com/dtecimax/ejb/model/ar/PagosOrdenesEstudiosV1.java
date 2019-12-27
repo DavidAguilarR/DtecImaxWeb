@@ -1,6 +1,7 @@
 package com.dtecimax.ejb.model.ar;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -32,8 +33,11 @@ public class PagosOrdenesEstudiosV1 implements Serializable {
 	private boolean requiereFactura;
 	private short tipoOrden;
 	private short tipoPago;
-	private float descuento; 
-	private float total; 
+	private BigDecimal descuento; 
+	private BigDecimal total; 
+	private String observDesc; 
+	private String observPago; 
+	
 
 	public String getApellidoMaternoPaciente() {
 		return this.apellidoMaternoPaciente;
@@ -203,20 +207,36 @@ public class PagosOrdenesEstudiosV1 implements Serializable {
 		this.tipoPago = tipoPago;
 	}
 
-	public float getDescuento() {
+	public BigDecimal getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(float descuento) {
+	public void setDescuento(BigDecimal descuento) {
 		this.descuento = descuento;
 	}
 
-	public float getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public String getObservDesc() {
+		return observDesc;
+	}
+
+	public void setObservDesc(String observDesc) {
+		this.observDesc = observDesc;
+	}
+
+	public String getObservPago() {
+		return observPago;
+	}
+
+	public void setObservPago(String observPago) {
+		this.observPago = observPago;
 	}
 
 	

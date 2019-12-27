@@ -1,5 +1,6 @@
 package com.dtecimax.jpa.dao.as;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.dtecimax.jpa.dto.as.OrdenesEstudiosDto;
@@ -35,4 +36,12 @@ public interface OrdenesEstudiosDao {
     
     public OrdenesEstudiosDto findByNumeroOrdenEstudio(long pNumeroOrden);
     
+    public void aplicarDescuento(long pNumeroOrden
+    		                    ,BigDecimal pDescuento
+    		                    ,String pObservDesc
+    		                    );
+    public void aplicarPago(long pNumeroOrden
+				           ,BigDecimal pPago
+				           ,String pObservPago
+				           );
 }
