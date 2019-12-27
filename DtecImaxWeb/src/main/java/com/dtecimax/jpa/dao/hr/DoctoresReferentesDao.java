@@ -21,6 +21,7 @@ public interface DoctoresReferentesDao {
 	public List<DoctoresReferentesDto> findBySearch(String pSearchNomDoct
             ,String pSearchApellPatDoc
             ,String pSearchApellMatDoc
+            ,String pSearchLugarTrabajo
             );
 
 }

@@ -271,7 +271,12 @@ public class OrdenesEspecialesForm {
 				ordenesEstudiosEspeciales.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
 				ordenesEstudiosEspeciales.setFechaNacimientoPaciente(ordenesEstudiosVDto.getFechaNacimientoPaciente());
 				ordenesEstudiosEspeciales.setNombreDoctor(ordenesEstudiosVDto.getNombreDoctor());
+				ordenesEstudiosEspeciales.setApellidoPaternoDoctor(ordenesEstudiosVDto.getApellidoPaternoDoctor());
+				ordenesEstudiosEspeciales.setApellidoMaternoDoctor(ordenesEstudiosVDto.getApellidoMaternoDoctor());
 				ordenesEstudiosEspeciales.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
+				ordenesEstudiosEspeciales.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente());
+				ordenesEstudiosEspeciales.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente());
+				ordenesEstudiosEspeciales.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
 				ordenesEstudiosEspeciales.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
 				ordenesEstudiosEspeciales.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
 				ordenesEstudiosEspeciales.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
