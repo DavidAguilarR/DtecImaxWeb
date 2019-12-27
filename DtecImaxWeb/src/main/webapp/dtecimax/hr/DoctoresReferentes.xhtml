@@ -69,6 +69,11 @@
          <p:inputText id="apellido_materno_doctor"  style="width: 100%; margin-top: 5px;" value="#{doctoresReferentesForm.searchApellMatDoct}" maxlength="50" />
          <p:message for="apellido_materno_doctor"/>
     </div>
+    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+         <p:outputLabel  for="lugar_trabajo" value="Lugar Trabajo:" />
+         <p:inputText id="lugar_trabajo"  style="width: 100%; margin-top: 5px;" value="#{doctoresReferentesForm.searchLugarTrabajo}" maxlength="50" />
+         <p:message for="lugar_trabajo"/>
+    </div>
     </div>
     
      <div class="ui-g">
@@ -79,7 +84,7 @@
         <p:commandButton value="Consultar" update="DoctoresReferentesFormReadOnly"  actionListener="#{doctoresReferentesForm.search}" style="margin-left: 10px;"/>
        </div>
      </div>
-    
+   
   </p:panel>
  </p:fieldset>
 </h:form>
@@ -92,7 +97,7 @@
                    
                             <div class="ui-g">
                             <div class="ui-g-12 ui-lg-12">
-                            <p:dataTable var="doctorReferente" value="#{doctoresReferentesForm.listDoctoresReferentes}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rowStyleClass="#{doctorReferente.colorRegistro}">
+                            <p:dataTable var="doctorReferente" value="#{doctoresReferentesForm.listDoctoresReferentes}" emptyMessage="Sin resultados" paginator="true" rows="50" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rowStyleClass="#{doctorReferente.colorRegistro}">
 						     <f:facet name="header">
 						      Doctores Referentes
 						     </f:facet>
@@ -331,7 +336,7 @@
 </p:dialog>   
  </h:form>
  
- 
+
  
  
  <h:form id="DoctoresReferentesFormDelete">

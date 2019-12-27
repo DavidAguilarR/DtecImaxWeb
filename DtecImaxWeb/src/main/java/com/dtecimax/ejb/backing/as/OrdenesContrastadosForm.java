@@ -261,8 +261,14 @@ public class OrdenesContrastadosForm {
 			ordenesEstudiosContrastados.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
 			ordenesEstudiosContrastados.setFechaNacimientoPaciente(ordenesEstudiosVDto.getFechaNacimientoPaciente());
 			ordenesEstudiosContrastados.setNombreDoctor(ordenesEstudiosVDto.getNombreDoctor());
+			ordenesEstudiosContrastados.setApellidoPaternoDoctor(ordenesEstudiosVDto.getApellidoPaternoDoctor());
+			ordenesEstudiosContrastados.setApellidoMaternoDoctor(ordenesEstudiosVDto.getApellidoMaternoDoctor());
+			ordenesEstudiosContrastados.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente());
+			ordenesEstudiosContrastados.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente());
+			ordenesEstudiosContrastados.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
 			ordenesEstudiosContrastados.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
 			ordenesEstudiosContrastados.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
+			ordenesEstudiosContrastados.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
 			ordenesEstudiosContrastados.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
 			ordenesEstudiosContrastados.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
 			ordenesEstudiosContrastados.setNumeroDoctor(ordenesEstudiosVDto.getNumeroDoctor());

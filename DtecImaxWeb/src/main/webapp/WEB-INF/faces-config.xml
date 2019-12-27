@@ -100,6 +100,11 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
+   <from-outcome>charges-historial-de-pagos</from-outcome>
+   <to-view-id>/dtecimax/ar/HistorialDePagos.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
    <from-outcome>as-citas</from-outcome>
    <to-view-id>/dtecimax/as/Citas.xhtml</to-view-id>
    <redirect/>

@@ -1,5 +1,6 @@
 package com.dtecimax.ejb.services.as;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -82,6 +83,24 @@ public class OrdenesEstudiosLocalImpl implements OrdenesEstudiosLocal {
 	@Override
 	public OrdenesEstudiosDto findByNumeroOrdenEstudio(long pNumeroOrden) {
 		return ordenesEstudiosDao.findByNumeroOrdenEstudio(pNumeroOrden); 
+	}
+
+	@Override
+	public void aplicarDescuento(long pNumeroOrden
+			                   , BigDecimal pDescuento
+			                   , String pObservDesc) {
+		ordenesEstudiosDao.aplicarDescuento(pNumeroOrden
+				                          , pDescuento
+				                          , pObservDesc); 	
+	}
+
+	@Override
+	public void aplicarPago(long pNumeroOrden
+			              , BigDecimal pPago
+			              , String pObservPago) {
+		ordenesEstudiosDao.aplicarPago(pNumeroOrden
+				                     , pPago
+				                     , pObservPago); 
 	}
 
 }

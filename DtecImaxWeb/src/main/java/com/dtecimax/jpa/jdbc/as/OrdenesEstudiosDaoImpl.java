@@ -1,5 +1,6 @@
 package com.dtecimax.jpa.jdbc.as;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -124,6 +125,29 @@ public class OrdenesEstudiosDaoImpl implements OrdenesEstudiosDao {
 	public OrdenesEstudiosDto findByNumeroOrdenEstudio(long pNumeroOrden) {
 		OrdenesEstudiosDto ordenesEstudiosDto = em.find(OrdenesEstudiosDto.class, pNumeroOrden);
 		return ordenesEstudiosDto;
+	}
+
+	@Override
+	public void aplicarDescuento(long pNumeroOrden, BigDecimal pDescuento, String pObservDesc) {
+		OrdenesEstudiosDto ordenesEstudiosDto = em.find(OrdenesEstudiosDto.class, pNumeroOrden);
+		if(null!=pDescuento) {
+			ordenesEstudiosDto.setDescuento(pDescuento);
+		}
+		if(null!=pObservDesc&!"".equals(pObservDesc)) {
+			ordenesEstudiosDto.setObservDesc(pObservDesc);
+		}
+	}
+
+	@Override
+	public void aplicarPago(long pNumeroOrden, BigDecimal pPago, String pObservPago) {
+		OrdenesEstudiosDto ordenesEstudiosDto = em.find(OrdenesEstudiosDto.class, pNumeroOrden);
+		if(null!=pPago) {
+			ordenesEstudiosDto.setTotal(pPago);
+		}
+		if(null!=pObservPago&!"".equals(pObservPago)) {
+			ordenesEstudiosDto.setObservPago(pObservPago);
+		}
+		ordenesEstudiosDto.setEstatusPago("PAGADO");
 	}
 
 	

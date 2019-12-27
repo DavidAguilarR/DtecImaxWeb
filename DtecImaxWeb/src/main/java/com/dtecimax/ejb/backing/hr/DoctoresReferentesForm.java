@@ -36,6 +36,7 @@ public class DoctoresReferentesForm {
 	private String searchNomDoct; 
 	private String searchApellPatDoct; 
 	private String searchApellMatDoct; 
+	private String searchLugarTrabajo; 
 	private String toemail;
 	private String subjectemail; 
 	@Inject
@@ -80,27 +81,25 @@ public class DoctoresReferentesForm {
 	  System.out.println ("mes act "+mesAct);
 	
 	  
-	 Timestamp fechaNacimiento =  doctoresReferentesDto.getFechaNacimientoDoctorReferente();
-     System.out.println("fecha completa Nacimiento "+fechaNacimiento);
-	 Calendar fechaNac = Calendar.getInstance();
-	 fechaNac.setTime(fechaNacimiento);
-	 int mesDoctRef =fechaNac.get(Calendar.MONTH);
-	 int diaDoctRef = fechaNac.get(Calendar.DAY_OF_MONTH);
-	 mesDoctRef = mesDoctRef+1;
-     System.out.println("diaaa "+diaDoctRef);
-     System.out.println("messs "+mesDoctRef);
+	  Timestamp fechaNacimiento =  doctoresReferentesDto.getFechaNacimientoDoctorReferente();
+      System.out.println("fecha completa Nacimiento "+fechaNacimiento);
+	  Calendar fechaNac = Calendar.getInstance();
+	  fechaNac.setTime(fechaNacimiento);
+	  int mesDoctRef =fechaNac.get(Calendar.MONTH);
+	  int diaDoctRef = fechaNac.get(Calendar.DAY_OF_MONTH);
+	  mesDoctRef = mesDoctRef+1;
+      System.out.println("diaaa "+diaDoctRef);
+      System.out.println("messs "+mesDoctRef);
     
-     if(diaDoctRef==diaAct && mesDoctRef==mesAct) {
+      if(diaDoctRef==diaAct && mesDoctRef==mesAct) {
         doctoresReferentes.setColorRegistro("dtecimaxgreen"); 
 	  } 
-     else if(diaDoctRef>diaAct&&mesDoctRef==mesAct){
+      else if(diaDoctRef>diaAct&&mesDoctRef==mesAct){
 		  doctoresReferentes.setColorRegistro("dtecimaxolive"); 
 	  }
 	  listDoctoresReferentes.add(doctoresReferentes); }
-	  
-	     listDoctoresReferentes.add(doctoresReferentes); }
-	  
-	 
+	  }
+	   
 	 
 
 	  public void insertDoctoresReferentes() {
@@ -216,12 +215,14 @@ public class DoctoresReferentesForm {
 	        if(null!=this.searchNomDoct&&!"".equals(this.searchNomDoct)
 	          ||(null!=this.searchApellPatDoct&&!"".equals(this.searchApellPatDoct))
 	          ||(null!=this.searchApellMatDoct&&!"".equals(this.searchApellMatDoct))
+	          ||(null!=this.searchLugarTrabajo&&!"".equals(this.searchLugarTrabajo))
 	          ) {
 	      	  
 	      	listDoctoresReferentes = new ArrayList<DoctoresReferentes>();
 	    		List<DoctoresReferentesDto> listDoctoresReferentesDto = doctoresReferentesLocal.findBySearch(this.searchNomDoct
 	    				                                                      ,this.searchApellPatDoct
 	    				                                                      ,this.searchApellMatDoct
+	    				                                                      ,this.searchLugarTrabajo
 	    				                                                      ); 
 	    		Iterator<DoctoresReferentesDto> iterDoctoresReferentesDto =  listDoctoresReferentesDto.iterator();
 	    		while(iterDoctoresReferentesDto.hasNext()) {
@@ -250,22 +251,20 @@ public class DoctoresReferentesForm {
 	        System.out.println("Sale search");
 	  	}
 	  	
-	   
-//		    public void selectForEmail(DoctoresReferentes pDoctoresReferentes) {
-//			 	   doctoresReferentes = new DoctoresReferentes();
-//			 		
-//			 	   doctoresReferentes.setNumeroDoctorReferente(pDoctoresReferentes.getNumeroDoctorReferente());
-//			 	  doctoresReferentes.setComentarios(pDoctoresReferentes.getComentarios());
-//			 	//doctoresReferentesSelected.setInfoAdicional(pOrdenesEstudiosEspeciales.getInfoAdicional());
-//			 		
-//			    }
-//
-//			    
-//			    public void enviarIndicaciones() {
-//			    	System.out.println("Comienza enviarIndicaciones");
-//			    	sessionBeanLocal.sendEmail(this.toemail, this.subjectemail, this.doctoresReferentesSelected.getIndicacionesDoctorReferente());
-//			    	System.out.println("Finaliza enviarIndicaciones");
-//			    }
+	    public void selectForEmail(DoctoresReferentes pDoctoresReferentes) {
+			 	   doctoresReferentes = new DoctoresReferentes();
+			 	   doctoresReferentes.setNumeroDoctorReferente(pDoctoresReferentes.getNumeroDoctorReferente());
+			 	  doctoresReferentes.setComentarios(pDoctoresReferentes.getComentarios());
+			 	//doctoresReferentesSelected.setInfoAdicional(pOrdenesEstudiosEspeciales.getInfoAdicional());
+			 		
+			    }
+
+		    
+			    public void enviarIndicaciones() {
+			    	System.out.println("Comienza enviarIndicaciones");
+		    	sessionBeanLocal.sendEmail(this.toemail, this.subjectemail, this.doctoresReferentesSelected.getIndicacionesDoctorReferente());
+			    	System.out.println("Finaliza enviarIndicaciones");
+			    }
 			  	
 	  	
 	  	
@@ -307,7 +306,13 @@ public class DoctoresReferentesForm {
 	public void setToemail(String toemail) {
 		this.toemail = toemail;
 	}
+	public String getSearchLugarTrabajo() {
+		return searchLugarTrabajo;
+	}
 
+	public void setSearchLugarTrabajo(String searchLugarTrabajo) {
+		this.searchLugarTrabajo = searchLugarTrabajo;
+	}
 	public String getSubjectemail() {
 		return subjectemail;
 	}
