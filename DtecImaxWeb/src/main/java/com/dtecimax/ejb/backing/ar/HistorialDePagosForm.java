@@ -13,8 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import org.primefaces.PrimeFaces;
-
 import com.dtecimax.ejb.model.ar.PagosOrdenesEstudiosV1;
 import com.dtecimax.ejb.services.ar.PagosOrdenesEstudiosV1Local;
 import com.dtecimax.ejb.services.as.OrdenesEstudiosLocal;
@@ -22,24 +20,14 @@ import com.dtecimax.jpa.dto.ar.PagosOrdenesEstudiosV1Dto;
 
 @ManagedBean  
 @ViewScoped
-public class PagoDeEstudiosForm {
-
+public class HistorialDePagosForm {
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	
-	private String searchNomPaci; 
-	private String searchApellPatPaci; 
-	private String searchApellMatPaci;
 	private Date searchFechaDesde;
 	private Date searchFechaHasta;
-	private int pacientesAtendidos; 
+	private BigDecimal gananciaTotal; 
 	private float totalPorCobrar; 
 	private List<PagosOrdenesEstudiosV1> listPagosOrdenesEstudiosV1 = new ArrayList<PagosOrdenesEstudiosV1>(); 
 	private PagosOrdenesEstudiosV1 pagosOrdenesEstudiosV1Selected = new PagosOrdenesEstudiosV1(); 
-	
-	private BigDecimal monto; 
-	private String observDesc; 
-	private BigDecimal total; 
-	private String observPago; 
 	
 	@Inject 
 	PagosOrdenesEstudiosV1Local pagosOrdenesEstudiosV1Local;
@@ -61,28 +49,21 @@ public class PagoDeEstudiosForm {
 	public void filtraPorFechas() {
 		System.out.println("Entra filtraPorFechas");
 		
-		System.out.println("searchNomPaci:"+searchNomPaci);
-		System.out.println("searchApellPatPaci:"+searchApellPatPaci);
-		System.out.println("searchApellMatPaci:"+searchApellMatPaci);
-		System.out.println("searchFechaDesde:"+searchFechaDesde);
-		System.out.println("searchFechaHasta:"+searchFechaHasta);
-		
 		java.sql.Date sqlFechaDesde = new java.sql.Date(searchFechaDesde.getTime());
 		java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaHasta.getTime()); 
 		
-		List<PagosOrdenesEstudiosV1Dto> listPagosEstudiosV1Dto = pagosOrdenesEstudiosV1Local.findByFiltros(searchNomPaci
-																		                                 , searchApellPatPaci
-																		                                 , searchApellMatPaci
+		List<PagosOrdenesEstudiosV1Dto> listPagosEstudiosV1Dto = pagosOrdenesEstudiosV1Local.findByFiltros(null /*searchNomPaci*/
+																		                                 , null /*searchApellPatPaci*/
+																		                                 , null /*searchApellMatPaci*/
 																		                                 , sqlFechaDesde
 																		                                 , sqlFechaHasta
 																		                                 );
 		listPagosOrdenesEstudiosV1 = new ArrayList<PagosOrdenesEstudiosV1>(); 
-		pacientesAtendidos = 0; 
 		totalPorCobrar = 0f; 
 		Iterator<PagosOrdenesEstudiosV1Dto> iterPagosEstudiosV1Dto = listPagosEstudiosV1Dto.iterator();
 		while(iterPagosEstudiosV1Dto.hasNext()) {
 			PagosOrdenesEstudiosV1Dto pagosOrdenesEstudiosV1Dto = iterPagosEstudiosV1Dto.next(); 
-			if(null==pagosOrdenesEstudiosV1Dto.getEstatusPago()||"".equals(pagosOrdenesEstudiosV1Dto.getEstatusPago())) {
+			if(null!=pagosOrdenesEstudiosV1Dto.getEstatusPago()&&!"".equals(pagosOrdenesEstudiosV1Dto.getEstatusPago())) {
 			PagosOrdenesEstudiosV1 pagosOrdenesEstudiosV1 = new PagosOrdenesEstudiosV1();
 			pagosOrdenesEstudiosV1.setNumeroOrden(pagosOrdenesEstudiosV1Dto.getNumeroOrden());
 			pagosOrdenesEstudiosV1.setNombreCompletoPaciente(pagosOrdenesEstudiosV1Dto.getNombreCompletoPaciente());
@@ -98,90 +79,28 @@ public class PagoDeEstudiosForm {
 				fTotal = pagosOrdenesEstudiosV1Dto.getCostoEstudio(); 
 			}
 			pagosOrdenesEstudiosV1.setTotal(new BigDecimal(fTotal));
+			pagosOrdenesEstudiosV1.setObservDesc(pagosOrdenesEstudiosV1Dto.getObservDesc());
+			pagosOrdenesEstudiosV1.setObservPago(pagosOrdenesEstudiosV1Dto.getObservPago());
 			listPagosOrdenesEstudiosV1.add(pagosOrdenesEstudiosV1); 
-			pacientesAtendidos = pacientesAtendidos +1; 
 			totalPorCobrar = totalPorCobrar + (float)pagosOrdenesEstudiosV1Dto.getCostoEstudio();  
 			}
 		}
 		
 		System.out.println("Sale filtraPorFechas");
-	}
+	}	
 	
-	public void selectForDescuento(PagosOrdenesEstudiosV1 pPagosOrdenesEstudiosV1) {
-		pagosOrdenesEstudiosV1Selected = new PagosOrdenesEstudiosV1();
-		pagosOrdenesEstudiosV1Selected.setNumeroOrden(pPagosOrdenesEstudiosV1.getNumeroOrden());
-	}
-	
-	public void selectForPago(PagosOrdenesEstudiosV1 pPagosOrdenesEstudiosV1) {
-		pagosOrdenesEstudiosV1Selected = new PagosOrdenesEstudiosV1();
-		
-		float fTotal =0f; 
-		if(null!=pPagosOrdenesEstudiosV1.getDescuento()) {
-			fTotal = pPagosOrdenesEstudiosV1.getCostoEstudio()-pPagosOrdenesEstudiosV1.getDescuento().floatValue();
-		}else {
-			fTotal = pPagosOrdenesEstudiosV1.getCostoEstudio(); 
-		}
-		
-		this.total = new BigDecimal(fTotal); 
-		pagosOrdenesEstudiosV1Selected.setNumeroOrden(pPagosOrdenesEstudiosV1.getNumeroOrden());
-	}
-	
-	public void aplicarDescuento() {
-		System.out.println("Entra aplicarDescuento");
-		System.out.println("monto:"+this.monto);
-		System.out.println("observDesc:"+this.observDesc);
-		System.out.println("NumeroOrden:"+pagosOrdenesEstudiosV1Selected.getNumeroOrden());
-		System.out.println("Sale aplicarDescuento");
-		
-		boolean descuentoIn = false; 
-		ordenesEstudiosLocal.aplicarDescuento(pagosOrdenesEstudiosV1Selected.getNumeroOrden()
-				                            , this.monto
-				                            , this.observDesc
-				                            );
-		filtraPorFechas();
-		descuentoIn = true; 
-		PrimeFaces.current().ajax().addCallbackParam("descuentoIn", descuentoIn);
-		
-	}
-	
-	public void aplicarPago() {
-		boolean pagoIn = false; 
-		ordenesEstudiosLocal.aplicarPago(pagosOrdenesEstudiosV1Selected.getNumeroOrden()
-				                       , this.total
-				                       , this.observPago
-				                       );
-		filtraPorFechas();
-		pagoIn = true; 
-		PrimeFaces.current().ajax().addCallbackParam("pagoIn", pagoIn);
-	}
-	
-	public String getSearchNomPaci() {
-		return searchNomPaci;
-	}
-	public void setSearchNomPaci(String searchNomPaci) {
-		this.searchNomPaci = searchNomPaci;
-	}
-	public String getSearchApellPatPaci() {
-		return searchApellPatPaci;
-	}
-	public void setSearchApellPatPaci(String searchApellPatPaci) {
-		this.searchApellPatPaci = searchApellPatPaci;
-	}
-	public String getSearchApellMatPaci() {
-		return searchApellMatPaci;
-	}
-	public void setSearchApellMatPaci(String searchApellMatPaci) {
-		this.searchApellMatPaci = searchApellMatPaci;
-	}
 	public Date getSearchFechaDesde() {
 		return searchFechaDesde;
 	}
+	
 	public void setSearchFechaDesde(Date searchFechaDesde) {
 		this.searchFechaDesde = searchFechaDesde;
 	}
+	
 	public Date getSearchFechaHasta() {
 		return searchFechaHasta;
 	}
+	
 	public void setSearchFechaHasta(Date searchFechaHasta) {
 		this.searchFechaHasta = searchFechaHasta;
 	}
@@ -194,22 +113,6 @@ public class PagoDeEstudiosForm {
 		this.listPagosOrdenesEstudiosV1 = listPagosOrdenesEstudiosV1;
 	}
 
-	public int getPacientesAtendidos() {
-		return pacientesAtendidos;
-	}
-
-	public void setPacientesAtendidos(int pacientesAtendidos) {
-		this.pacientesAtendidos = pacientesAtendidos;
-	}
-
-	public float getTotalPorCobrar() {
-		return totalPorCobrar;
-	}
-
-	public void setTotalPorCobrar(float totalPorCobrar) {
-		this.totalPorCobrar = totalPorCobrar;
-	}
-
 	public PagosOrdenesEstudiosV1 getPagosOrdenesEstudiosV1Selected() {
 		return pagosOrdenesEstudiosV1Selected;
 	}
@@ -218,36 +121,20 @@ public class PagoDeEstudiosForm {
 		this.pagosOrdenesEstudiosV1Selected = pagosOrdenesEstudiosV1Selected;
 	}
 
-	public BigDecimal getMonto() {
-		return monto;
+	public BigDecimal getGananciaTotal() {
+		return gananciaTotal;
 	}
 
-	public void setMonto(BigDecimal monto) {
-		this.monto = monto;
+	public void setGananciaTotal(BigDecimal gananciaTotal) {
+		this.gananciaTotal = gananciaTotal;
+	}
+	
+	public float getTotalPorCobrar() {
+		return totalPorCobrar;
 	}
 
-	public String getObservDesc() {
-		return observDesc;
+	public void setTotalPorCobrar(float totalPorCobrar) {
+		this.totalPorCobrar = totalPorCobrar;
 	}
-
-	public void setObservDesc(String observDesc) {
-		this.observDesc = observDesc;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	public String getObservPago() {
-		return observPago;
-	}
-
-	public void setObservPago(String observPago) {
-		this.observPago = observPago;
-	} 
 	
 }
