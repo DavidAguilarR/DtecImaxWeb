@@ -36,7 +36,8 @@ public class DoctoresReferentesDaoImpl implements DoctoresReferentesDao {
 	  
 	  @Override 
 	  public void deleteDoctoresReferentes(long pNumeroDoctorReferente) { 
-		  DoctoresReferentesDto doctoresDto = em.find(DoctoresReferentesDto.class, pNumeroDoctorReferente); em.remove(doctoresDto);
+		  DoctoresReferentesDto doctoresReferentesDto = em.find(DoctoresReferentesDto.class, pNumeroDoctorReferente); 
+		  em.remove(doctoresReferentesDto);
 		  }
 	  
 	  
@@ -68,16 +69,21 @@ public class DoctoresReferentesDaoImpl implements DoctoresReferentesDao {
 	public List<DoctoresReferentesDto> findBySearch(String pSearchNomDoct
 			                             ,String pSearchApellPatDoc
 			                             ,String pSearchApellMatDoc
+			                             ,String pSearchLugarTrabajo
+			                             
 			                             ) {
-		String query = " SELECT d FROM DoctoresDto d where 1=1"; 
+		String query = " SELECT d FROM DoctoresReferentesDto d where 1=1"; 
 		if(null!=pSearchNomDoct&&!"".equals(pSearchNomDoct)) {
-			query = query+" AND d.nombreDoctor like '%"+pSearchNomDoct+"%' ";
+			query = query+" AND d.nombreDoctorReferente like '%"+pSearchNomDoct+"%' ";
 		}
 		if(null!=pSearchApellPatDoc&&!"".equals(pSearchApellPatDoc)) {
-			query = query+" AND d.apellidoPaternoDoctor like '%"+pSearchApellPatDoc+"%' ";
+			query = query+" AND d.apellidoPaternoDoctorReferente like '%"+pSearchApellPatDoc+"%' ";
 		}
 		if(null!=pSearchApellMatDoc&&!"".equals(pSearchApellMatDoc)) {
-			query = query+" AND d.apellidoMaternoDoctor like '%"+pSearchApellMatDoc+"%' ";
+			query = query+" AND d.apellidoMaternoDoctorReferente like '%"+pSearchApellMatDoc+"%' ";
+		}
+		if(null!=pSearchLugarTrabajo&&!"".equals(pSearchLugarTrabajo)) {
+			query = query+" AND d.lugarTrabajo like '%"+pSearchLugarTrabajo+"%' ";
 		}
 		return em.createQuery(query).getResultList();
 	}
