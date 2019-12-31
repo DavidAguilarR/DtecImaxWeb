@@ -83,31 +83,34 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenContrastado" value="#{ordenesContrastadosForm.listOrdenesEstudiosContrastados}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Contrastados(Pendientes)
+								  Ordenes Contrastados (Pendientes)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenContrastado.numeroOrden}" />
 								</p:column>
-								 <p:column headerText="Nombre Estudio">
+								 <p:column headerText="Estudio">
 								   <h:outputText value="#{ordenContrastado.nombreEstudio}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenContrastado.nombrePaciente}" />
 								</p:column>
 								 <p:column headerText="Nombre Doctor">
 								        <h:outputText value="#{ordenContrastado.nombreDoctor}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenContrastado.apellidoPaternoDoctor}" />
+								          <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctor}" />
 								</p:column>
 								
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenContrastado.nombreDoctorReferente}" />
+								         <p:spacer width="5" height="5" />
 								        <h:outputText value="#{ordenContrastado.apellidoPaternoDoctorReferente}" />
+								         <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctorReferente}" />
 								</p:column>
 								
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenContrastado.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -140,30 +143,34 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenContrastado" value="#{ordenesContrastadosForm.listOrdEstContrEnAten}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Contrastados(En Atencion)
+								  Ordenes Contrastados (En Atencion)
 						       </f:facet>
 						       <p:column headerText="N Orden">
 								   <h:outputText value="#{ordenContrastado.numeroOrden}" />
 								</p:column>
-								<p:column headerText="Nombre Estudio">
+								<p:column headerText="Estudio">
 								   <h:outputText value="#{ordenContrastado.nombreEstudio}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenContrastado.nombrePaciente}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor">
+								 <p:column headerText="Doctor">
 								        <h:outputText value="#{ordenContrastado.nombreDoctor}" />
+								         <p:spacer width="5" height="5" />
 								          <h:outputText value="#{ordenContrastado.nombreDoctor}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenContrastado.apellidoPaternoDoctor}" />
+								          <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctor}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenContrastado.nombreDoctorReferente}" />
+								         <p:spacer width="5" height="5" />
 								        <h:outputText value="#{ordenContrastado.apellidoPaternoDoctorReferente}" />
+								         <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenContrastado.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -196,30 +203,32 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenContrastado" value="#{ordenesContrastadosForm.listOrdEstContrEstRea}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Contrastados(Estudios Realizados)
+								  Ordenes Contrastados (Estudios Realizados)
 						       </f:facet>
-						       <p:column headerText="Numero Estudio">
+						       <p:column headerText="Estudio">
 								   <h:outputText value="#{ordenContrastado.numeroOrden}" />
 								</p:column>
-								<p:column headerText="Nombre Estudio">
+								<p:column headerText="Estudio">
 								   <h:outputText value="#{ordenContrastado.nombreEstudio}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenContrastado.nombrePaciente}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor">
-								        <h:outputText value="#{ordenContrastado.nombreDoctor}" />
+								 <p:column headerText="Doctor">
 								          <h:outputText value="#{ordenContrastado.nombreDoctor}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenContrastado.apellidoPaternoDoctor}" />
+								          <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctor}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenContrastado.nombreDoctorReferente}" />
+								         <p:spacer width="5" height="5" />
 								        <h:outputText value="#{ordenContrastado.apellidoPaternoDoctorReferente}" />
+								        . <p:spacer width="5" height="5" />
 								            <h:outputText value="#{ordenContrastado.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenContrastado.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -265,8 +274,8 @@
 
 <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-12" style="margin-bottom: 5px;">
-  <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  <p:outputLabel value="Paciente" for="numero_paciente" /> 
   <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroPaciente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
@@ -274,9 +283,6 @@
   </p:selectOneMenu>
   <p:message for="numero_paciente"/>
  </div>
- </div>
- 
- <div class="ui-g ui-fluid">
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel for="edad" value="Edad"/>
   <p:inputText id="edad" value="#{ordenesContrastadosForm.edad}" readonly="true"/>
@@ -289,27 +295,11 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
  </div>
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor Referente" for="numero_doctor_referente" /> 
-   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroDoctorReferente}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
- </div>
-</div>
+ 
  <div class="ui-g ui-fluid">
-  
-   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  		<p:outputLabel value="Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
   		<f:selectItems value="#{adminHelper.selectEstudiosItems}"/>
@@ -323,16 +313,7 @@
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
-  	
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
-	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroUbicacion}" >
-	<f:selectItem itemLabel="seleccione" itemValue="" /> 
-	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
-	</p:selectOneMenu>
-	<p:message for="numero_ubicacion"/>
-  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  	  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
     <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesEstudiosContrastados.tipoPago}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -340,7 +321,32 @@
 	</p:selectOneMenu>
 	<p:message for="tipo_pago"/>
   </div>
-  
+</div>
+ <div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="numero_doctor_referente" /> 
+   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroDoctorReferente}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor_referente"/>
+ </div>
+   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Ubicacion paciente" for="numero_ubicacion" /> 
+	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosContrastados.numeroUbicacion}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+	</p:selectOneMenu>
+	<p:message for="numero_ubicacion"/>
+  </div>
  </div>
  
 <div class="ui-g ui-fluid">
@@ -408,8 +414,8 @@
 <p:panel id="panelUpdate">
 
  <div class="ui-g ui-fluid">
-   <div class="ui-g-12 ui-lg-12" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
+   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+    <p:outputLabel value="Paciente" for="numero_paciente" /> 
     <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroPaciente}" >
     <f:selectItem itemLabel="seleccione" itemValue="" /> 
     <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
@@ -417,10 +423,7 @@
     </p:selectOneMenu>
     <p:message for="numero_paciente"/>
   </div>
- </div>
-
- <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel for="edad" value="Edad"/>
   <p:inputText id="edad" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.edad}" readonly="true"/>
   <p:message for="edad"/>
@@ -432,27 +435,11 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor Referente" for="numero_doctor_referente" /> 
-   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroDoctorReferente}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor_referente"/>
- </div>
-</div>
+
  <div class="ui-g ui-fluid">
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+<div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  		<p:outputLabel value="Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
   		<f:selectItems value="#{adminHelper.selectEstudiosItems}"/>
@@ -466,16 +453,7 @@
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
-	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroUbicacion}" >
-	<f:selectItem itemLabel="seleccione" itemValue="" /> 
-	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
-	</p:selectOneMenu>
-	<p:message for="numero_ubicacion"/>
-  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  	 <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
     <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.tipoPago}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -483,7 +461,32 @@
 	</p:selectOneMenu>
 	<p:message for="tipo_pago"/>
   </div>
-  
+</div>
+ <div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="numero_doctor_referente" /> 
+   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroDoctorReferente}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor_referente"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Ubicacion paciente" for="numero_ubicacion" /> 
+	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesContrastadosForm.ordenesEstudiosContrastadosSelected.numeroUbicacion}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+	</p:selectOneMenu>
+	<p:message for="numero_ubicacion"/>
+  </div>
  </div>
  
  <div class="ui-g ui-fluid">
