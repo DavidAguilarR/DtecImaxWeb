@@ -83,7 +83,7 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenDental" value="#{ordenesDentalesForm.listOrdenesEstudiosDentales}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Dentales(Pendientes)
+								  Ordenes Dentales (Pendientes)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenDental.numeroOrden}" />
@@ -101,14 +101,14 @@
 								        <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctor}" />
 								</p:column>
-								<p:column headerText="Doctor Referente">
+								<p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenDental.nombreDoctorReferente}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoPaternoDoctorReferente}" />
 								          <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenDental.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -141,7 +141,7 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenDental" value="#{ordenesDentalesForm.listOrdEstDentEnAten}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Dentales(En Atencion)
+								  Ordenes Dentales (En Atencion)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenDental.numeroOrden}" />
@@ -159,14 +159,14 @@
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctor}" />
 								</p:column>
-								<p:column headerText="Doctor Referente">
+								<p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenDental.nombreDoctorReferente}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoPaternoDoctorReferente}" />
 								          <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenDental.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -201,7 +201,7 @@
                             <div class="ui-g-12 ui-lg-12">
                             <p:dataTable var="ordenDental" value="#{ordenesDentalesForm.listOrdEstDentEstRea}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Dentales(Estudios Realizados)
+								  Ordenes Dentales (Estudios Realizados)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenDental.numeroOrden}" />
@@ -219,14 +219,14 @@
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctor}" />
 								</p:column>
-								<p:column headerText="Doctor Referente">
+								<p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenDental.nombreDoctorReferente}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoPaternoDoctorReferente}" />
 								          <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenDental.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenDental.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -405,7 +405,7 @@
 
  <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
+    <p:outputLabel value="Paciente" for="numero_paciente" /> 
     <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroPaciente}" >
     <f:selectItem itemLabel="seleccione" itemValue="" /> 
     <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
@@ -429,7 +429,7 @@
 
  <div class="ui-g ui-fluid">
  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
-  		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+  		<p:outputLabel value="Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
   		<f:selectItems value="#{adminHelper.selectEstudiosItems}"/>
@@ -454,16 +454,8 @@
     
 </div>
  <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
- </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor Referente" for="numero_doctor_referente" /> 
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="numero_doctor_referente" /> 
    <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctorReferente}" >
    <f:selectItem itemLabel="seleccione" itemValue="" /> 
    <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
@@ -471,7 +463,15 @@
    <p:message for="numero_doctor_referente"/>
  </div>
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
+   <p:outputLabel value="Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Ubicacion paciente" for="numero_ubicacion" /> 
 	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.numeroUbicacion}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
 	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
@@ -484,12 +484,12 @@
  
  <div class="ui-g ui-fluid">
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-      <p:outputLabel value="Hora Inicial" for="horaInicialOrden" />
+      <p:outputLabel value="Hora llegada" for="horaInicialOrden" />
       <pe:timePicker id="horaInicialOrden" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaInicialOrdenWidget" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.utilHoraInicialOrden}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
       <p:message for="horaInicialOrden"/>
    </div>
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-      <p:outputLabel value="Hora Final" for="horaFinalOrden" />
+      <p:outputLabel value="Hora Salida" for="horaFinalOrden" />
       <pe:timePicker id="horaFinalOrden" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaFinalOrdenWidget" value="#{ordenesDentalesForm.ordenesEstudiosDentalesSelected.utilHoraFinalOrden}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
       <p:message for="horaFinalOrden"/>
    </div>

@@ -232,6 +232,7 @@ public class OrdenesSimplesForm {
 		    ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
 			ordenesEstudiosSimples.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
 			ordenesEstudiosSimples.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
+			ordenesEstudiosSimples.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
             ordenesEstudiosSimples.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
 			ordenesEstudiosSimples.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
 			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosVDto.getNumeroDoctor());
