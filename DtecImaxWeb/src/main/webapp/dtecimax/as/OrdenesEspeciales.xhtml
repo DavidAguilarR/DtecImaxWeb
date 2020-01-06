@@ -84,30 +84,30 @@
                            
 							 <p:dataTable id="dataTable1" var="ordenEspecial" value="#{ordenesEspecialesForm.listOrdenesEstudiosEspeciales}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Especiales(Pendientes)
+								  Ordenes Especiales (Pendientes)
 						       </f:facet>
 						       <p:column headerText="N° Orden ">
 								   <h:outputText value="#{ordenEspecial.numeroOrden}" />
 								</p:column>
-								  <p:column headerText="Nombre Estudio">
+								  <p:column headerText="Estudio">
 								   <h:outputText value="#{ordenEspecial.nombreEstudio}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenEspecial.nombrePaciente}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor">
+								 <p:column headerText="Doctor">
 								        <h:outputText value="#{ordenEspecial.nombreDoctor}" />
 								        <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenEspecial.apellidoPaternoDoctor}" />
 								          <p:spacer width="5" height="5" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctor}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenEspecial.nombreDoctorReferente}" />
 								        <h:outputText value="#{ordenEspecial.apellidoPaternoDoctorReferente}" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenEspecial.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -143,27 +143,27 @@
                            
 							 <p:dataTable id="dataTable2" var="ordenEspecial" value="#{ordenesEspecialesForm.listOrdEstEspeEnAten}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Especiales(En Atencion)
+								  Ordenes Especiales (En Atencion)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenEspecial.numeroOrden}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenEspecial.nombrePaciente}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor">
+								 <p:column headerText="Doctor">
 								        <h:outputText value="#{ordenEspecial.nombreDoctor}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenEspecial.apellidoPaternoDoctor}" />
 								          <p:spacer width="5" height="5" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctor}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenEspecial.nombreDoctorReferente}" />
 								        <h:outputText value="#{ordenEspecial.apellidoPaternoDoctorReferente}" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion paciente">
 								        <h:outputText value="#{ordenEspecial.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -199,27 +199,27 @@
                            
 							 <p:dataTable id="dataTable3" var="ordenEspecial" value="#{ordenesEspecialesForm.listOrdEstEspeEstRea}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							   <f:facet name="header">
-								  Ordenes Especiales(Estudios Realizados)
+								  Ordenes Especiales (Estudios Realizados)
 						       </f:facet>
 						       <p:column headerText="N° Orden">
 								   <h:outputText value="#{ordenEspecial.numeroOrden}" />
 								</p:column>
-						        <p:column headerText="Nombre Paciente">
+						        <p:column headerText="Paciente">
 								        <h:outputText value="#{ordenEspecial.nombrePaciente}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor">
+								 <p:column headerText="Doctor">
 								        <h:outputText value="#{ordenEspecial.nombreDoctor}" />
 								         <p:spacer width="5" height="5" />
 								         <h:outputText value="#{ordenEspecial.apellidoPaternoDoctor}" />
 								          <p:spacer width="5" height="5" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctor}" />
 								</p:column>
-								 <p:column headerText="Nombre Doctor Referente">
+								 <p:column headerText="Doctor que refiere">
 								        <h:outputText value="#{ordenEspecial.nombreDoctorReferente}" />
 								        <h:outputText value="#{ordenEspecial.apellidoPaternoDoctorReferente}" />
 								          <h:outputText value="#{ordenEspecial.apellidoMaternoDoctorReferente}" />
 								</p:column>
-								 <p:column headerText="Nombre Ubicacion">
+								 <p:column headerText="Ubicacion">
 								        <h:outputText value="#{ordenEspecial.nombreUbicacion}" />
 								</p:column>
 								<p:column headerText="Horario">
@@ -268,8 +268,8 @@
 
 <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-12" style="margin-bottom: 5px;">
-  <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  <p:outputLabel value="Paciente" for="numero_paciente" /> 
   <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroPaciente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
@@ -277,9 +277,6 @@
  </p:selectOneMenu>
  <p:message for="numero_paciente"/>
  </div>
- </div>
- 
- <div class="ui-g ui-fluid">
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel for="edad" value="Edad"/>
   <p:inputText id="edad" value="#{ordenesEspecialesForm.edad}" readonly="true"/>
@@ -292,27 +289,11 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
  </div>
-   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor referente" for="numero_doctor_referente" /> 
-   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroDoctorReferente}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor_referente"/>
- </div>
-</div>
- <div class="ui-g ui-fluid">
  
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+ <div class="ui-g ui-fluid">
+   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  		<p:outputLabel value="Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
   		<f:selectItems value="#{adminHelper.selectEstudiosItems}"/>
@@ -326,15 +307,6 @@
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
-	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroUbicacion}" >
-	<f:selectItem itemLabel="seleccione" itemValue="" /> 
-	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
-	</p:selectOneMenu>
-	<p:message for="numero_ubicacion"/>
-  </div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
     <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesEstudiosEspeciales.tipoPago}" >
@@ -342,6 +314,34 @@
 	<f:selectItems value="#{adminHelper.selectTipoPagoItems}"  />
 	</p:selectOneMenu>
 	<p:message for="tipo_pago"/>
+  </div>
+   
+</div>
+ <div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="numero_doctor_referente" /> 
+   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroDoctorReferente}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor_referente"/>
+ </div>
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
+
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Ubicacion paciente" for="numero_ubicacion" /> 
+	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosEspeciales.numeroUbicacion}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+	</p:selectOneMenu>
+	<p:message for="numero_ubicacion"/>
   </div>
 </div>
 
@@ -363,7 +363,7 @@
   </div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Alergias" for="alergias_pacientes" /> 
-    <p:selectManyMenu id="alergias_pacientes"  panelStyle="width:250px" value="#{ordenesEspecialesForm.selectedAlergiasPacientes}" showCheckbox="true">
+    <p:selectManyMenu id="alergias_pacientes"  panelStyle="width:150px" value="#{ordenesEspecialesForm.selectedAlergiasPacientes}" showCheckbox="true">
     <f:selectItems value="#{ordenesEspecialesForm.alergiasPacientesItems}"  />
     </p:selectManyMenu>
     <p:message for="alergias_pacientes"/>
@@ -406,8 +406,8 @@
 
 <p:panel id="panelUpdate">
   <div class="ui-g ui-fluid">
-   <div class="ui-g-12 ui-lg-12" style="margin-bottom: 5px;">
-     <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
+   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+     <p:outputLabel value="Paciente" for="numero_paciente" /> 
 	 <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroPaciente}" >
 	 <f:selectItem itemLabel="seleccione" itemValue="" /> 
 	 <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
@@ -415,9 +415,7 @@
 	 </p:selectOneMenu>
 	 <p:message for="numero_paciente"/>
    </div>
-  </div>
- <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel for="edad" value="Edad"/>
   <p:inputText id="edad" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.edad}" readonly="true"/>
   <p:message for="edad"/>
@@ -429,28 +427,10 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor" for="numero_doctor" /> 
-   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroDoctor}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
- </div>
-
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-   <p:outputLabel value="Nombre Doctor referente" for="numero_doctor_referente" /> 
-   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroDoctorReferente}" >
-   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   </p:selectOneMenu>
-   <p:message for="numero_doctor"/>
- </div>
-</div>
+  </div>
  <div class="ui-g ui-fluid">
- 
-   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-  		<p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  		<p:outputLabel value="Estudio" for="numero_estudio" /> 
   		<p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroEstudio}" >
   		<f:selectItem itemLabel="seleccione" itemValue="" /> 
   		<f:selectItems value="#{adminHelper.selectEstudiosItems}"/>
@@ -464,16 +444,7 @@
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
-	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroUbicacion}" >
-	<f:selectItem itemLabel="seleccione" itemValue="" /> 
-	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
-	</p:selectOneMenu>
-	<p:message for="numero_ubicacion"/>
-  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
     <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.tipoPago}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -481,16 +452,42 @@
 	</p:selectOneMenu>
 	<p:message for="tipo_pago"/>
   </div>
+  
+</div>
+ <div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="numero_doctor_referente" /> 
+   <p:selectOneMenu id="numero_doctor_referente" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroDoctorReferente}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor_referente"/>
  </div>
- 
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor" for="numero_doctor" /> 
+   <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroDoctor}" >
+   <f:selectItem itemLabel="seleccione" itemValue="" /> 
+   <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+   </p:selectOneMenu>
+   <p:message for="numero_doctor"/>
+ </div>
+  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Ubicacion paciente" for="numero_ubicacion" /> 
+	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.numeroUbicacion}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+	</p:selectOneMenu>
+	<p:message for="numero_ubicacion"/>
+  </div>
+ </div>
  <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-      <p:outputLabel value="Hora Inicial" for="horaInicialOrden" />
+      <p:outputLabel value="Hora llegada" for="horaInicialOrden" />
       <pe:timePicker id="horaInicialOrden" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaInicialOrdenWidget" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.utilHoraInicialOrden}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
       <p:message for="horaInicialOrden"/>
    </div>
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-      <p:outputLabel value="Hora Final" for="horaFinalOrden" />
+      <p:outputLabel value="Hora Salida" for="horaFinalOrden" />
       <pe:timePicker id="horaFinalOrden" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaFinalOrdenWidget" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.utilHoraFinalOrden}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
       <p:message for="horaFinalOrden"/>
    </div>
@@ -500,7 +497,7 @@
     <p:message for="requiere_factura"/>
   </div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Alergias" for="alergias_pacientes" /> 
+    <p:outputLabel value="Padecimiento" for="alergias_pacientes" /> 
     <p:selectManyMenu id="alergias_pacientes" multiple="true" panelStyle="width:250px" value="#{ordenesEspecialesForm.ordenesEstudiosEspecialesSelected.selectedAlergiasPacientes}" showCheckbox="true">
     <f:selectItems value="#{ordenesEspecialesForm.alergiasPacientesItems}"  />
     </p:selectManyMenu>
