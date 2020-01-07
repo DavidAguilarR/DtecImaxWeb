@@ -33,7 +33,7 @@
                      <p:menuitem id="apl_hr_doctores_referentes" value="Doctores Referentes" icon="fa fa-user-md" outcome="hr-doctores-referentes" />
                     </p:submenu>
                     
-                     <p:submenu id="apl_as" label="Citas y Ordenes" icon="fa fa-pencil-square-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
+                     <p:submenu id="apl_as" label="Citas y Ordenes" icon="fa fa-pencil-square-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}">
                         <p:menuitem id="apl_as_citas" value="Citas" icon="fa fa-stethoscope" outcome="as-citas" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}" />
                         <p:menuitem id="apl_as_resumen_citas" value="Resumen Citas" icon="fa fa-stethoscope" outcome="as-resumen-citas" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
                        <p:menuitem id="apl_as_estudios" value="Estudios" icon="fa fa-flask" outcome="as-estudios" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
