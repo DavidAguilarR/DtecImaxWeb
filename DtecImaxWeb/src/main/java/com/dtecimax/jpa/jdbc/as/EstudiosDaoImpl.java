@@ -68,6 +68,7 @@ public class EstudiosDaoImpl implements EstudiosDao {
 		return  em.createNamedQuery("EstudiosDto.findAll").getResultList();
 	}
 
+	
 	@Override
 	public String findEstudioByNumero(long pNumeroEstudio) {
 		Query q = em.createNativeQuery("SELECT NOMBRE_ESTUDIO FROM dbo.ESTUDIOS where NUMERO_ESTUDIO = "+pNumeroEstudio);
