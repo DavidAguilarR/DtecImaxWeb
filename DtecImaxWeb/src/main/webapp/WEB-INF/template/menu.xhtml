@@ -40,7 +40,7 @@
                         <p:menuitem id="apl_as_historial_ordenes" value="Historial Ordenes" icon="fa fa-flask" outcome="as-historial-ordenes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
                         <p:menuitem id="apl_as_ordenes_simples" value="Ordenes Simples" icon="fa fa-flask" outcome="as-ordenes-simples" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
                         <p:menuitem id="apl_as_ordenes_especiales" value="Ordenes Especiales" icon="fa fa-flask" outcome="as-ordenes-especiales" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
-                        <p:menuitem id="apl_as_ordenes_contrastados" value="Ordenes Contrastados" icon="fa fa-flask" outcome="as-ordenes-contrastados"rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
+                        <p:menuitem id="apl_as_ordenes_contrastados" value="Ordenes Contrastados" icon="fa fa-flask" outcome="as-ordenes-contrastados" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
                         <p:menuitem id="apl_as_ordenes_dentales" value="Ordenes Dentales" icon="fa fa-flask" outcome="as-ordenes-dentales" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')} or request.isUserInRole('ROLE_RECEPCION')}"/>
                      </p:submenu>
                      
