@@ -197,7 +197,7 @@
                             <div class="ui-g-12 ui-lg-12">
                             
   <h:panelGrid>
-   <p:schedule id="scheduleId" widgetVar="myschedule" draggable="false" resizable="false" value="#{citasForm.eventModel}"  locale="es" timeZone="GMT-11" minTime="8:00" slotMinutes="10" maxTime="20:00" view="agendaDay" leftHeaderTemplate="today" rightHeaderTemplate="prev, next" >
+   <p:schedule id="scheduleId" widgetVar="myschedule" draggable="false" resizable="false" value="#{citasForm.eventModel}"  locale="es" timeZone="GMT-12" minTime="8:00" slotMinutes="10" maxTime="20:00" view="agendaDay" leftHeaderTemplate="today" rightHeaderTemplate="prev, next" >
     <p:ajax event="eventSelect" listener="#{citasForm.onEventSelect}" update="CitasScheduleForm CitasFormUpdate" oncomplete="PF('CitasDialogUpdate').show();" />
     <p:ajax event="dateSelect" listener="#{citasForm.seleccionarFecha}" update=":CitasFormCreate:citas-dialog-create" oncomplete="PF('CitasDialogCreate').show();" />
    </p:schedule>
@@ -235,7 +235,7 @@
  </p:selectOneMenu>
  <p:message for="numero_ubicacion"/>
  </div>
-   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
   <p:outputLabel value="Estudio" for="numero_estudio" /> 
    <p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroEstudio}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
