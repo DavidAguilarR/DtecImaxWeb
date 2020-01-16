@@ -67,7 +67,8 @@ public class OrdenesEstudiosLocalImpl implements OrdenesEstudiosLocal {
 				                             , pSearchNomDoct
 				                             );
 	}
-
+	
+	
 	@Override
 	public void updateFormato(long pNumeroOrden
 			                 , String pFormato

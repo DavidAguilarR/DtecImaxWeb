@@ -63,6 +63,7 @@ public class OrdenesEstudiosDto implements Serializable {
 
 	@Column(name="NUMERO_PACIENTE")
 	private long numeroPaciente;
+	
 
 	@Column(name="NUMERO_UBICACION")
 	private long numeroUbicacion;
@@ -169,8 +170,7 @@ public class OrdenesEstudiosDto implements Serializable {
 	public void setInfoAdicional(String infoAdicional) {
 		this.infoAdicional = infoAdicional;
 	}
-
-	public String getNumeroAlergia() {
+		public String getNumeroAlergia() {
 		return this.numeroAlergia;
 	}
 

@@ -31,6 +31,10 @@ public interface OrdenesEstudiosLocal {
 									            ,String pSearchNomPaci
 									            ,String pSearchNomDoct
 									            );
+
+	
+								
+	
 	public void updateFormato(long pNumeroOrden
             , String pFormato
             , String pFormatoText); 
