@@ -18,5 +18,6 @@ public interface OrdenesEstudiosVLocal {
 	public List<OrdenesEstudiosVDto> findBySearchHisto(	String pSearchNumOrde
             ,String pSearchNomEstu
             ,String pSearchNomPaci
+            ,String pSearchNomDocRef
           );
 }
