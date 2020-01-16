@@ -68,22 +68,26 @@
     <div class="card no-margin">
                             <div class="ui-g">
                             <div class="ui-g-12 ui-lg-12">
-                            <p:dataTable var="estudio" value="#{estudiosForm.listEstudios}" emptyMessage="Sin resultados" paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                            <p:dataTable var="estudio" value="#{estudiosForm.listEstudios}" emptyMessage="Sin resultados" paginator="true" rows="50" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 							<f:facet name="header">Estudios</f:facet>
-                                 <p:column headerText="Nom. Estudio">
+                                 <p:column headerText="Nombre. Estudio">
                                   <h:outputText value="#{estudio.nombreEstudio}" />
                                 </p:column>
-                                 <p:column headerText="Tipo estudio">
+                                 <p:column headerText="Categoria estudio">
                                   <h:outputText value="#{estudio.tipoEstudio}" />
                                 </p:column>
-                                 <p:column headerText="Costo Estudio">
+                                 <p:column headerText="Costo">
                                   <h:outputText value="#{estudio.costoEstudio}" />
                                 </p:column>
-                                <p:column headerText="Realiza Estudio">
-                                  <h:outputText value="#{estudio.realizaEstudio}" />
-                                </p:column>
-                                <p:column headerText="Color Estudio">
+<!--                                 <p:column headerText="Realiza Estudio"> -->
+<!--                                   <h:outputText value="#{estudio.realizaEstudio}" /> -->
+<!--                                 </p:column> -->
+                               
+                                <p:column headerText="Color Asignado">
                                   <p:colorPicker  value="#{estudio.colorEstudio}" disabled="true" />
+                                </p:column>
+                                 <p:column headerText="Comentarios">
+                                  <h:outputText value="#{estudio.comentarios}" />
                                 </p:column>
                                <p:column headerText="Opciones:">
                                   <p:commandButton icon="fa fa-edit" update="EstudiosFormUpdate EstudiosFormReadOnly" oncomplete="PF('EstudioDialogUpdate').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForUpdate(estudio)}"/>
@@ -113,7 +117,7 @@
 <div class="ui-g ui-fluid">
      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
          <p:outputLabel  for="nombre_estudio" value="Nombre Estudio:" />
-         <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.nombreEstudio}" maxlength="50" />
+         <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.nombreEstudio}" maxlength="100" />
          <p:message for="nombre_estudio"/>
      </div>
       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
@@ -129,11 +133,11 @@
           </p:selectOneMenu>
           <p:message for="tipo_estudio"/>
      </div>
-      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-         <p:outputLabel  for="realiza_estudio" value="Realiza Estudio:" />
-         <p:inputText id="realiza_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.realizaEstudio}" maxlength="50" />
-         <p:message for="realiza_estudio"/>
-     </div>
+<!--       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!--          <p:outputLabel  for="realiza_estudio" value="Realiza Estudio:" /> -->
+<!--          <p:inputText id="realiza_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.realizaEstudio}" maxlength="50" /> -->
+<!--          <p:message for="realiza_estudio"/> -->
+<!--      </div> -->
       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
 		<p:outputLabel for="numero_ubicacion" value="Nombre Ubicacion:" />
 		<p:selectOneMenu id="numero_ubicacion" style="width: 100%; margin-top: 5px;" filter="true" filterMatchMode="contains" required="true" value="#{estudios.numeroUbicacion}">
@@ -194,11 +198,11 @@
             </p:selectOneMenu>
   			<p:message for="tipo_estudio" />
  		</div>
-      	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-         <p:outputLabel  for="realiza_estudio" value="Realiza Estudio:" />
-         <p:inputText id="realiza_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudiosForm.estudiosSelected.realizaEstudio}" maxlength="50" />
-         <p:message for="realiza_estudio"/>
-     </div>
+<!--       	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!--          <p:outputLabel  for="realiza_estudio" value="Realiza Estudio:" /> -->
+<!--          <p:inputText id="realiza_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudiosForm.estudiosSelected.realizaEstudio}" maxlength="50" /> -->
+<!--          <p:message for="realiza_estudio"/> -->
+<!--      </div> -->
 	</div>
 	<div class="ui-g ui-fluid">
  			<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
