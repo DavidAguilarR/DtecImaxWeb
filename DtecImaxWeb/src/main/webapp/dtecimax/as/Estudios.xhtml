@@ -90,8 +90,8 @@
                                   <h:outputText value="#{estudio.comentarios}" />
                                 </p:column>
                                <p:column headerText="Opciones:">
-                                  <p:commandButton icon="fa fa-edit" update="EstudiosFormUpdate EstudiosFormReadOnly" oncomplete="PF('EstudioDialogUpdate').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForUpdate(estudio)}"/>
-								 <p:commandButton icon="fa fa-trash" update=":EstudiosFormDelete:eliminar-estudio-dialog" oncomplete="PF('eliminarEstudioDlg').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForDelete(estudio)}"/>
+                                  <p:commandButton icon="fa fa-edit" update="EstudiosFormUpdate EstudiosFormReadOnly" oncomplete="PF('EstudioDialogUpdate').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForUpdate(estudio)}" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
+								 <p:commandButton icon="fa fa-trash" update=":EstudiosFormDelete:eliminar-estudio-dialog" oncomplete="PF('eliminarEstudioDlg').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForDelete(estudio)}" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
 							   </p:column>
 							</p:dataTable>	
 								
