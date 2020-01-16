@@ -18,8 +18,8 @@
         <p:message for="fechaDesde"/>
      </div>
      <div class="ui-g-6">
-        <p:outputLabel for="fechaHasta" value="Fecha Hasta" />
-         <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{historialDePagosForm.searchFechaHasta}"/>
+        <p:outputLabel for="fechaHasta" value="Fecha Hasta" rendered="false" />
+         <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{historialDePagosForm.searchFechaHasta}" rendered="false"/>
          <p:message for="fechaHasta"/>
      </div>
   </div>

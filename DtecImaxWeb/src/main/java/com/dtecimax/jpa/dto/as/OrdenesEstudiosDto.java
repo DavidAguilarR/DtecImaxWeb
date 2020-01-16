@@ -113,6 +113,9 @@ public class OrdenesEstudiosDto implements Serializable {
 	@Column(name="OBSERV_DESC")
 	private String observDesc;
 	
+	@Column(name="INFO_FACTURA")
+	private String infoFactura;
+	
 	public OrdenesEstudiosDto() {
 	}
 	
@@ -342,6 +345,14 @@ public class OrdenesEstudiosDto implements Serializable {
 
 	public void setObservDesc(String observDesc) {
 		this.observDesc = observDesc;
+	}
+
+	public String getInfoFactura() {
+		return infoFactura;
+	}
+
+	public void setInfoFactura(String infoFactura) {
+		this.infoFactura = infoFactura;
 	}
 
 	

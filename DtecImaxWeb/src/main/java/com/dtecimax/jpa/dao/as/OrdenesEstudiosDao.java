@@ -47,4 +47,8 @@ public interface OrdenesEstudiosDao {
 				           ,BigDecimal pPago
 				           ,String pObservPago
 				           );
+    
+    public void aplicarInfoFactura(long pNumeroOrden
+    		                      ,String pInfoFactura
+    		                      );
 }

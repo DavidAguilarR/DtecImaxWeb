@@ -1,3 +1,7 @@
+/**
+ * 10012020 se solicita que solo exista una fecha como filtro
+ */
+
 package com.dtecimax.ejb.backing.ar;
 
 import java.math.BigDecimal;
@@ -40,6 +44,9 @@ public class PagoDeEstudiosForm {
 	private String observDesc; 
 	private BigDecimal total; 
 	private String observPago; 
+	private String infoFactura; 
+	private BigDecimal gananciaTotalDia;
+	private BigDecimal gastosTotalDia; 
 	
 	@Inject 
 	PagosOrdenesEstudiosV1Local pagosOrdenesEstudiosV1Local;
@@ -68,7 +75,8 @@ public class PagoDeEstudiosForm {
 		System.out.println("searchFechaHasta:"+searchFechaHasta);
 		
 		java.sql.Date sqlFechaDesde = new java.sql.Date(searchFechaDesde.getTime());
-		java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaHasta.getTime()); 
+		/* java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaHasta.getTime()); 10012020 */
+		java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaDesde.getTime());
 		
 		List<PagosOrdenesEstudiosV1Dto> listPagosEstudiosV1Dto = pagosOrdenesEstudiosV1Local.findByFiltros(searchNomPaci
 																		                                 , searchApellPatPaci
@@ -79,6 +87,7 @@ public class PagoDeEstudiosForm {
 		listPagosOrdenesEstudiosV1 = new ArrayList<PagosOrdenesEstudiosV1>(); 
 		pacientesAtendidos = 0; 
 		totalPorCobrar = 0f; 
+		gananciaTotalDia = new BigDecimal(0);
 		Iterator<PagosOrdenesEstudiosV1Dto> iterPagosEstudiosV1Dto = listPagosEstudiosV1Dto.iterator();
 		while(iterPagosEstudiosV1Dto.hasNext()) {
 			PagosOrdenesEstudiosV1Dto pagosOrdenesEstudiosV1Dto = iterPagosEstudiosV1Dto.next(); 
@@ -98,10 +107,15 @@ public class PagoDeEstudiosForm {
 				fTotal = pagosOrdenesEstudiosV1Dto.getCostoEstudio(); 
 			}
 			pagosOrdenesEstudiosV1.setTotal(new BigDecimal(fTotal));
+			pagosOrdenesEstudiosV1.setDecodeRequiereFactura(pagosOrdenesEstudiosV1Dto.getDecodeRequiereFactura());
+			pagosOrdenesEstudiosV1.setInfoFactura(pagosOrdenesEstudiosV1Dto.getInfoFactura());
 			listPagosOrdenesEstudiosV1.add(pagosOrdenesEstudiosV1); 
 			pacientesAtendidos = pacientesAtendidos +1; 
 			totalPorCobrar = totalPorCobrar + (float)pagosOrdenesEstudiosV1Dto.getCostoEstudio();  
+			}else {
+				gananciaTotalDia = gananciaTotalDia.add(pagosOrdenesEstudiosV1Dto.getTotal());
 			}
+			
 		}
 		
 		System.out.println("Sale filtraPorFechas");
@@ -123,6 +137,11 @@ public class PagoDeEstudiosForm {
 		}
 		
 		this.total = new BigDecimal(fTotal); 
+		pagosOrdenesEstudiosV1Selected.setNumeroOrden(pPagosOrdenesEstudiosV1.getNumeroOrden());
+	}
+	
+	public void selectForInfoFactura(PagosOrdenesEstudiosV1 pPagosOrdenesEstudiosV1) {
+		pagosOrdenesEstudiosV1Selected = new PagosOrdenesEstudiosV1();
 		pagosOrdenesEstudiosV1Selected.setNumeroOrden(pPagosOrdenesEstudiosV1.getNumeroOrden());
 	}
 	
@@ -153,6 +172,16 @@ public class PagoDeEstudiosForm {
 		filtraPorFechas();
 		pagoIn = true; 
 		PrimeFaces.current().ajax().addCallbackParam("pagoIn", pagoIn);
+	}
+	
+	public void aplicarInfoFactura() {
+		boolean infoFacturaIn = false; 	
+		ordenesEstudiosLocal.aplicarInfoFactura(pagosOrdenesEstudiosV1Selected.getNumeroOrden()
+				                              , this.infoFactura
+				                              );
+		filtraPorFechas();
+		infoFacturaIn = true; 
+		PrimeFaces.current().ajax().addCallbackParam("infoFacturaIn", infoFacturaIn);
 	}
 	
 	public String getSearchNomPaci() {
@@ -248,6 +277,30 @@ public class PagoDeEstudiosForm {
 
 	public void setObservPago(String observPago) {
 		this.observPago = observPago;
+	}
+
+	public String getInfoFactura() {
+		return infoFactura;
+	}
+
+	public void setInfoFactura(String infoFactura) {
+		this.infoFactura = infoFactura;
+	}
+
+	public BigDecimal getGananciaTotalDia() {
+		return gananciaTotalDia;
+	}
+
+	public void setGananciaTotalDia(BigDecimal gananciaTotalDia) {
+		this.gananciaTotalDia = gananciaTotalDia;
+	}
+
+	public BigDecimal getGastosTotalDia() {
+		return gastosTotalDia;
+	}
+
+	public void setGastosTotalDia(BigDecimal gastosTotalDia) {
+		this.gastosTotalDia = gastosTotalDia;
 	} 
 	
 }
