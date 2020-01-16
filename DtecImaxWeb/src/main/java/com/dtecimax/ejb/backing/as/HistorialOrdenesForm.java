@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import org.primefaces.PrimeFaces;
 
 import com.dtecimax.ejb.model.as.OrdenesEstudios;
+import com.dtecimax.ejb.model.as.OrdenesEstudiosHistorial;
 import com.dtecimax.ejb.model.as.OrdenesEstudiosSimples;
 import com.dtecimax.ejb.services.admin.UbicacionesLocal;
 import com.dtecimax.ejb.services.ar.PacientesLocal;
@@ -36,30 +37,17 @@ import com.dtecimax.jpa.dto.hr.DoctoresReferentesDto;
 @ViewScoped
 public class HistorialOrdenesForm {
 
-	@ManagedProperty(value="#{ordenesEstudios}") 
-	private OrdenesEstudios ordenesEstudios;
+	@ManagedProperty(value="#{ordenesEstudiosHistorial}") 
+	private OrdenesEstudiosHistorial ordenesEstudiosHistorial;
 
-//	private String edad; 
-//	private Date fechaNacimiento;
-//	private long costoEstudio;
-//	
-	//private OrdenesEstudiosHistorial ordenesEstudiosSelected = new OrdenesEstudiosHistorial(); 
-	private List<OrdenesEstudios> listOrdenesEstudios = new ArrayList<OrdenesEstudios>();
-	//private List<OrdenesEstudios> listOrdEstSimpEnAten = new ArrayList<OrdenesEstudios); 
-//	private List<OrdenesEstudios> listOrdEstSimpEstRea = new ArrayList<OrdenesEstudios>(); 
-//	
+ 
+	private List<OrdenesEstudiosHistorial> listOrdenesEstudiosHistorial = new ArrayList<OrdenesEstudiosHistorial>();
+	
 	
 	@Inject
 	PacientesLocal pacientesLocal;
 	
-//	@Inject
-//	DoctoresLocal doctoresLocal;
-//	@Inject
-//	DoctoresReferentesLocal doctoresReferentesLocal;
-//	
-//	@Inject
-//	UbicacionesLocal ubicacionesLocal; 
-	
+
 	@Inject 
 	OrdenesEstudiosLocal ordenesEstudiosLocal; 
 	
@@ -68,11 +56,12 @@ public class HistorialOrdenesForm {
 	
 	@Inject 
 	EstudiosLocal estudiosLocal;
-	
-	private String searchNumEstu; 
+
+	private String searchNomEstu; 
 	private String searchNomPaci; 
-	private String searchNomDoct; 
-	
+	private String searchNumOrde; 
+	private String decodeTipoOrden;
+	private String apellidoPaternoPaciente;
 	private String localFormato; 
 	
 	@PostConstruct
@@ -80,37 +69,14 @@ public class HistorialOrdenesForm {
 		 refreshEntity();
 	 }
 	
-	public OrdenesEstudios getOrdenesEstudios() {
-		return ordenesEstudios;
+	public OrdenesEstudiosHistorial getOrdenesEstudiosHistorial() {
+		return ordenesEstudiosHistorial;
 	}
 
-	public void setOrdenesEstudios(OrdenesEstudios ordenesEstudio) {
-		this.ordenesEstudios = ordenesEstudio;
+	public void setOrdenesEstudiosHistorial(OrdenesEstudiosHistorial ordenesEstudioHistorial) {
+		this.ordenesEstudiosHistorial = ordenesEstudioHistorial;
 	} 
 	
-//	public void handlePacienteChange() {
-//		PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(ordenesEstudios.getNumeroPaciente());
-//		if(null!=pacientesDto) {
-//		if(null!=pacientesDto.getFechaNacimientoPaciente()) {
-//		fechaNacimiento = new Date(pacientesDto.getFechaNacimientoPaciente().getTime());
-//		int intMonthsBetween =  differenceInMonths(fechaNacimiento,new Date());
-//		int intAniosBetween = intMonthsBetween/12;
-//		this.setEdad(intAniosBetween+" anios");
-//		 }
-//		}
-//	}
-//	
-//	public void handlePacienteChangeUpd() {
-//		PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(ordenesEstudiosHistorialSelected.getNumeroPaciente());
-//		if(null!=pacientesDto) {
-//		if(null!=pacientesDto.getFechaNacimientoPaciente()) {
-//		ordenesEstudiosHistorialSelected.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());	
-//		int intMonthsBetween =  differenceInMonths(pacientesDto.getFechaNacimientoPaciente(),new Date());
-//		int intAniosBetween = intMonthsBetween/12;
-//		ordenesEstudiosHistorialSelected.setEdad(intAniosBetween+" anios");
-//		 }
-//		}
-//	}
 
 	public void insertaHistorialOrden() {
 	
@@ -118,12 +84,10 @@ public class HistorialOrdenesForm {
 		
 	  OrdenesEstudiosDto ordenesEstudiosDto = new OrdenesEstudiosDto();
 	  
-//	  ordenesEstudiosDto.setNumeroUbicacion(ordenesEstudiosSimples.getNumeroUbicacion());
-//	  ordenesEstudiosDto.setNumeroDoctor(ordenesEstudiosSimples.getNumeroDoctor());
-//	  ordenesEstudiosDto.setNumeroDoctorReferente(ordenesEstudiosSimples.getNumeroDoctorReferente());
-	  ordenesEstudiosDto.setNumeroPaciente(ordenesEstudios.getNumeroPaciente());
+
+	  ordenesEstudiosDto.setNumeroPaciente(ordenesEstudiosHistorial.getNumeroPaciente());
 	  ordenesEstudiosDto.setTipoOrden((short)1/*Simple*/);
-	  ordenesEstudiosDto.setNumeroEstudio(ordenesEstudios.getNumeroEstudio()/*(long)2*/);
+	  ordenesEstudiosDto.setNumeroEstudio(ordenesEstudiosHistorial.getNumeroEstudio()/*(long)2*/);
 	
 	  ordenesEstudiosLocal.insertOrdenesEstudios(ordenesEstudiosDto);
 	  refreshEntity();
@@ -133,414 +97,72 @@ public class HistorialOrdenesForm {
 	}
 	
 	private void refreshEntity() {
-		listOrdenesEstudios = new ArrayList<OrdenesEstudios>(); 
-		List<OrdenesEstudiosVDto> listOrdenesVEstudiosDto = ordenesEstudiosVLocal.findByEstaus("PENDIENTE",1/*OrdenesSimples*/);
+		listOrdenesEstudiosHistorial = new ArrayList<OrdenesEstudiosHistorial>(); 
+		List<OrdenesEstudiosVDto> listOrdenesVEstudiosDto = ordenesEstudiosVLocal.findAll();
 		Iterator<OrdenesEstudiosVDto> iterOrdenesEstudiosVDto = listOrdenesVEstudiosDto.iterator(); 
 		while(iterOrdenesEstudiosVDto.hasNext()) {
 			OrdenesEstudiosVDto ordenesEstudiosVDto = iterOrdenesEstudiosVDto.next(); 
-			OrdenesEstudiosSimples ordenesEstudios = new OrdenesEstudiosSimples();
-			ordenesEstudios.setNumeroOrden(ordenesEstudiosVDto.getNumeroOrden());
-			ordenesEstudios.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
-			//ordenesEstudios.setFechaNacimientoPaciente(ordenesEstudiosVDto.getFechaNacimientoPaciente());
-//			ordenesEstudiosSimples.setNombreDoctor(ordenesEstudiosVDto.getNombreDoctor());
-//			ordenesEstudiosSimples.setApellidoPaternoDoctor(ordenesEstudiosVDto.getApellidoPaternoDoctor());
-//			ordenesEstudiosSimples.setApellidoMaternoDoctor(ordenesEstudiosVDto.getApellidoMaternoDoctor());
-//			ordenesEstudiosSimples.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente());
-//			ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente());
-//			ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
-//			ordenesEstudiosSimples.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
-//			ordenesEstudiosSimples.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
-			ordenesEstudios.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
-            ordenesEstudios.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
-			ordenesEstudios.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
-//			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosVDto.getNumeroDoctor());
-//			ordenesEstudiosSimples.setNumeroDoctorReferente(ordenesEstudiosVDto.getNumeroDoctorReferente());
-//			ordenesEstudiosSimples.setRequiereFactura(ordenesEstudiosVDto.getRequiereFactura());
-//			ordenesEstudiosSimples.setInfoAdicional(ordenesEstudiosVDto.getInfoAdicional());
-//			ordenesEstudiosSimples.setTipoPago(ordenesEstudiosVDto.getTipoPago());
-			ordenesEstudios.setTipoOrden(ordenesEstudiosVDto.getTipoOrden());
-//			ordenesEstudiosSimples.setEstatus(ordenesEstudiosVDto.getEstatus());
-//			ordenesEstudiosSimples.setDecodeEstatus(ordenesEstudiosVDto.getDecodeEstatus());
-			ordenesEstudios.setFechaCreacion(ordenesEstudiosVDto.getFechaCreacion());
-//			ordenesEstudiosSimples.setUsuarioUltimaActualizacion(ordenesEstudiosVDto.getUsuarioUltimaActualizacion());
-//			ordenesEstudiosSimples.setFechaUltimaActualizacion(ordenesEstudiosVDto.getFechaUltimaActualizacion());
-//			ordenesEstudiosSimples.setIndicacionesDoctor(ordenesEstudiosVDto.getIndicacionesDoctor());
-//			ordenesEstudiosSimples.setHoraInicialOrden(ordenesEstudiosVDto.getHoraInicialOrden());
-//			ordenesEstudiosSimples.setHoraFinalOrden(ordenesEstudiosVDto.getHoraFinalOrden());
-			listOrdenesEstudios.add(ordenesEstudios);
-		}
-		
-//		listOrdEstSimpEnAten = new ArrayList<OrdenesEstudiosSimples>(); 
-//		listOrdenesVEstudiosDto = ordenesEstudiosVLocal.findByEstaus("EN_ATENCION",1/*OrdenesSimples*/);
-//		iterOrdenesEstudiosVDto = listOrdenesVEstudiosDto.iterator(); 
-//		while(iterOrdenesEstudiosVDto.hasNext()) {
-//			OrdenesEstudiosVDto ordenesEstudiosVDto = iterOrdenesEstudiosVDto.next(); 
-//			OrdenesEstudiosSimples ordenesEstudiosSimples = new OrdenesEstudiosSimples();
-//			ordenesEstudiosSimples.setNumeroOrden(ordenesEstudiosVDto.getNumeroOrden());
-//			ordenesEstudiosSimples.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
-//			ordenesEstudiosSimples.setFechaNacimientoPaciente(ordenesEstudiosVDto.getFechaNacimientoPaciente());
-//			ordenesEstudiosSimples.setNombreDoctor(ordenesEstudiosVDto.getNombreDoctor());
-//			ordenesEstudiosSimples.setApellidoPaternoDoctor(ordenesEstudiosVDto.getApellidoPaternoDoctor());
-//			ordenesEstudiosSimples.setApellidoMaternoDoctor(ordenesEstudiosVDto.getApellidoMaternoDoctor());
-//			ordenesEstudiosSimples.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente());
-//			ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente());
-//			ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
-//			ordenesEstudiosSimples.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
-//			ordenesEstudiosSimples.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
-//			ordenesEstudiosSimples.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
-//            ordenesEstudiosSimples.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
-//			ordenesEstudiosSimples.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
-//			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosVDto.getNumeroDoctor());
-//			ordenesEstudiosSimples.setRequiereFactura(ordenesEstudiosVDto.getRequiereFactura());
-//			ordenesEstudiosSimples.setInfoAdicional(ordenesEstudiosVDto.getInfoAdicional());
-//			ordenesEstudiosSimples.setTipoPago(ordenesEstudiosVDto.getTipoPago());
-//			ordenesEstudiosSimples.setEstatus(ordenesEstudiosVDto.getEstatus());
-//			ordenesEstudiosSimples.setDecodeEstatus(ordenesEstudiosVDto.getDecodeEstatus());
-//			ordenesEstudiosSimples.setFechaCreacion(ordenesEstudiosVDto.getFechaCreacion());
-//			ordenesEstudiosSimples.setUsuarioUltimaActualizacion(ordenesEstudiosVDto.getUsuarioUltimaActualizacion());
-//			ordenesEstudiosSimples.setFechaUltimaActualizacion(ordenesEstudiosVDto.getFechaUltimaActualizacion());
-//			ordenesEstudiosSimples.setIndicacionesDoctor(ordenesEstudiosVDto.getIndicacionesDoctor());
-//			ordenesEstudiosSimples.setHoraInicialOrden(ordenesEstudiosVDto.getHoraInicialOrden());
-//			ordenesEstudiosSimples.setHoraFinalOrden(ordenesEstudiosVDto.getHoraFinalOrden());
-//			listOrdEstSimpEnAten.add(ordenesEstudiosSimples);
-//		}
-//		
-//		
-//		listOrdEstSimpEstRea = new ArrayList<OrdenesEstudiosSimples>(); 
-//		listOrdenesVEstudiosDto = ordenesEstudiosVLocal.findByEstaus("ESTUDIO_REALIZADO",1/*OrdenesSimples*/);
-//		iterOrdenesEstudiosVDto = listOrdenesVEstudiosDto.iterator(); 
-//		while(iterOrdenesEstudiosVDto.hasNext()) {
-//			OrdenesEstudiosVDto ordenesEstudiosVDto = iterOrdenesEstudiosVDto.next(); 
-//			OrdenesEstudiosSimples ordenesEstudiosSimples = new OrdenesEstudiosSimples();
-//			ordenesEstudiosSimples.setNumeroOrden(ordenesEstudiosVDto.getNumeroOrden());
-//			ordenesEstudiosSimples.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
-//			ordenesEstudiosSimples.setFechaNacimientoPaciente(ordenesEstudiosVDto.getFechaNacimientoPaciente());
-//			ordenesEstudiosSimples.setNombreDoctor(ordenesEstudiosVDto.getNombreDoctor());
-//			ordenesEstudiosSimples.setApellidoMaternoDoctor(ordenesEstudiosVDto.getApellidoMaternoDoctor());
-//			ordenesEstudiosSimples.setApellidoPaternoDoctor(ordenesEstudiosVDto.getApellidoPaternoDoctor());
-//		    ordenesEstudiosSimples.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente());
-//		    ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente());
-//		    ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente());
-//			ordenesEstudiosSimples.setNombreUbicacion(ordenesEstudiosVDto.getNombreUbicacion());
-//			ordenesEstudiosSimples.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
-//            ordenesEstudiosSimples.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
-//			ordenesEstudiosSimples.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
-//			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosVDto.getNumeroDoctor());
-//			ordenesEstudiosSimples.setRequiereFactura(ordenesEstudiosVDto.getRequiereFactura());
-//			ordenesEstudiosSimples.setInfoAdicional(ordenesEstudiosVDto.getInfoAdicional());
-//			ordenesEstudiosSimples.setTipoPago(ordenesEstudiosVDto.getTipoPago());
-//			ordenesEstudiosSimples.setEstatus(ordenesEstudiosVDto.getEstatus());
-//			ordenesEstudiosSimples.setDecodeEstatus(ordenesEstudiosVDto.getDecodeEstatus());
-//			ordenesEstudiosSimples.setFechaCreacion(ordenesEstudiosVDto.getFechaCreacion());
-//			ordenesEstudiosSimples.setUsuarioUltimaActualizacion(ordenesEstudiosVDto.getUsuarioUltimaActualizacion());
-//			ordenesEstudiosSimples.setFechaUltimaActualizacion(ordenesEstudiosVDto.getFechaUltimaActualizacion());
-//			ordenesEstudiosSimples.setIndicacionesDoctor(ordenesEstudiosVDto.getIndicacionesDoctor());
-//			ordenesEstudiosSimples.setHoraInicialOrden(ordenesEstudiosVDto.getHoraInicialOrden());
-//			ordenesEstudiosSimples.setHoraFinalOrden(ordenesEstudiosVDto.getHoraFinalOrden());
-//			listOrdEstSimpEstRea.add(ordenesEstudiosSimples);
-//		}
-		
-		/***
-		List<OrdenesEstudiosDto> listOrdenesEstudiosDto = ordenesEstudiosLocal.findAllDesc();
-		Iterator<OrdenesEstudiosDto> iterOrdenesEstudiosDto = listOrdenesEstudiosDto.iterator();
-		while(iterOrdenesEstudiosDto.hasNext()) {
-			OrdenesEstudiosDto ordenesEstudiosDto = iterOrdenesEstudiosDto.next();
-			PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(ordenesEstudiosDto.getNumeroPaciente());
-			DoctoresDto doctoresDto = doctoresLocal.findByNumeroDoctor(ordenesEstudiosDto.getNumeroDoctor());
-			UbicacionesDto ubicacionesDto = ubicacionesLocal.findByNumeroUbicacion(ordenesEstudiosDto.getNumeroUbicacion());
-			OrdenesEstudiosSimples ordenesEstudiosSimples = new OrdenesEstudiosSimples();
-			ordenesEstudiosSimples.setNumeroOrden(ordenesEstudiosDto.getNumeroOrden());
-			ordenesEstudiosSimples.setNombrePaciente(pacientesDto.getNombrePaciente());
-			ordenesEstudiosSimples.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
-			ordenesEstudiosSimples.setNombreDoctor(doctoresDto.getNombreDoctor());
-			ordenesEstudiosSimples.setNombreUbicacion(ubicacionesDto.getNombreUbicacion());
-			
-			ordenesEstudiosSimples.setNumeroEstudio(ordenesEstudiosDto.getNumeroEstudio());
-			EstudiosDto estudiosDto = estudiosLocal.findByNumeroEstudio(ordenesEstudiosDto.getNumeroEstudio());
-			ordenesEstudiosSimples.setCostoEstudio(estudiosDto.getCostoEstudio());
-			
-			ordenesEstudiosSimples.setNumeroPaciente(ordenesEstudiosDto.getNumeroPaciente());
-			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosDto.getNumeroDoctor());
-			ordenesEstudiosSimples.setRequiereFactura(ordenesEstudiosDto.getRequiereFactura());
-			ordenesEstudiosSimples.setInfoAdicional(ordenesEstudiosDto.getInfoAdicional());
-			ordenesEstudiosSimples.setTipoPago(ordenesEstudiosDto.getTipoPago());
-			ordenesEstudiosSimples.setEstatus(ordenesEstudiosDto.getEstatus());
-			ordenesEstudiosSimples.setFechaCreacion(ordenesEstudiosDto.getFechaCreacion());
-			ordenesEstudiosSimples.setUsuarioUltimaActualizacion(ordenesEstudiosDto.getUsuarioUltimaActualizacion());
-			ordenesEstudiosSimples.setFechaUltimaActualizacion(ordenesEstudiosDto.getFechaUltimaActualizacion());
-			ordenesEstudiosSimples.setIndicacionesDoctor(ordenesEstudiosDto.getIndicacionesDoctor());
-			ordenesEstudiosSimples.setHoraInicialOrden(ordenesEstudiosDto.getHoraInicialOrden());
-			ordenesEstudiosSimples.setHoraFinalOrden(ordenesEstudiosDto.getHoraFinalOrden());
-			
-			listOrdenesEstudiosSimples.add(ordenesEstudiosSimples);
-		}
-		***/
-	}
+			OrdenesEstudiosHistorial ordenesEstudiosHistorial = new OrdenesEstudiosHistorial();
+			ordenesEstudiosHistorial.setNumeroOrden(ordenesEstudiosVDto.getNumeroOrden());
+			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
+			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
+			ordenesEstudiosHistorial.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
+			ordenesEstudiosHistorial.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
+			ordenesEstudiosHistorial.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
+			ordenesEstudiosHistorial.setDecodeTipoOrden(ordenesEstudiosVDto.getDecodeTipoOrden());
+			ordenesEstudiosHistorial.setFechaCreacion(ordenesEstudiosVDto.getFechaCreacion());
 	
-//	public void selectForUpdate(OrdenesEstudiosSimples pOrdenesEstudiosSimples) {
-//		
-//		ordenesEstudiosSimplesSelected = new OrdenesEstudiosSimples();
-//		
-//		 ordenesEstudiosSimplesSelected.setNumeroOrden(pOrdenesEstudiosSimples.getNumeroOrden());
-//		 ordenesEstudiosSimplesSelected.setNumeroUbicacion(pOrdenesEstudiosSimples.getNumeroUbicacion());
-//		 ordenesEstudiosSimplesSelected.setNumeroDoctor(pOrdenesEstudiosSimples.getNumeroDoctor());
-//		 ordenesEstudiosSimplesSelected.setNumeroDoctorReferente(pOrdenesEstudiosSimples.getNumeroDoctorReferente());
-//		 ordenesEstudiosSimplesSelected.setNumeroPaciente(pOrdenesEstudiosSimples.getNumeroPaciente());
-//		 ordenesEstudiosSimplesSelected.setTipoOrden(pOrdenesEstudiosSimples.getTipoOrden());
-//		 ordenesEstudiosSimplesSelected.setNumeroEstudio(pOrdenesEstudiosSimples.getNumeroEstudio());
-//		 ordenesEstudiosSimplesSelected.setNumeroAlergia(pOrdenesEstudiosSimples.getNumeroAlergia());
-//		 ordenesEstudiosSimplesSelected.setRequiereFactura(pOrdenesEstudiosSimples.getRequiereFactura());
-//		 ordenesEstudiosSimplesSelected.setTipoPago(pOrdenesEstudiosSimples.getTipoPago());
-//		 ordenesEstudiosSimplesSelected.setEstatus(pOrdenesEstudiosSimples.getEstatus());
-//		 ordenesEstudiosSimplesSelected.setFechaCreacion(pOrdenesEstudiosSimples.getFechaCreacion());
-//		 ordenesEstudiosSimplesSelected.setUsuarioUltimaActualizacion(pOrdenesEstudiosSimples.getUsuarioUltimaActualizacion());
-//		 ordenesEstudiosSimplesSelected.setFechaUltimaActualizacion(pOrdenesEstudiosSimples.getFechaUltimaActualizacion());
-//		 ordenesEstudiosSimplesSelected.setIndicacionesDoctor(pOrdenesEstudiosSimples.getIndicacionesDoctor());
-//		 ordenesEstudiosSimplesSelected.setInfoAdicional(pOrdenesEstudiosSimples.getInfoAdicional());
-//		 
-//		 ordenesEstudiosSimplesSelected.setFechaNacimientoPaciente(pOrdenesEstudiosSimples.getFechaNacimientoPaciente());
-//		 int intMonthsBetween =  differenceInMonths(new Date(pOrdenesEstudiosSimples.getFechaNacimientoPaciente().getTime()),new Date());
-//		 int intAniosBetween = intMonthsBetween/12;
-//		 ordenesEstudiosSimplesSelected.setEdad(intAniosBetween+" anios");	
-//		 
-//		 ordenesEstudiosSimplesSelected.setCostoEstudio(pOrdenesEstudiosSimples.getCostoEstudio());
-//		 ordenesEstudiosSimplesSelected.setHoraInicialOrden(pOrdenesEstudiosSimples.getHoraInicialOrden()); 
-//		 ordenesEstudiosSimplesSelected.setHoraFinalOrden(pOrdenesEstudiosSimples.getHoraFinalOrden());
-//		 if(null!=pOrdenesEstudiosSimples.getHoraInicialOrden()) {
-//			 ordenesEstudiosSimplesSelected.setUtilHoraInicialOrden(new Date(pOrdenesEstudiosSimples.getHoraInicialOrden().getTime()));
-//		 }
-//		 if(null!=pOrdenesEstudiosSimples.getHoraFinalOrden()) {
-//			 ordenesEstudiosSimplesSelected.setUtilHoraFinalOrden(new Date(pOrdenesEstudiosSimples.getHoraFinalOrden().getTime()));
-//		 }
-//		 
-//		 System.out.println("pOrdenesEstudiosSimples.getEstatus():"+pOrdenesEstudiosSimples.getEstatus());
-//		 
-//		 ordenesEstudiosSimplesSelected.setEstatus(pOrdenesEstudiosSimples.getEstatus());
-//	    
-//	}
-	
-//   public void selectForDelete(OrdenesEstudiosSimples pOrdenesEstudiosSimples) {
-//		
-//		 ordenesEstudiosSimplesSelected = new OrdenesEstudiosSimples();
-//		
-//		 ordenesEstudiosSimplesSelected.setNumeroOrden(pOrdenesEstudiosSimples.getNumeroOrden());
-//		 ordenesEstudiosSimplesSelected.setNumeroUbicacion(pOrdenesEstudiosSimples.getNumeroUbicacion());
-//		 ordenesEstudiosSimplesSelected.setNumeroDoctor(pOrdenesEstudiosSimples.getNumeroDoctor());
-//		 ordenesEstudiosSimplesSelected.setNumeroPaciente(pOrdenesEstudiosSimples.getNumeroPaciente());
-//		 ordenesEstudiosSimplesSelected.setTipoOrden(pOrdenesEstudiosSimples.getTipoOrden());
-//		 ordenesEstudiosSimplesSelected.setNumeroEstudio(pOrdenesEstudiosSimples.getNumeroEstudio());
-//		 ordenesEstudiosSimplesSelected.setNumeroAlergia(pOrdenesEstudiosSimples.getNumeroAlergia());
-//		 ordenesEstudiosSimplesSelected.setRequiereFactura(pOrdenesEstudiosSimples.getRequiereFactura());
-//		 ordenesEstudiosSimplesSelected.setTipoPago(pOrdenesEstudiosSimples.getTipoPago());
-//		 ordenesEstudiosSimplesSelected.setEstatus(pOrdenesEstudiosSimples.getEstatus());
-//		 ordenesEstudiosSimplesSelected.setFechaCreacion(pOrdenesEstudiosSimples.getFechaCreacion());
-//		 ordenesEstudiosSimplesSelected.setUsuarioUltimaActualizacion(pOrdenesEstudiosSimples.getUsuarioUltimaActualizacion());
-//		 ordenesEstudiosSimplesSelected.setFechaUltimaActualizacion(pOrdenesEstudiosSimples.getFechaUltimaActualizacion());
-//		 ordenesEstudiosSimplesSelected.setIndicacionesDoctor(pOrdenesEstudiosSimples.getIndicacionesDoctor());
-//		 ordenesEstudiosSimplesSelected.setInfoAdicional(pOrdenesEstudiosSimples.getInfoAdicional());
-//		
-//	}
-//
-//    public void actualizaOrdenSimple() {
-//    	
-//    	boolean updatedIn = false; 
-//    	OrdenesEstudiosDto ordenesEstudiosDto = new OrdenesEstudiosDto();
-//    	ordenesEstudiosDto.setNumeroPaciente(ordenesEstudiosSimplesSelected.getNumeroPaciente());
-//    	ordenesEstudiosDto.setNumeroDoctor(ordenesEstudiosSimplesSelected.getNumeroDoctor());
-//    	ordenesEstudiosDto.setNumeroDoctorReferente(ordenesEstudiosSimplesSelected.getNumeroDoctorReferente());
-//    	ordenesEstudiosDto.setNumeroEstudio(ordenesEstudiosSimplesSelected.getNumeroEstudio());
-//    	ordenesEstudiosDto.setHoraInicialOrden(ordenesEstudiosSimplesSelected.getHoraInicialOrden());
-//    	ordenesEstudiosDto.setHoraFinalOrden(ordenesEstudiosSimplesSelected.getHoraFinalOrden());
-//    	ordenesEstudiosDto.setInfoAdicional(ordenesEstudiosSimplesSelected.getInfoAdicional());
-//    	ordenesEstudiosDto.setEstatus(ordenesEstudiosSimplesSelected.getEstatus());
-//    	ordenesEstudiosLocal.updateOrdenesEstudios(ordenesEstudiosSimplesSelected.getNumeroOrden(), ordenesEstudiosDto);
-//    	refreshEntity();
-//    	updatedIn = true;
-//    	PrimeFaces.current().ajax().addCallbackParam("updatedIn", updatedIn);
-//    }
-//   
-//    public void delete() {
-//    	ordenesEstudiosLocal.deleteOrdenesEstudios(ordenesEstudiosSimplesSelected.getNumeroOrden());
-//    	refreshEntity();
-//    }
-//    
-//    public void handleEstudioChange() {
-//		EstudiosDto estudiosDto = estudiosLocal.findByNumeroEstudio(ordenesEstudiosSimples.getNumeroEstudio());
-//		if(null!=estudiosDto) {
-//		setCostoEstudio(estudiosDto.getCostoEstudio());
-//		}
-//	}
-    
-//    public void handleEstudioChangeUpd() {
-//		EstudiosDto estudiosDto = estudiosLocal.findByNumeroEstudio(ordenesEstudiosSimplesSelected.getNumeroEstudio());
-//		if(null!=estudiosDto) {
-//			ordenesEstudiosSimplesSelected.setCostoEstudio(estudiosDto.getCostoEstudio());
-//		}
-//	}
-//    
-//    public void search() {
-//    	if((null!=this.searchNumEstu&&!"".equals(this.searchNumEstu))
-//    	  ||(null!=this.searchNomPaci&&!"".equals(this.searchNomPaci))
-//    	  ||(null!=this.searchNomDoct&&!"".equals(this.searchNomDoct))
-//    	  ) {
-//    	
-//    		listOrdenesEstudios = new ArrayList<OrdenesEstudios>(); 
-//    		List<OrdenesEstudiosDto> listOrdenesEstudiosDto = ordenesEstudiosLocal.findBySearch("1"
-//    				                                                                           ,this.searchNumEstu
-//    				                                                                           ,this.searchNomPaci
-//    				                                                                           ,this.searchNomDoct
-//    				                                                                           );
-//    		Iterator<OrdenesEstudiosDto> iterOrdenesEstudiosDto = listOrdenesEstudiosDto.iterator();
-//    		while(iterOrdenesEstudiosDto.hasNext()) {
-//    			OrdenesEstudiosDto ordenesEstudiosDto = iterOrdenesEstudiosDto.next();
-//    			PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(ordenesEstudiosDto.getNumeroPaciente());
-//    			//DoctoresDto doctoresDto = doctoresLocal.findByNumeroDoctor(ordenesEstudiosDto.getNumeroDoctor());
-//    			//DoctoresReferentesDto doctoresReferentesDto = doctoresReferentesLocal.findByNumeroDoctorReferente(ordenesEstudiosDto.getNumeroDoctorReferente());
-//    			//UbicacionesDto ubicacionesDto = ubicacionesLocal.findByNumeroUbicacion(ordenesEstudiosDto.getNumeroUbicacion());
-//    			OrdenesEstudios ordenesEstudios = new OrdenesEstudios();
-//    			ordenesEstudios.setNumeroOrden(ordenesEstudiosDto.getNumeroOrden());
-//    			ordenesEstudios.setNombrePaciente(pacientesDto.getNombrePaciente());
-//    			ordenesEstudios.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
-//    			//ordenesEstudiosSimples.setNombreDoctor(doctoresDto.getNombreDoctor());
-//    			//ordenesEstudiosSimples.setNombreDoctorReferente(doctoresReferentesDto.getNombreDoctorReferente());
-//    			//ordenesEstudiosSimples.setNombreUbicacion(ubicacionesDto.getNombreUbicacion());
-//    			
-//    			ordenesEstudios.setNumeroEstudio(ordenesEstudiosDto.getNumeroEstudio());
-//    			EstudiosDto estudiosDto = estudiosLocal.findByNumeroEstudio(ordenesEstudiosDto.getNumeroEstudio());
-//    			//ordenesEstudiosSimples.setCostoEstudio(estudiosDto.getCostoEstudio());
-//    			
-//    			ordenesEstudios.setNumeroPaciente(ordenesEstudiosDto.getNumeroPaciente());
-////    			ordenesEstudiosSimples.setNumeroDoctor(ordenesEstudiosDto.getNumeroDoctor());
-////    			ordenesEstudiosSimples.setRequiereFactura(ordenesEstudiosDto.getRequiereFactura());
-////    			ordenesEstudiosSimples.setInfoAdicional(ordenesEstudiosDto.getInfoAdicional());
-////    			ordenesEstudiosSimples.setTipoPago(ordenesEstudiosDto.getTipoPago());
-////    			ordenesEstudiosSimples.setEstatus(ordenesEstudiosDto.getEstatus());
-//    			ordenesEstudios.setFechaCreacion(ordenesEstudiosDto.getFechaCreacion());
-////    			ordenesEstudiosSimples.setUsuarioUltimaActualizacion(ordenesEstudiosDto.getUsuarioUltimaActualizacion());
-////    			ordenesEstudiosSimples.setFechaUltimaActualizacion(ordenesEstudiosDto.getFechaUltimaActualizacion());
-////    			ordenesEstudiosSimples.setIndicacionesDoctor(ordenesEstudiosDto.getIndicacionesDoctor());
-////    			ordenesEstudiosSimples.setHoraInicialOrden(ordenesEstudiosDto.getHoraInicialOrden());
-////    			ordenesEstudiosSimples.setHoraFinalOrden(ordenesEstudiosDto.getHoraFinalOrden());
-////    			
-//    			listOrdenesEstudios.add(ordenesEstudios);
-//    		}
-//    		
-//    	}
-//    	
-//    }
-    
-   // public String toFormatoOrdenSimple() {
-//    	ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-//        Map<String, Object> sessionMap  = context.getSessionMap();
-//        sessionMap.remove("svNumeroOrden"); 
-//        sessionMap.put("svNumeroOrden", ordenesEstudiosSelected.getNumeroOrden());
-//        return "admin-Formato1";
-//    }
-//    
-//    public String toFormatoRO(long pNumeroOrden) {
-//    	System.out.println("Entra toFormatoRO");
-//    	System.out.println("pNumeroOrden:"+pNumeroOrden);
-//    	ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-//        Map<String, Object> sessionMap  = context.getSessionMap();
-//        sessionMap.remove("svNumeroOrden"); 
-//        sessionMap.put("svNumeroOrden", pNumeroOrden);
-//        
-//        OrdenesEstudiosDto ordenesEstudiosDto = ordenesEstudiosLocal.findByNumeroOrdenEstudio(pNumeroOrden); 
-//        String strRetval = ""; 
-//        if("Formato1".equals(ordenesEstudiosDto.getFormato())) {
-//        	strRetval =  "admin-Formato1RO";
-//        }else if("Formato2".equals(ordenesEstudiosDto.getFormato())) {
-//        	strRetval =  "admin-Formato2RO";
-//        }
-//    	 return strRetval;
-//    }
-//    
-//    public void handleFormatoChange() {
-//    	System.out.println("Entra handleFormatoChange");
-//    	System.out.println("Sale handleFormatoChange");
-//    }
-//    
-//    public String executeRcFormato() {
-//    	System.out.println("Entra executeRcFormato");
-//    	System.out.println("localFormato:"+localFormato);
-//    	String strPage = ""; 
-//    	ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-//        Map<String, Object> sessionMap  = context.getSessionMap();
-//        sessionMap.remove("svNumeroOrden"); 
-//        sessionMap.put("svNumeroOrden", ordenesEstudiosSimplesSelected.getNumeroOrden());
-//    	if("1".equals(localFormato)) {
-//    		strPage = "admin-Formato1"; 
-//       }else if("2".equals(localFormato)) {
-//    	   strPage = "admin-Formato2"; 
-//       }
-//        System.out.println("Sale executeRcFormato");
-//    	return strPage; 
-//    }
-//    
-//    
-//	public String getEdad() {
-//		return edad;
-//	}
-//
-//	public void setEdad(String edad) {
-//		this.edad = edad;
-//	}
-//
-//	public Date getFechaNacimiento() {
-//		return fechaNacimiento;
-//	}
-//
-//	public void setFechaNacimiento(Date fechaNacimiento) {
-//		this.fechaNacimiento = fechaNacimiento;
-//	}
-//	
-//	private  int differenceInMonths(Date d1, Date d2) {
-//		Calendar c1 = Calendar.getInstance();
-//	    c1.setTime(d1);
-//	    Calendar c2 = Calendar.getInstance();
-//	    c2.setTime(d2);
-//	    int diff = 0;
-//	    if (c2.after(c1)) {
-//	        while (c2.after(c1)) {
-//	            c1.add(Calendar.MONTH, 1);
-//	            if (c2.after(c1)) {
-//	                diff++;
-//	            }
-//	        }
-//	    } else if (c2.before(c1)) {
-//	        while (c2.before(c1)) {
-//	            c1.add(Calendar.MONTH, -1);
-//	            if (c1.before(c2)) {
-//	                diff--;
-//	            }
-//	        }
-//	    }
-//	    return diff;
-//	}
-
-	public List<OrdenesEstudios> getListOrdenesEstudios() {
-		return listOrdenesEstudios;
+			listOrdenesEstudiosHistorial.add(ordenesEstudiosHistorial);
+		}
 	}
 
-	public void setListOrdenesEstudios(List<OrdenesEstudios> listOrdenesEstudios) {
-		this.listOrdenesEstudios = listOrdenesEstudios;
+
+    
+	   public void search() {
+	    	if((null!=this.searchNomEstu&&!"".equals(this.searchNomEstu))
+	    	  ||(null!=this.searchNomPaci&&!"".equals(this.searchNomPaci))
+	    	  ||(null!=this.searchNumOrde&&!"".equals(this.searchNumOrde))
+	    	  ) {
+	    	
+	    		listOrdenesEstudiosHistorial= new ArrayList<OrdenesEstudiosHistorial>(); 
+	    		List<OrdenesEstudiosVDto> listOrdenesEstudiosVDto = ordenesEstudiosVLocal.findBySearchHisto( this.searchNumOrde
+	    				                                                                                  ,this.searchNomEstu
+                                                                                                          ,this.searchNomPaci
+                                                                                                                );
+	    				                                                                          
+	    		Iterator<OrdenesEstudiosVDto> iterOrdenesEstudiosVDto = listOrdenesEstudiosVDto.iterator();
+	    		while(iterOrdenesEstudiosVDto.hasNext()) {
+	    			OrdenesEstudiosVDto ordenesEstudiosVDto = iterOrdenesEstudiosVDto.next();
+	    			OrdenesEstudiosHistorial ordenesEstudiosHistorial = new OrdenesEstudiosHistorial(); 
+	    			ordenesEstudiosHistorial.setNumeroOrden(ordenesEstudiosVDto.getNumeroOrden());
+	    			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
+	    			ordenesEstudiosHistorial.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
+	    			ordenesEstudiosHistorial.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
+	    			ordenesEstudiosHistorial.setDecodeTipoOrden(ordenesEstudiosVDto.getDecodeTipoOrden());
+	    			ordenesEstudiosHistorial.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
+	    			ordenesEstudiosHistorial.setEstatus(ordenesEstudiosVDto.getEstatus());
+	    			ordenesEstudiosHistorial.setFechaCreacion(ordenesEstudiosVDto.getFechaCreacion());
+	    			ordenesEstudiosHistorial.setFechaUltimaActualizacion(ordenesEstudiosVDto.getFechaUltimaActualizacion());
+	    			ordenesEstudiosHistorial.setHoraInicialOrden(ordenesEstudiosVDto.getHoraInicialOrden());
+	    			ordenesEstudiosHistorial.setHoraFinalOrden(ordenesEstudiosVDto.getHoraFinalOrden());
+	    			
+	    			listOrdenesEstudiosHistorial.add(ordenesEstudiosHistorial);
+	    		}
+	    		
+	    	}
+	    	
+	    }
+	    
+
+	public List<OrdenesEstudiosHistorial> getListOrdenesEstudiosHistorial() {
+		return listOrdenesEstudiosHistorial;
 	}
 
-//	public OrdenesEstudios getOrdenesEstudiosHistorialSelected() {
-//		return ordenesEstudiosHistorialSelected;
-//	}
-//
-//	public void setOrdenesEstudiosHistorialSelected(OrdenesEstudios ordenesEstudiosSelected) {
-//		this.ordenesEstudiohistorialSelected = ordenesEstudioshistorialSelected;
-//	}
+	public void setListOrdenesEstudiosHistorial(List<OrdenesEstudiosHistorial> listOrdenesEstudiosHistorial) {
+		this.listOrdenesEstudiosHistorial = listOrdenesEstudiosHistorial;
+	}
 
-//	public long getCostoEstudio() {
-//		return costoEstudio;
-//	}
-//
-//	public void setCostoEstudio(long costoEstudio) {
-//		this.costoEstudio = costoEstudio;
-//	}
+
 
 	public String getSearchNomPaci() {
 		return searchNomPaci;
@@ -550,20 +172,21 @@ public class HistorialOrdenesForm {
 		this.searchNomPaci = searchNomPaci;
 	}
 
-//	public String getSearchNomDoct() {
-//		return searchNomDoct;
-//	}
-//
-//	public void setSearchNomDoct(String searchNomDoct) {
-//		this.searchNomDoct = searchNomDoct;
-//	}
-
-	public String getSearchNumEstu() {
-		return searchNumEstu;
+	public String  getSearchNumOrde() {
+		return searchNumOrde;
 	}
 
-	public void setSearchNumEstu(String searchNumEstu) {
-		this.searchNumEstu = searchNumEstu;
+	public void setSearchNumOrde(String searchNumOrde) {
+		this.searchNumOrde = searchNumOrde;
+	}
+
+
+	public String getSearchNomEstu() {
+		return searchNomEstu;
+	}
+
+	public void setSearchNomEstu(String searchNomEstu) {
+		this.searchNomEstu = searchNomEstu;
 	}
 
 	public String getLocalFormato() {
@@ -573,21 +196,21 @@ public class HistorialOrdenesForm {
 	public void setLocalFormato(String localFormato) {
 		this.localFormato = localFormato;
 	}
-//
-//	public List<OrdenesEstudiosSimples> getListOrdEstSimpEnAten() {
-//		return listOrdEstSimpEnAten;
-//	}
-//
-//	public void setListOrdEstSimpEnAten(List<OrdenesEstudiosSimples> listOrdEstSimpEnAten) {
-//		this.listOrdEstSimpEnAten = listOrdEstSimpEnAten;
-//	}
-//
-//	public List<OrdenesEstudiosSimples> getListOrdEstSimpEstRea() {
-//		return listOrdEstSimpEstRea;
-//	}
-//
-//	public void setListOrdEstSimpEstRea(List<OrdenesEstudiosSimples> listOrdEstSimpEstRea) {
-//		this.listOrdEstSimpEstRea = listOrdEstSimpEstRea;
-//	}
+	public String getDecodeTipoOrden() {
+		return this.decodeTipoOrden;
+	}
+
+	public void setDecodeTipoOrden(String decodeTipoOrden) {
+		this.decodeTipoOrden = decodeTipoOrden;
+	}
+	public String getApellidoPaternoPaciente() {
+		return apellidoPaternoPaciente;
+	}
+
+	public void setApellidoPaternoPaciente(String apellidoPaternoPaciente) {
+		this.apellidoPaternoPaciente = apellidoPaternoPaciente;
+	}
+
+
 	
 }

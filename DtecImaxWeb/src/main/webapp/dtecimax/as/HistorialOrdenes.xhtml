@@ -7,30 +7,7 @@
 <ui:define name="content">
  <h1>Historial de Ordenes</h1>
  
-<!--   <h:form id="SearchForm"> -->
-<!--   <f:passThroughAttribute name="autocomplete" value="off"/> -->
-<!--   <p:panel id="SearchPanel" > -->
-<!--   <div class="ui-g"> -->
-<!--   <div class="ui-g-9 ui-g-nopad"> -->
-<!--      <div class="ui-g-6"> -->
-<!--       <p:outputLabel for="fechaDesde" value="Fecha Desde" /> -->
-<!--         <p:calendar id="fechaDesde"  pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{historialDePagosForm.searchFechaDesde}"/> -->
-<!--         <p:message for="fechaDesde"/> -->
-<!--      </div> -->
-<!--      <div class="ui-g-6"> -->
-<!--         <p:outputLabel for="fechaHasta" value="Fecha Hasta" /> -->
-<!--          <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{historialDePagosForm.searchFechaHasta}"/> -->
-<!--          <p:message for="fechaHasta"/> -->
-<!--      </div> -->
-<!--   </div> -->
-<!--   </div>END ui-g  -->
-<!--    <div class="ui-g"> -->
-<!--       <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: left;"> -->
-<!--        <p:commandButton value="Consultar" update="SearchPanel HistorialDePagosFormReadOnly" actionListener="#{historialDePagosForm.filtraPorFechas()}" oncomplete="$('.ui-message-error').delay(1800).fadeOut(500);"/> -->
-<!--       </div> -->
-<!--    </div>END ui-g  -->
-<!--    </p:panel> -->
-<!--   </h:form> -->
+
   
  
 <h:form id="SearchForm">
@@ -41,17 +18,17 @@
       <div class="ui-g ui-fluid">
        <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
         <p:outputLabel  for="nombre_paciente" value="Nombre Paciente:" />
-         <p:inputText id="nombre_paciente"  style="width: 100%; margin-top: 5px;"  maxlength="50" />
+         <p:inputText id="nombre_paciente"  style="width: 100%; margin-top: 5px;"  value="#{historialOrdenesForm.searchNomPaci}" maxlength="50" />
          <p:message for="nombre_paciente"/>
       </div>
       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
         <p:outputLabel  for="numero_orden" value="Numero Orden:" />
-         <p:inputText id="numero_orden"  style="width: 100%; margin-top: 5px;"  maxlength="50" />
+         <p:inputText id="numero_orden"  style="width: 100%; margin-top: 5px;"  value="#{historialOrdenesForm.searchNumOrde}" maxlength="50" />
          <p:message for="numero_orden"/>
       </div>
       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
         <p:outputLabel  for="nombre_estudio" value="Nombre Estudio:" />
-         <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;"  maxlength="50" />
+         <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;"  value="#{historialOrdenesForm.searchNomEstu}" maxlength="50" />
          <p:message for="nombre_estudio"/>
       </div>
       </div>
@@ -61,31 +38,35 @@
         <p:commandButton value="Cancelar">
          <p:ajax update="SearchPanel" resetValues="true" />
         </p:commandButton>
-        <p:commandButton value="Consultar" update="HistorialDePagosFormReadOnly"   style="margin-left: 10px;"/>
+        <p:commandButton value="Consultar" update="HistorialDeOrdenesFormReadOnly"   actionListener="#{historialOrdenesForm.search}"  style="margin-left: 10px;"/>
        </div>
       </div>
       
   </p:panel>
   </p:fieldset>
 </h:form>
-  <h:form id="HistorialDePagosFormReadOnly">
+  <h:form id="HistorialDeOrdenesFormReadOnly">
     <div class="ui-g">
     <div class="ui-g-12 ui-lg-12">
     <div class="card no-margin">
            <div class="ui-g">
            <div class="ui-g-12 ui-lg-12">
-              <p:dataTable var="historialOrden" value="#{historialOrdenesForm.listOrdenesEstudios}" emptyMessage="Sin resultados" tableStyle="width:auto"  paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
+              <p:dataTable var="historialOrden" value="#{historialOrdenesForm.listOrdenesEstudiosHistorial}" emptyMessage="Sin resultados" tableStyle="width:auto"  paginator="true" rows="50" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
 				   <p:column headerText="Numero orden" style="text-overflow: ellipsis; white-space: nowrap;">
 			        <h:outputText value="#{historialOrden.numeroOrden}" />
 			       </p:column> 
 			       <p:column headerText="Nombre Paciente">
 			         <h:outputText value="#{historialOrden.nombrePaciente}" />
-			       </p:column>
+<!-- 			       <p:spacer width="5" height="5" /> -->
+<!-- 			           <h:outputText value="#{historialOrden.apellidoPaternoPaciente}" /> -->
+<!-- 			          <p:spacer width="5" height="5" /> -->
+<!-- 			            <h:outputText value="#{historialOrden.apellidoMaternoPaciente}" /> -->
+<!-- 			       </p:column> -->
 <!-- 			        <p:column headerText="Fecha" style="text-overflow: ellipsis; white-space: nowrap;"> -->
 <!-- 			         <h:outputText value="#{pagoDeEstudio.castFechaCreacion}" > -->
 <!-- 			          <f:convertDateTime type="date" pattern= "yyyy-MM-dd" /> -->
 <!-- 			         </h:outputText> -->
-<!-- 			       </p:column> -->
+			       </p:column> 
 			       <p:column headerText="Nombre Estudio">
 			         <h:outputText value="#{historialOrden.nombreEstudio}" /> 
 			       </p:column>
@@ -93,7 +74,7 @@
 			           <h:outputText value="#{historialOrden.fechaCreacion}" />
 			       </p:column>
 			      <p:column headerText="Tipo De Orden">
-			           <h:outputText value="#{historialOrden.tipoOrden}" />
+			           <h:outputText value="#{historialOrden.decodeTipoOrden}" />
 			       </p:column>
 <!-- 			       <p:column headerText="Observaciones Pago"> -->
 <!-- 			           <h:outputText value="#{pagoDeEstudio.observPago}" /> -->

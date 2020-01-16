@@ -18,6 +18,7 @@ public abstract class OrdenesEstudios implements Serializable {
 	private String indicacionesDoctor;
 	private String infoAdicional;
 	private String numeroAlergia;
+	
 	private long numeroCita;
 	private long numeroDoctor;
 	private long numeroDoctorReferente;

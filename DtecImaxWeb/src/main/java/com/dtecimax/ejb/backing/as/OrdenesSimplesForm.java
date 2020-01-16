@@ -294,7 +294,6 @@ public class OrdenesSimplesForm {
 		 ordenesEstudiosSimplesSelected.setNumeroOrden(pOrdenesEstudiosSimples.getNumeroOrden());
 		 ordenesEstudiosSimplesSelected.setNumeroUbicacion(pOrdenesEstudiosSimples.getNumeroUbicacion());
 		 ordenesEstudiosSimplesSelected.setNumeroDoctor(pOrdenesEstudiosSimples.getNumeroDoctor());
-		 ordenesEstudiosSimplesSelected.setNumeroDoctorReferente(pOrdenesEstudiosSimples.getNumeroDoctorReferente());
 		 ordenesEstudiosSimplesSelected.setNumeroPaciente(pOrdenesEstudiosSimples.getNumeroPaciente());
 		 ordenesEstudiosSimplesSelected.setTipoOrden(pOrdenesEstudiosSimples.getTipoOrden());
 		 ordenesEstudiosSimplesSelected.setNumeroEstudio(pOrdenesEstudiosSimples.getNumeroEstudio());

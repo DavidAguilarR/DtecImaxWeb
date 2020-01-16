@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import com.dtecimax.jpa.dao.as.OrdenesEstudiosDao;
 import com.dtecimax.jpa.dto.as.OrdenesEstudiosDto;
+import com.dtecimax.jpa.dto.hr.DoctoresReferentesDto;
 
 @Stateless 
 public class OrdenesEstudiosDaoImpl implements OrdenesEstudiosDao {
@@ -104,7 +105,8 @@ public class OrdenesEstudiosDaoImpl implements OrdenesEstudiosDao {
 		}
 		return em.createQuery(query).getResultList();
 	}
-
+	
+	
 	@Override
 	public void updateFormato(long pNumeroOrden
 			                , String pFormato
