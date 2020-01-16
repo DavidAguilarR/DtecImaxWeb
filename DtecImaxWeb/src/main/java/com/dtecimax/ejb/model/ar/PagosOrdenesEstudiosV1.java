@@ -37,6 +37,7 @@ public class PagosOrdenesEstudiosV1 implements Serializable {
 	private BigDecimal total; 
 	private String observDesc; 
 	private String observPago; 
+	private String infoFactura;
 	
 
 	public String getApellidoMaternoPaciente() {
@@ -237,6 +238,14 @@ public class PagosOrdenesEstudiosV1 implements Serializable {
 
 	public void setObservPago(String observPago) {
 		this.observPago = observPago;
+	}
+
+	public String getInfoFactura() {
+		return infoFactura;
+	}
+
+	public void setInfoFactura(String infoFactura) {
+		this.infoFactura = infoFactura;
 	}
 
 	

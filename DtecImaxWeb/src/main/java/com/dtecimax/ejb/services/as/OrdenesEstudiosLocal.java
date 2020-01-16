@@ -47,5 +47,9 @@ public interface OrdenesEstudiosLocal {
 	        ,String pObservPago
 	        );
 	
+	 public void aplicarInfoFactura(long pNumeroOrden
+						           ,String pInfoFactura
+						            );
+	
 }
 

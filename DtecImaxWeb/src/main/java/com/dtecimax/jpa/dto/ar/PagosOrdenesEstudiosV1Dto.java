@@ -101,6 +101,9 @@ public class PagosOrdenesEstudiosV1Dto implements Serializable {
 	@Column(name="OBSERV_DESC")
 	private String observDesc;
 	
+	@Column(name="INFO_FACTURA")
+	private String infoFactura; 
+	
 	public PagosOrdenesEstudiosV1Dto() {
 	}
 
@@ -318,6 +321,14 @@ public class PagosOrdenesEstudiosV1Dto implements Serializable {
 
 	public void setEstatusPago(String estatusPago) {
 		this.estatusPago = estatusPago;
+	}
+
+	public String getInfoFactura() {
+		return infoFactura;
+	}
+
+	public void setInfoFactura(String infoFactura) {
+		this.infoFactura = infoFactura;
 	}
 
 }

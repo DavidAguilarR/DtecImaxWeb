@@ -150,5 +150,13 @@ public class OrdenesEstudiosDaoImpl implements OrdenesEstudiosDao {
 		ordenesEstudiosDto.setEstatusPago("PAGADO");
 	}
 
+	 public void aplicarInfoFactura(long pNumeroOrden
+						           ,String pInfoFactura
+						            ) {
+		
+		 OrdenesEstudiosDto ordenesEstudiosDto = em.find(OrdenesEstudiosDto.class, pNumeroOrden);
+		 ordenesEstudiosDto.setInfoFactura(pInfoFactura);
+		 
+	 }
 	
 }

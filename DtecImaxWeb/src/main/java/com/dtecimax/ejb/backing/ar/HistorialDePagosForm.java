@@ -50,8 +50,9 @@ public class HistorialDePagosForm {
 		System.out.println("Entra filtraPorFechas");
 		
 		java.sql.Date sqlFechaDesde = new java.sql.Date(searchFechaDesde.getTime());
-		java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaHasta.getTime()); 
-		
+		/** java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaHasta.getTime()); 16012020 **/
+		java.sql.Date sqlFechaHasta = new java.sql.Date(searchFechaDesde.getTime());
+				
 		List<PagosOrdenesEstudiosV1Dto> listPagosEstudiosV1Dto = pagosOrdenesEstudiosV1Local.findByFiltros(null /*searchNomPaci*/
 																		                                 , null /*searchApellPatPaci*/
 																		                                 , null /*searchApellMatPaci*/

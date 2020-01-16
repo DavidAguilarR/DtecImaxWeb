@@ -103,4 +103,15 @@ public class OrdenesEstudiosLocalImpl implements OrdenesEstudiosLocal {
 				                     , pObservPago); 
 	}
 
+	@Override
+	 public void aplicarInfoFactura(long pNumeroOrden
+						           ,String pInfoFactura
+						            ) {
+		
+		ordenesEstudiosDao.aplicarInfoFactura(pNumeroOrden
+				                            , pInfoFactura
+				                            );
+	 
+	}
+	
 }

@@ -25,6 +25,15 @@
             /*$('#RegistrarUbicacionBtn').fadeOut();*/
         }
     }
+    function handleInfoFacturaRequest(xhr, status, args) {
+        if(args.validationFailed || !args.infoFacturaIn) {
+            PF('facturaInfoDialogWV').jq.effect("shake", {times:5}, 100);
+        }
+        else {
+            PF('facturaInfoDialogWV').hide();
+            /*$('#RegistrarUbicacionBtn').fadeOut();*/
+        }
+    }
 </script>
     
 
@@ -52,13 +61,13 @@
   
   <div class="ui-g-9 ui-g-nopad">
      <div class="ui-g-6">
-      <p:outputLabel for="fechaDesde" value="Fecha Desde" />
+      <p:outputLabel for="fechaDesde" value="Fecha" />
         <p:calendar id="fechaDesde"  pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{pagoDeEstudiosForm.searchFechaDesde}"/>
         <p:message for="fechaDesde"/>
      </div>
      <div class="ui-g-6">
-        <p:outputLabel for="fechaHasta" value="Fecha Hasta" />
-         <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{pagoDeEstudiosForm.searchFechaHasta}"/>
+        <p:outputLabel for="fechaHasta" value="Fecha Hasta" rendered="false"/>
+         <p:calendar id="fechaHasta" pattern="dd/MM/yyyy" mask="true" required="true" locale="es" navigator="true" value="#{pagoDeEstudiosForm.searchFechaHasta}" rendered="false"/>
          <p:message for="fechaHasta"/>
      </div>
   </div>
@@ -104,9 +113,16 @@
 			        <p:column headerText="Costo Total">
 			           <h:outputText value="#{pagoDeEstudio.total}" />
 			       </p:column>
+			        <p:column headerText="Requiere Factura">
+			           <h:outputText value="#{pagoDeEstudio.decodeRequiereFactura}" />
+			       </p:column>
+			        <p:column headerText="Info Factura">
+			         <h:outputText value="#{pagoDeEstudio.infoFactura}" />
+			        </p:column>
 			       <p:column headerText="Opciones:" style="text-overflow: ellipsis; white-space: nowrap;">
 			        <p:commandButton value="Descuento" oncomplete="PF('descuentoDialogWV').show()" style="margin-left: 15px;" actionListener="#{pagoDeEstudiosForm.selectForDescuento(pagoDeEstudio)}"/>
 			        <p:commandButton value="Cobrar" update="pagoForm" oncomplete="PF('pagoDialogWV').show()" style="margin-left: 15px;" actionListener="#{pagoDeEstudiosForm.selectForPago(pagoDeEstudio)}"/>
+			        <p:commandButton value="Factura" oncomplete="PF('facturaInfoDialogWV').show()" style="margin-left: 15px;" actionListener="#{pagoDeEstudiosForm.selectForInfoFactura(pagoDeEstudio)}"/>
 			       </p:column>
 			  </p:dataTable> 
            </div>
@@ -117,15 +133,29 @@
    
    <p:panel id="TotalsPanel" >
      <div class="ui-g">
-      <div class="ui-g-12">
-         <p:outputLabel  for="pacientes_atendidos" value="Pacientes Atendidos:" />
+      <div class="ui-g-2">
+        <p:outputLabel  for="pacientes_atendidos" value="Pacientes Atendidos:" />
+      </div>
+      <div class="ui-g-4">
          <p:inputText id="pacientes_atendidos" value="#{pagoDeEstudiosForm.pacientesAtendidos}" readonly="true"/>
       </div>
-      <div class="ui-g-12">
-         <p:outputLabel  for="total_por_cobrar" value="Total por Cobrar:" />
-         <p:inputText id="total_por_cobrar" value="#{pagoDeEstudiosForm.totalPorCobrar}" readonly="true"/>
+      <div class="ui-g-2">
+        <p:outputLabel  for="pacientes_atendidos" value="Ganancias Total del Día:" />
       </div>
-      <div class="ui-g-12">
+      <div class="ui-g-4">
+         <p:inputText id="gananciaTotalDia" value="#{pagoDeEstudiosForm.gananciaTotalDia}" readonly="true"/>
+      </div>
+      <div class="ui-g-2">
+         <p:outputLabel  for="total_por_cobrar" value="Total por Cobrar:" />
+      </div>
+      <div class="ui-g-4">
+          <p:inputText id="total_por_cobrar" value="#{pagoDeEstudiosForm.totalPorCobrar}" readonly="true"/>
+      </div>
+      <div class="ui-g-2">
+        <p:outputLabel for="gastosTotalDia" value="Gastos Total por Día:"/>
+      </div>
+      <div class="ui-g-4">
+          <p:inputText id="gastosTotalDia" value="#{pagoDeEstudiosForm.gastosTotalDia}" readonly="true"/>
       </div>
      </div>
     </p:panel>
@@ -178,7 +208,28 @@
 	   </p:panelGrid>
     </p:dialog>
     </h:form>
-   
+    
+     <h:form id="facturaInfoForm">
+     <f:passThroughAttribute name="autocomplete" value="off"/>
+     <p:dialog id="facturaInfoDialogId" widgetVar="facturaInfoDialogWV" modal="true" closable="true" closeOnEscape="true" draggable="false" resizable="false" width="1000" header="Información de Factura">
+       <p:messages />
+       <p:panelGrid id="panel" columns="2" layout="grid" columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-8">
+	     <h:outputLabel for="infoFactura" value="Información de Factura:" />
+	     <p:inputText id="infoFactura" value="#{pagoDeEstudiosForm.infoFactura}"  style="width:99%"/>
+	      <f:facet name="footer">
+	         <div class="ui-g">
+              <div class="ui-g-4">
+	          <p:commandButton value="Aplicar" update="panel PagoDeEstudiosFormReadOnly" actionListener="#{pagoDeEstudiosForm.aplicarInfoFactura()}" oncomplete="handleInfoFacturaRequest(xhr, status, args)" />
+	          </div>
+	          <div class="ui-g-4">
+	          <p:commandButton value="Cancelar" onclick="PF('facturaInfoDialogWV').hide()"/>
+	          </div>
+	         </div>
+	     </f:facet>
+	   </p:panelGrid>  
+     </p:dialog>
+     </h:form>
+
    
 </ui:define>
 </ui:composition>
