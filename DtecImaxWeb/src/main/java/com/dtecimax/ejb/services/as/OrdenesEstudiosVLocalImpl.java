@@ -40,11 +40,13 @@ public class OrdenesEstudiosVLocalImpl implements OrdenesEstudiosVLocal {
 	public List<OrdenesEstudiosVDto> findBySearchHisto( String pSearchNomEstu
                                                        ,String pSearchNomPaci
                                                        ,String pSearchNumOrde
+                                                       ,String pSearchNomDocRef
             
             ){
 		return ordenesEstudiosVDao.findBySearchHisto( pSearchNomEstu
                                                   , pSearchNomPaci
                                                    , pSearchNumOrde
+                                                   , pSearchNomDocRef
 				                             
 				                             );
 	}

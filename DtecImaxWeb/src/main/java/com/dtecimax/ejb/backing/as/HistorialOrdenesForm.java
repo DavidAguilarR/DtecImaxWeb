@@ -60,6 +60,7 @@ public class HistorialOrdenesForm {
 	private String searchNomEstu; 
 	private String searchNomPaci; 
 	private String searchNumOrde; 
+	private String searchNomDocRef; 
 	private String decodeTipoOrden;
 	private String apellidoPaternoPaciente;
 	private String localFormato; 
@@ -107,6 +108,9 @@ public class HistorialOrdenesForm {
 			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
 			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
 			ordenesEstudiosHistorial.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
+			ordenesEstudiosHistorial.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente ());
+			ordenesEstudiosHistorial.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente ());
+			ordenesEstudiosHistorial.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente ());
 			ordenesEstudiosHistorial.setCostoEstudio(ordenesEstudiosVDto.getCostoEstudio());
 			ordenesEstudiosHistorial.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
 			ordenesEstudiosHistorial.setDecodeTipoOrden(ordenesEstudiosVDto.getDecodeTipoOrden());
@@ -122,12 +126,14 @@ public class HistorialOrdenesForm {
 	    	if((null!=this.searchNomEstu&&!"".equals(this.searchNomEstu))
 	    	  ||(null!=this.searchNomPaci&&!"".equals(this.searchNomPaci))
 	    	  ||(null!=this.searchNumOrde&&!"".equals(this.searchNumOrde))
+	    	  ||(null!=this.searchNomDocRef&&!"".equals(this.searchNomDocRef))
 	    	  ) {
 	    	
 	    		listOrdenesEstudiosHistorial= new ArrayList<OrdenesEstudiosHistorial>(); 
 	    		List<OrdenesEstudiosVDto> listOrdenesEstudiosVDto = ordenesEstudiosVLocal.findBySearchHisto( this.searchNumOrde
 	    				                                                                                  ,this.searchNomEstu
                                                                                                           ,this.searchNomPaci
+                                                                                                          ,this.searchNomDocRef
                                                                                                                 );
 	    				                                                                          
 	    		Iterator<OrdenesEstudiosVDto> iterOrdenesEstudiosVDto = listOrdenesEstudiosVDto.iterator();
@@ -138,6 +144,10 @@ public class HistorialOrdenesForm {
 	    			ordenesEstudiosHistorial.setNombrePaciente(ordenesEstudiosVDto.getNombrePaciente());
 	    			ordenesEstudiosHistorial.setNumeroEstudio(ordenesEstudiosVDto.getNumeroEstudio());
 	    			ordenesEstudiosHistorial.setNombreEstudio(ordenesEstudiosVDto.getNombreEstudio());
+	    			ordenesEstudiosHistorial.setNumeroDoctorReferente(ordenesEstudiosVDto.getNumeroDoctorReferente ());
+	    			ordenesEstudiosHistorial.setNombreDoctorReferente(ordenesEstudiosVDto.getNombreDoctorReferente ());
+	    			ordenesEstudiosHistorial.setApellidoPaternoDoctorReferente(ordenesEstudiosVDto.getApellidoPaternoDoctorReferente ());
+	    			ordenesEstudiosHistorial.setApellidoMaternoDoctorReferente(ordenesEstudiosVDto.getApellidoMaternoDoctorReferente ());
 	    			ordenesEstudiosHistorial.setDecodeTipoOrden(ordenesEstudiosVDto.getDecodeTipoOrden());
 	    			ordenesEstudiosHistorial.setNumeroPaciente(ordenesEstudiosVDto.getNumeroPaciente());
 	    			ordenesEstudiosHistorial.setEstatus(ordenesEstudiosVDto.getEstatus());
@@ -179,7 +189,13 @@ public class HistorialOrdenesForm {
 	public void setSearchNumOrde(String searchNumOrde) {
 		this.searchNumOrde = searchNumOrde;
 	}
+	public String  getSearchNomDocRef() {
+		return searchNomDocRef;
+	}
 
+	public void setSearchNomDocRef(String searchNomDocRef) {
+		this.searchNomDocRef= searchNomDocRef;
+	}
 
 	public String getSearchNomEstu() {
 		return searchNomEstu;

@@ -31,6 +31,11 @@
          <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;"  value="#{historialOrdenesForm.searchNomEstu}" maxlength="50" />
          <p:message for="nombre_estudio"/>
       </div>
+        <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+        <p:outputLabel  for="nombre_doctor_referente" value="Nombre Doctor Referente:" />
+         <p:inputText id="nombre_doctor_referente"  style="width: 100%; margin-top: 5px;"  value="#{historialOrdenesForm.searchNomDocRef}" maxlength="50" />
+         <p:message for="nombre_doctor_referente"/>
+      </div>
       </div>
       
       <div class="ui-g">
@@ -67,6 +72,13 @@
 <!-- 			          <f:convertDateTime type="date" pattern= "yyyy-MM-dd" /> -->
 <!-- 			         </h:outputText> -->
 			       </p:column> 
+			        <p:column headerText="Doctor Referente">
+			         <h:outputText value="#{historialOrden.nombreDoctorReferente}" /> 
+			           <p:spacer width="5" height="5" />
+			          <h:outputText value="#{historialOrden.apellidoPaternoDoctorReferente}" /> 
+			            <p:spacer width="5" height="5" />
+			           <h:outputText value="#{historialOrden.apellidoMaternoDoctorReferente}" /> 
+			       </p:column>
 			       <p:column headerText="Nombre Estudio">
 			         <h:outputText value="#{historialOrden.nombreEstudio}" /> 
 			       </p:column>

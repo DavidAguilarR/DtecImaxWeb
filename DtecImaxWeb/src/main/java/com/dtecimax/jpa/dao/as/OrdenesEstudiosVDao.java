@@ -14,5 +14,6 @@ public interface OrdenesEstudiosVDao {
 	public List<OrdenesEstudiosVDto> findAll();
 	public List<OrdenesEstudiosVDto> findBySearchHisto(String pSearchNumOrde
             ,String pSearchNomEstu
-            ,String pSearchNomPaci);
+            ,String pSearchNomPaci
+            ,String pSearchNomDocRef);
 }

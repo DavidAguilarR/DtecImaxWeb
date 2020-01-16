@@ -60,12 +60,13 @@ public class OrdenesEstudiosVDaoImpl implements OrdenesEstudiosVDao {
 			String pSearchNumOrde
             ,String pSearchNomEstu
             ,String pSearchNomPaci
-          
+            ,String pSearchNomDocRef
             
             ) {
 		System.out.println("pSearchNumOrde:"+pSearchNumOrde);
 		System.out.println("pSearchNomEstu:"+pSearchNomEstu);
 		System.out.println("pSearchNomPaci:"+pSearchNomPaci);
+		System.out.println("pSearchNomPaci:"+pSearchNomDocRef);
 		String query = " SELECT o FROM OrdenesEstudiosVDto o WHERE 1=1"; 
 		if(null!=pSearchNumOrde&&!"".equals(pSearchNumOrde)) {
 			query = query+" AND o.numeroOrden = "+pSearchNumOrde;
@@ -75,6 +76,10 @@ public class OrdenesEstudiosVDaoImpl implements OrdenesEstudiosVDao {
 		}
 		if(null!=pSearchNomPaci&&!"".equals(pSearchNomPaci)) {
 			query = query+" AND o.nombrePaciente like '%"+pSearchNomPaci+"%' ";
+		
+		}
+		if(null!=pSearchNomDocRef&&!"".equals(pSearchNomDocRef)) {
+			query = query+" AND o.nombreDoctorReferente like '%"+pSearchNomDocRef+"%' ";
 		
 		}
         System.out.println("query:"+query); 
