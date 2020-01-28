@@ -49,11 +49,13 @@ public class DoctoresReferentesLocalImpl implements DoctoresReferentesLocal {
 			                             ,String pSearchApellPatDoc
 			                             ,String pSearchApellMatDoc
 			                             ,String pSearchLugarTrabajo
+			                             ,String pSearchAreaDocRef
 			                             ) {
 		return doctoresReferentesDao.findBySearch(pSearchNomDoct
 				                       ,pSearchApellPatDoc
 				                       ,pSearchApellMatDoc
 				                       ,pSearchLugarTrabajo
+				                       ,pSearchAreaDocRef
 				                       );
 	}
 

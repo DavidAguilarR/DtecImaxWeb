@@ -22,6 +22,7 @@ public interface DoctoresReferentesDao {
             ,String pSearchApellPatDoc
             ,String pSearchApellMatDoc
             ,String pSearchLugarTrabajo
+            ,String pSearchAreaDocRef
             );
 
 }
