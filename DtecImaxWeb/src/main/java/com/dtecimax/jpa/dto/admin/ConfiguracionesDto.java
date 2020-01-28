@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="dbo.CONFIGURACIONES")
+@Table(name="CONFIGURACIONES")
 @NamedQuery(name="ConfiguracionesDto.findAll", query="SELECT u FROM ConfiguracionesDto u")
 public class ConfiguracionesDto implements Serializable {
 	private static final long serialVersionUID = 1L;

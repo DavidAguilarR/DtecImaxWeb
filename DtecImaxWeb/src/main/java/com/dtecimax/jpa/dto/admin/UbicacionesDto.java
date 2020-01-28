@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="dbo.UBICACIONES")
+@Table(name="UBICACIONES")
 @NamedQuery(name="UbicacionesDto.findAll", query="SELECT u FROM UbicacionesDto u")
 public class UbicacionesDto implements Serializable {
 	private static final long serialVersionUID = 1L;
