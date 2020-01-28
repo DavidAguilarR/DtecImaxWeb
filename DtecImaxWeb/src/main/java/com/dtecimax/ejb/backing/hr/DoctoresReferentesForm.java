@@ -37,6 +37,7 @@ public class DoctoresReferentesForm {
 	private String searchApellPatDoct; 
 	private String searchApellMatDoct; 
 	private String searchLugarTrabajo; 
+	private String searchAreaDocRef; 
 	private String toemail;
 	private String subjectemail; 
 	@Inject
@@ -216,6 +217,7 @@ public class DoctoresReferentesForm {
 	          ||(null!=this.searchApellPatDoct&&!"".equals(this.searchApellPatDoct))
 	          ||(null!=this.searchApellMatDoct&&!"".equals(this.searchApellMatDoct))
 	          ||(null!=this.searchLugarTrabajo&&!"".equals(this.searchLugarTrabajo))
+	          ||(null!=this.searchAreaDocRef&&!"".equals(this.searchAreaDocRef))
 	          ) {
 	      	  
 	      	listDoctoresReferentes = new ArrayList<DoctoresReferentes>();
@@ -223,6 +225,7 @@ public class DoctoresReferentesForm {
 	    				                                                      ,this.searchApellPatDoct
 	    				                                                      ,this.searchApellMatDoct
 	    				                                                      ,this.searchLugarTrabajo
+	    				                                                      ,this.searchAreaDocRef
 	    				                                                      ); 
 	    		Iterator<DoctoresReferentesDto> iterDoctoresReferentesDto =  listDoctoresReferentesDto.iterator();
 	    		while(iterDoctoresReferentesDto.hasNext()) {
@@ -298,6 +301,13 @@ public class DoctoresReferentesForm {
 
 	public void setSearchNomDoct(String searchNomDoct) {
 		this.searchNomDoct = searchNomDoct;
+	}
+	public String getSearchAreaDocRef() {
+		return searchAreaDocRef;
+	}
+
+	public void setSearchAreaDocRef(String searchAreaDocRef) {
+		this.searchAreaDocRef = searchAreaDocRef;
 	}
 	public String getToemail() {
 		return toemail;

@@ -79,8 +79,7 @@ public class OrdenesEstudiosVDaoImpl implements OrdenesEstudiosVDao {
 		
 		}
 		if(null!=pSearchNomDocRef&&!"".equals(pSearchNomDocRef)) {
-			query = query+" AND o.nombreDoctorReferente like '%"+pSearchNomDocRef+"%' ";
-		
+			query = query+" AND nombreDoctorReferente like '%"+pSearchNomDocRef+"%' ";
 		}
         System.out.println("query:"+query); 
 		return em.createQuery(query).getResultList();

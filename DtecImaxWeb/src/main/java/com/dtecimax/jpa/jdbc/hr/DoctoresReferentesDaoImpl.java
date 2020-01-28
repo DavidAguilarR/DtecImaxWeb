@@ -70,6 +70,7 @@ public class DoctoresReferentesDaoImpl implements DoctoresReferentesDao {
 			                             ,String pSearchApellPatDoc
 			                             ,String pSearchApellMatDoc
 			                             ,String pSearchLugarTrabajo
+			                             ,String pSearchAreaDocRef
 			                             
 			                             ) {
 		String query = " SELECT d FROM DoctoresReferentesDto d where 1=1"; 
@@ -84,6 +85,9 @@ public class DoctoresReferentesDaoImpl implements DoctoresReferentesDao {
 		}
 		if(null!=pSearchLugarTrabajo&&!"".equals(pSearchLugarTrabajo)) {
 			query = query+" AND d.lugarTrabajo like '%"+pSearchLugarTrabajo+"%' ";
+		}
+		if(null!=pSearchAreaDocRef&&!"".equals(pSearchAreaDocRef)) {
+			query = query+" AND d.areaDoctorReferente like '%"+pSearchAreaDocRef+"%' ";
 		}
 		return em.createQuery(query).getResultList();
 	}
