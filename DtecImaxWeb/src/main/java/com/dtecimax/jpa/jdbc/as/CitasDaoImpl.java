@@ -24,6 +24,9 @@ public class CitasDaoImpl implements CitasDao {
 		pCitasDto.setNumeroCita(lCitasS.longValue());
         em.persist(pCitasDto);
 	}
+	
+	
+	
 
 	@Override
 	public List<CitasDto> findSelectItems() {

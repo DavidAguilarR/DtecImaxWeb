@@ -103,18 +103,16 @@
 						      </f:facet>
 						     <p:column headerText="Nombre" style="text-overflow: ellipsis; white-space: nowrap;">
 						       <h:outputText value="#{paciente.nombrePaciente}" />
-						     </p:column> 
-						      <p:column headerText="Apellido Paterno">
-						       <h:outputText value="#{paciente.apellidoPaternoPaciente}" />
-						     </p:column> 
-						      <p:column headerText="Apellido Materno">
-						       <h:outputText value="#{paciente.apellidoMaternoPaciente}" />
+						       <p:spacer width="5" height="5" />
+						         <h:outputText value="#{paciente.apellidoPaternoPaciente}" />
+						         <p:spacer width="5" height="5" />
+						         <h:outputText value="#{paciente.apellidoMaternoPaciente}" />
 						     </p:column> 
 						      <p:column headerText="Fecha Nacimiento">
 						       <h:outputText value="#{paciente.fechaNacimientoPaciente}" >
 						        <f:convertDateTime type="date" pattern= "yyyy-MM-dd" />
 						       </h:outputText>
-						     </p:column> 
+						     </p:column>
 						       <p:column headerText="Celular">
 						       <h:outputText value="#{paciente.celularPaciente}" />
 						     </p:column> 

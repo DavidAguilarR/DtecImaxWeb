@@ -84,17 +84,12 @@
 						     <f:facet name="header">
 						      Doctores
 						     </f:facet>
-						     <p:column headerText="Ubicacion">
-                               <h:outputText value="#{adminHelper.descUbicacion(doctor.numeroUbicacion)}" />
-                             </p:column>
                               <p:column headerText="Nombre">
                                <h:outputText value="#{doctor.nombreDoctor}" />
-                             </p:column>
-                              <p:column headerText="Apellido Paterno">
-                               <h:outputText value="#{doctor.apellidoPaternoDoctor}" />
-                             </p:column>
-                              <p:column headerText="Apellido Materno">
-                               <h:outputText value="#{doctor.apellidoMaternoDoctor}" />
+                               <p:spacer width="5" height="5" />
+                                <h:outputText value="#{doctor.apellidoPaternoDoctor}" />
+                                <p:spacer width="5" height="5" />
+                                 <h:outputText value="#{doctor.apellidoMaternoDoctor}" />
                              </p:column>
                               <p:column headerText="Fecha Nacimiento">
 						       <h:outputText value="#{doctor.fechaNacimientoDoctor}" >
@@ -109,6 +104,10 @@
                              </p:column>
                               <p:column headerText="CURP">
                                <h:outputText value="#{doctor.curpDoctor}" />
+                             </p:column>
+                              <p:column headerText="Ubicacion">
+                               <h:outputText value="#{adminHelper.descUbicacion(doctor.numeroUbicacion)}">
+                               </h:outputText>
                              </p:column>
                               <p:column headerText="Cedula">
                                <h:outputText value="#{doctor.cedulaDoctor}" />
@@ -129,7 +128,8 @@
                       </h:panelGroup>
     </div>
     </div>
-    </div>                        
+    </div> 
+                                                       
 </h:form>
 
  <h:form id="DoctoresFormCreate">
