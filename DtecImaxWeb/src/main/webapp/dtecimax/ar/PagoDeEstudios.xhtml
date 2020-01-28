@@ -230,6 +230,56 @@
      </p:dialog>
      </h:form>
 
+     
+     <h:form id="readOnlyGastoForm">
+     <p:dataTable emptyMessage="Sin resultados" tableStyle="width:auto"  paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
+       <f:facet name="header">
+        GASTOS
+       </f:facet>
+        <p:column headerText="Razon">
+        </p:column>
+        <p:column headerText="Cantidad">
+        </p:column>
+        <p:column headerText="Autorizo">
+        </p:column>
+        <p:column headerText="Opciones:">
+        </p:column>
+        <f:facet name="footer">
+           <div class="ui-g">
+             <div class="ui-g-12 ui-lg-12" style="text-align: right;">
+                 <p:commandButton id="RegistrarGastoBtn" value="Registrar Gasto" icon="fa fa-plus" onclick="PF('createGastoDialogWV').show();" />
+              </div>
+            </div>
+        </f:facet>
+     </p:dataTable>
+     </h:form>
+     
+     <h:form id="createGastoForm">
+       <f:passThroughAttribute name="autocomplete" value="off"/>
+       <p:dialog id="createGastoDialogId" widgetVar="createGastoDialogWV" modal="true" closable="true" closeOnEscape="true" draggable="false" resizable="false" width="1000" header="Registrar Gasto">
+        <p:panelGrid columns="3" layout="grid" columnClasses="ui-g-12 ui-md-6 ui-lg-2,ui-g-12 ui-md-6 ui-lg-8,ui-g-12 ui-md-6 ui-lg-2">
+          <p:outputLabel for="razon" value="Razon"/>
+		  <p:inputText id="razon" style="width:100%"/>
+		  <p:message for="razon"/>
+		  <p:outputLabel for="cantidad" value="Cantidad"/>
+		  <p:inputText id="cantidad" />
+		  <p:message for="cantidad"/>
+		  <p:outputLabel for="autorizo" value="Autorizo"/>
+		  <p:inputText id="autorizo" style="width:100%" />
+		  <p:message for="autorizo" />
+		  <f:facet name="footer">
+		   <div class="ui-g">
+           <div class="ui-g-12 ui-sm-12 ui-md-6 ui-lg-6" style="text-align:center">
+              <p:commandButton value="Aceptar"/> 
+           </div>
+           <div class="ui-g-12 ui-sm-12 ui-md-6 ui-lg-6" style="text-align:center">
+              <p:commandButton value="Cancelar" onclick="PF('createGastoDialogWV').hide();"/> 
+           </div>
+           </div>
+		  </f:facet>
+        </p:panelGrid>
+       </p:dialog>
+     </h:form>
    
 </ui:define>
 </ui:composition>
