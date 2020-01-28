@@ -306,6 +306,7 @@ public class OrdenesSimplesForm {
 		 ordenesEstudiosSimplesSelected.setFechaUltimaActualizacion(pOrdenesEstudiosSimples.getFechaUltimaActualizacion());
 		 ordenesEstudiosSimplesSelected.setIndicacionesDoctor(pOrdenesEstudiosSimples.getIndicacionesDoctor());
 		 ordenesEstudiosSimplesSelected.setInfoAdicional(pOrdenesEstudiosSimples.getInfoAdicional());
+		 ordenesEstudiosSimplesSelected.setNumeroDoctorReferente(pOrdenesEstudiosSimples.getNumeroDoctorReferente());
 		 
 		 ordenesEstudiosSimplesSelected.setFechaNacimientoPaciente(pOrdenesEstudiosSimples.getFechaNacimientoPaciente());
 		 int intMonthsBetween =  differenceInMonths(new Date(pOrdenesEstudiosSimples.getFechaNacimientoPaciente().getTime()),new Date());
@@ -362,6 +363,7 @@ public class OrdenesSimplesForm {
     	ordenesEstudiosDto.setHoraFinalOrden(ordenesEstudiosSimplesSelected.getHoraFinalOrden());
     	ordenesEstudiosDto.setInfoAdicional(ordenesEstudiosSimplesSelected.getInfoAdicional());
     	ordenesEstudiosDto.setEstatus(ordenesEstudiosSimplesSelected.getEstatus());
+    	ordenesEstudiosDto.setNumeroUbicacion(ordenesEstudiosSimplesSelected.getNumeroUbicacion());
     	ordenesEstudiosLocal.updateOrdenesEstudios(ordenesEstudiosSimplesSelected.getNumeroOrden(), ordenesEstudiosDto);
     	refreshEntity();
     	updatedIn = true;

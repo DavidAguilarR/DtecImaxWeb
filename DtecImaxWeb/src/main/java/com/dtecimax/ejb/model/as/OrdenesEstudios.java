@@ -244,6 +244,8 @@ public abstract class OrdenesEstudios implements Serializable {
 	/***********************************************************************
 	 ***********************************************************************/
 	private String nombrePaciente;
+	private String apellidoPaternoPaciente;
+	private String apellidoMaternoPaciente;
 	private String nombreDoctor; 
 	private String apellidoPaternoDoctor; 
 	private String apellidoMaternoDoctor; 
@@ -287,6 +289,23 @@ public abstract class OrdenesEstudios implements Serializable {
 	public void setNombrePaciente(String nombrePaciente) {
 		this.nombrePaciente = nombrePaciente;
 	}
+	
+	public String getApellidoPaternoPaciente() {
+		return apellidoPaternoPaciente;
+	}
+
+	public void setApellidoPaternoPaciente(String apellidoPaternoPaciente) {
+		this.apellidoPaternoPaciente = apellidoPaternoPaciente;
+	}
+	
+	public String getApellidoMaternoPaciente() {
+		return apellidoMaternoPaciente;
+	}
+
+	public void setApellidoMaternoPaciente(String apellidoMaternoPaciente) {
+		this.apellidoMaternoPaciente = apellidoMaternoPaciente;
+	}
+	
 
 	public String getNombreDoctor() {
 		return nombreDoctor;

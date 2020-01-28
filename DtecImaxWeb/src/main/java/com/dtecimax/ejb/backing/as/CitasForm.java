@@ -21,8 +21,10 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import com.dtecimax.ejb.model.ar.Pacientes;
 import com.dtecimax.ejb.model.as.Citas;
 import com.dtecimax.ejb.model.as.NotasCitas;
+import com.dtecimax.ejb.model.as.OrdenesEstudios;
 import com.dtecimax.ejb.model.as.OrdenesEstudiosContrastados;
 import com.dtecimax.ejb.model.as.OrdenesEstudiosDentales;
 import com.dtecimax.ejb.model.as.OrdenesEstudiosEspeciales;
@@ -33,12 +35,14 @@ import com.dtecimax.ejb.services.as.EstudiosLocal;
 import com.dtecimax.ejb.services.as.NotasCitasLocal;
 import com.dtecimax.ejb.services.as.OrdenesEstudiosLocal;
 import com.dtecimax.ejb.services.hr.DoctoresLocal;
+import com.dtecimax.ejb.services.hr.DoctoresReferentesLocal;
 import com.dtecimax.jpa.dto.ar.PacientesDto;
 import com.dtecimax.jpa.dto.as.CitasDto;
 import com.dtecimax.jpa.dto.as.EstudiosDto;
 import com.dtecimax.jpa.dto.as.NotasCitasDto;
 import com.dtecimax.jpa.dto.as.OrdenesEstudiosDto;
 import com.dtecimax.jpa.dto.hr.DoctoresDto;
+import com.dtecimax.jpa.dto.hr.DoctoresReferentesDto;
 
 @ManagedBean  
 @ViewScoped
@@ -69,6 +73,7 @@ public class CitasForm {
 		
 	@Inject
 	EstudiosLocal estudiosLocal;
+	
 
 	private long searchNumDoct; 
 	private String searchTipoEstu;
@@ -97,6 +102,9 @@ public class CitasForm {
 	
 	@Inject
 	DoctoresLocal doctoresLocal; 
+	
+	@Inject
+	DoctoresReferentesLocal doctoresReferentesLocal; 
 	
 	@Inject
 	OrdenesEstudiosLocal ordenesEstudiosLocal;
@@ -271,6 +279,7 @@ public class CitasForm {
         System.out.println("onEventSelect:"+citasDto.getNumeroPaciente());
         citasSelected.setNumeroPaciente(citasDto.getNumeroPaciente());
         citasSelected.setNumeroEstudio(citasDto.getNumeroEstudio());
+        citasSelected.setNumeroDoctorReferente(citasDto.getNumeroDoctorReferente());
         System.out.println("citasDto.getFechaCita():"+citasDto.getFechaCita());
         System.out.println("citasDto.getHoraInicialCita():"+citasDto.getHoraInicialCita());
         System.out.println("citasDto.getHoraFinalCita():"+citasDto.getHoraFinalCita());
@@ -340,19 +349,31 @@ public class CitasForm {
 		long lNumeroPaciente  = citasSelected.getNumeroPaciente(); 
 		long lNumeroEstudio = citasSelected.getNumeroEstudio(); 
 		long lNumeroDoctor = citasSelected.getNumeroDoctor(); 
+		long lNumeroDoctorReferente = citasSelected.getNumeroDoctorReferente();
 		
 		PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(lNumeroPaciente); 
 		EstudiosDto estudiosDto = estudiosLocal.findByNumeroEstudio(lNumeroEstudio); 
 		DoctoresDto doctoresDto = doctoresLocal.findByNumeroDoctor(lNumeroDoctor); 
+		DoctoresReferentesDto doctoresReferentesDto = doctoresReferentesLocal.findByNumeroDoctorReferente(lNumeroDoctorReferente);
 		int intMonthsBetween =  differenceInMonths(new Date(pacientesDto.getFechaNacimientoPaciente().getTime()),new Date());
 		int intAniosBetween = intMonthsBetween/12;
 		 
 		 if("OrdenesSimples".equals(tipoOrden)) {
 			 ordenesEstudiosSimples.setNumeroPaciente(lNumeroPaciente);
 			 ordenesEstudiosSimples.setNombrePaciente(pacientesDto.getNombrePaciente());
+			 ordenesEstudiosSimples.setApellidoPaternoPaciente(pacientesDto.getApellidoPaternoPaciente());
+			 ordenesEstudiosSimples.setApellidoMaternoPaciente(pacientesDto.getApellidoMaternoPaciente());
 			 ordenesEstudiosSimples.setNumeroDoctor(lNumeroDoctor);
 			 ordenesEstudiosSimples.setNombreDoctor(doctoresDto.getNombreDoctor());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctor(doctoresDto.getApellidoPaternoDoctor());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctor(doctoresDto.getApellidoMaternoDoctor());
 			 ordenesEstudiosSimples.setEdad(intAniosBetween+" anios");
+			 ordenesEstudiosSimples.setNumeroDoctorReferente(lNumeroDoctorReferente);
+			 ordenesEstudiosSimples.setNombreDoctorReferente(doctoresReferentesDto.getNombreDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(doctoresReferentesDto.getApellidoPaternoDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(doctoresReferentesDto.getApellidoMaternoDoctorReferente());
+			 
+
 			 ordenesEstudiosSimples.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
 			 ordenesEstudiosSimples.setUtilHoraFinalOrden(new Date(citasSelected.getHoraFinalCita().getTime()));
 			 ordenesEstudiosSimples.setUtilHoraInicialOrden(new Date(citasSelected.getHoraInicialCita().getTime()));
@@ -362,10 +383,20 @@ public class CitasForm {
 		 }else if("OrdenesEspeciales".equals(tipoOrden)) {
 			 ordenesEstudiosEspeciales.setNumeroPaciente(lNumeroPaciente);
 			 ordenesEstudiosEspeciales.setNombrePaciente(pacientesDto.getNombrePaciente());
+			 ordenesEstudiosSimples.setApellidoPaternoPaciente(pacientesDto.getApellidoPaternoPaciente());
+			 ordenesEstudiosSimples.setApellidoMaternoPaciente(pacientesDto.getApellidoMaternoPaciente());
+			 
 			 ordenesEstudiosEspeciales.setNumeroDoctor(lNumeroDoctor);
 			 ordenesEstudiosEspeciales.setNombreDoctor(doctoresDto.getNombreDoctor());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctor(doctoresDto.getApellidoPaternoDoctor());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctor(doctoresDto.getApellidoMaternoDoctor());
 			 ordenesEstudiosEspeciales.setEdad(intAniosBetween+" anios");
 			 ordenesEstudiosEspeciales.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
+			 
+			 ordenesEstudiosSimples.setNumeroDoctorReferente(lNumeroDoctorReferente);
+			 ordenesEstudiosSimples.setNombreDoctorReferente(doctoresReferentesDto.getNombreDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(doctoresReferentesDto.getApellidoPaternoDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(doctoresReferentesDto.getApellidoMaternoDoctorReferente());
 			 ordenesEstudiosEspeciales.setUtilHoraFinalOrden(new Date(citasSelected.getHoraFinalCita().getTime()));
 			 ordenesEstudiosEspeciales.setUtilHoraInicialOrden(new Date(citasSelected.getHoraInicialCita().getTime()));
 			 ordenesEstudiosEspeciales.setNumeroEstudio(citasSelected.getNumeroEstudio());
@@ -374,10 +405,19 @@ public class CitasForm {
 		 }else if("OrdenesContrastados".equals(tipoOrden)) {
 			 ordenesEstudiosContrastados.setNumeroPaciente(lNumeroPaciente);
 			 ordenesEstudiosContrastados.setNombrePaciente(pacientesDto.getNombrePaciente());
+			 ordenesEstudiosSimples.setApellidoPaternoPaciente(pacientesDto.getApellidoPaternoPaciente());
+			 ordenesEstudiosSimples.setApellidoMaternoPaciente(pacientesDto.getApellidoMaternoPaciente());
+			 
 			 ordenesEstudiosContrastados.setNumeroDoctor(lNumeroDoctor);
 			 ordenesEstudiosContrastados.setNombreDoctor(doctoresDto.getNombreDoctor());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctor(doctoresDto.getApellidoPaternoDoctor());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctor(doctoresDto.getApellidoMaternoDoctor());
 			 ordenesEstudiosContrastados.setEdad(intAniosBetween+" anios");
 			 ordenesEstudiosContrastados.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
+			 ordenesEstudiosSimples.setNumeroDoctorReferente(lNumeroDoctorReferente);
+			 ordenesEstudiosSimples.setNombreDoctorReferente(doctoresReferentesDto.getNombreDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(doctoresReferentesDto.getApellidoPaternoDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(doctoresReferentesDto.getApellidoMaternoDoctorReferente());
 			 ordenesEstudiosContrastados.setUtilHoraFinalOrden(new Date(citasSelected.getHoraFinalCita().getTime()));
 			 ordenesEstudiosContrastados.setUtilHoraInicialOrden(new Date(citasSelected.getHoraInicialCita().getTime()));
 			 ordenesEstudiosContrastados.setNumeroEstudio(citasSelected.getNumeroEstudio());
@@ -386,8 +426,18 @@ public class CitasForm {
 		 }else if("OrdenesDentales".equals(tipoOrden)) {
 			 ordenesEstudiosDentales.setNumeroPaciente(lNumeroPaciente);
 			 ordenesEstudiosDentales.setNombrePaciente(pacientesDto.getNombrePaciente());
+			 ordenesEstudiosSimples.setApellidoPaternoPaciente(pacientesDto.getApellidoPaternoPaciente());
+			 ordenesEstudiosSimples.setApellidoMaternoPaciente(pacientesDto.getApellidoMaternoPaciente());
+			 
 			 ordenesEstudiosDentales.setNumeroDoctor(lNumeroDoctor);
 			 ordenesEstudiosDentales.setNombreDoctor(doctoresDto.getNombreDoctor());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctor(doctoresDto.getApellidoPaternoDoctor());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctor(doctoresDto.getApellidoMaternoDoctor());
+			 ordenesEstudiosSimples.setNumeroDoctorReferente(lNumeroDoctorReferente);
+			 ordenesEstudiosSimples.setNombreDoctorReferente(doctoresReferentesDto.getNombreDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoPaternoDoctorReferente(doctoresReferentesDto.getApellidoPaternoDoctorReferente());
+			 ordenesEstudiosSimples.setApellidoMaternoDoctorReferente(doctoresReferentesDto.getApellidoMaternoDoctorReferente());
+			 
 			 ordenesEstudiosDentales.setEdad(intAniosBetween+" anios");
 			 ordenesEstudiosDentales.setFechaNacimientoPaciente(pacientesDto.getFechaNacimientoPaciente());
 			 ordenesEstudiosDentales.setUtilHoraFinalOrden(new Date(citasSelected.getHoraFinalCita().getTime()));
@@ -547,6 +597,21 @@ public class CitasForm {
 		  refreshEntity();
 		  loggedIn = true;
 		  PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
+			
+		}
+	
+	public void insertPacientes() {
+		  boolean loggedIn = false;
+		
+	      PacientesDto pacientesDto = new PacientesDto(); 
+	      Pacientes pacientes= new Pacientes();
+	      pacientes.setNumeroPaciente(pacientesDto.getNumeroPaciente());
+	      pacientes.setNombrePaciente(pacientesDto.getNombrePaciente());
+	     
+	      pacientesLocal.insertPacientes(pacientesDto);
+	      refreshEntity();
+	      loggedIn = true;
+	      PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
 			
 		}
 	
