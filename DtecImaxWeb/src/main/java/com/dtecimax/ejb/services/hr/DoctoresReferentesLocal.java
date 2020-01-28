@@ -23,7 +23,7 @@ public interface DoctoresReferentesLocal {
 			                             ,String pSearchApellPatDoc
 			                             ,String pSearchApellMatDoc
 			                             ,String pSearchLugarTrabajo
-			                             
+			                             ,String pSearchAreaDocRef
 			                             );
 	
 }

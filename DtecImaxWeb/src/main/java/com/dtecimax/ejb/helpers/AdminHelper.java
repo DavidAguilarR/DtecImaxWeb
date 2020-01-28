@@ -205,7 +205,15 @@ public class AdminHelper {
 		
 		return lselectTipoEstudioItems; 
 	}
-	
+	public List<SelectItem> getSelectDrEspecialidadItems(){
+		List<SelectItem> lselectDrEspecialidadItems = new ArrayList<SelectItem>();
+		SelectItem selectItem = new SelectItem("Ginecologia","Ginecologia");
+		lselectDrEspecialidadItems.add(selectItem);
+		SelectItem selectItem2 = new SelectItem("Patologia","Patologia");
+		lselectDrEspecialidadItems.add(selectItem2);
+		
+		return lselectDrEspecialidadItems; 
+	}
 	public List<SelectItem> getSelectTipoPagoItems(){
 		List<SelectItem> lselectTipoPagoItems = new ArrayList<SelectItem>();
 		
