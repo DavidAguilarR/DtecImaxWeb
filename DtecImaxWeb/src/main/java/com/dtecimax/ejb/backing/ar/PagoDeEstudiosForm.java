@@ -19,9 +19,12 @@ import javax.inject.Inject;
 
 import org.primefaces.PrimeFaces;
 
+import com.dtecimax.ejb.model.ar.AsGastos;
 import com.dtecimax.ejb.model.ar.PagosOrdenesEstudiosV1;
+import com.dtecimax.ejb.services.ar.AsGastosLocal;
 import com.dtecimax.ejb.services.ar.PagosOrdenesEstudiosV1Local;
 import com.dtecimax.ejb.services.as.OrdenesEstudiosLocal;
+import com.dtecimax.jpa.dto.ar.AsGastosDto;
 import com.dtecimax.jpa.dto.ar.PagosOrdenesEstudiosV1Dto;
 
 @ManagedBean  
@@ -48,12 +51,21 @@ public class PagoDeEstudiosForm {
 	private BigDecimal gananciaTotalDia;
 	private BigDecimal gastosTotalDia; 
 	
+	/******Pago******/
+	private String razon;
+	private String autorizo; 
+	private BigDecimal cantidad; 
+	private List<AsGastos> listAsGastos = new ArrayList<AsGastos>();
+	private AsGastos asGastosForAction = new AsGastos();
+	
 	@Inject 
 	PagosOrdenesEstudiosV1Local pagosOrdenesEstudiosV1Local;
 	
 	@Inject 
 	OrdenesEstudiosLocal ordenesEstudiosLocal; 
 	
+	@Inject
+	AsGastosLocal asGastosLocal; 
 	
 	 @PostConstruct
 	 public void init() {
@@ -116,6 +128,22 @@ public class PagoDeEstudiosForm {
 				gananciaTotalDia = gananciaTotalDia.add(pagosOrdenesEstudiosV1Dto.getTotal());
 			}
 			
+		}
+		
+	    /** AsGastos **/
+		List<AsGastosDto> listAsGastosDto = asGastosLocal.findByFiltros(sqlFechaDesde, sqlFechaHasta);
+		Iterator<AsGastosDto> iterAsGastosDto = listAsGastosDto.iterator();
+		listAsGastos = new ArrayList<AsGastos>();
+		gastosTotalDia = new BigDecimal(0);
+		while(iterAsGastosDto.hasNext()) {
+			AsGastosDto asGastosDto = iterAsGastosDto.next(); 
+			AsGastos asGastos = new AsGastos();
+			asGastos.setNumero(asGastosDto.getNumero());
+			asGastos.setRazon(asGastosDto.getRazon());
+			asGastos.setMonto(asGastosDto.getMonto());
+			asGastos.setAutorizo(asGastosDto.getAutorizo());
+			gastosTotalDia = gastosTotalDia.add(asGastosDto.getMonto());
+			listAsGastos.add(asGastos); 
 		}
 		
 		System.out.println("Sale filtraPorFechas");
@@ -182,6 +210,49 @@ public class PagoDeEstudiosForm {
 		filtraPorFechas();
 		infoFacturaIn = true; 
 		PrimeFaces.current().ajax().addCallbackParam("infoFacturaIn", infoFacturaIn);
+	}
+	
+	public void createPago() {
+	  boolean createPagoIn = false; 
+	  System.out.println("Entra "+this.getClass()+" createPago()");	
+	  java.sql.Date sqlFechaDesde = new java.sql.Date(searchFechaDesde.getTime());
+	  AsGastosDto asGastosDto = new AsGastosDto();
+	  asGastosDto.setRazon(this.razon);
+	  asGastosDto.setMonto(this.cantidad);
+	  asGastosDto.setAutorizo(this.autorizo);
+	  asGastosDto.setFechaPago(sqlFechaDesde);
+	  asGastosLocal.insertAsGasto(asGastosDto);
+	  filtraPorFechas();
+	  createPagoIn = true; 
+	  PrimeFaces.current().ajax().addCallbackParam("createPagoIn", createPagoIn);
+	  System.out.println("Sale "+this.getClass()+" createPago()");	
+	}
+	
+	public void selectGastoForAction(AsGastos pAsGastos) {
+		this.asGastosForAction.setNumero(pAsGastos.getNumero());
+		this.asGastosForAction.setRazon(pAsGastos.getRazon());
+		this.asGastosForAction.setAutorizo(pAsGastos.getAutorizo());
+		this.asGastosForAction.setMonto(pAsGastos.getMonto());
+	}
+	
+	public void deleteGasto() {
+		  boolean deletePagoIn = false; 
+		  asGastosLocal.deleteAsGasto(this.asGastosForAction.getNumero());
+		  filtraPorFechas();
+		  deletePagoIn = true; 
+		  PrimeFaces.current().ajax().addCallbackParam("deletePagoIn", deletePagoIn);
+	}
+	
+	public void updatePago() {
+		 boolean updatePagoIn = false; 
+		 AsGastosDto asGastosDto = new AsGastosDto();
+		 asGastosDto.setRazon(this.asGastosForAction.getRazon());
+		 asGastosDto.setMonto(this.asGastosForAction.getMonto());
+		 asGastosDto.setAutorizo(this.asGastosForAction.getAutorizo());
+		 asGastosLocal.updateAsGasto(this.asGastosForAction.getNumero(), asGastosDto);
+		 filtraPorFechas();
+		 updatePagoIn = true; 
+		 PrimeFaces.current().ajax().addCallbackParam("updatePagoIn", updatePagoIn);
 	}
 	
 	public String getSearchNomPaci() {
@@ -301,6 +372,46 @@ public class PagoDeEstudiosForm {
 
 	public void setGastosTotalDia(BigDecimal gastosTotalDia) {
 		this.gastosTotalDia = gastosTotalDia;
+	}
+
+	public String getRazon() {
+		return razon;
+	}
+
+	public void setRazon(String razon) {
+		this.razon = razon;
+	}
+
+	public String getAutorizo() {
+		return autorizo;
+	}
+
+	public void setAutorizo(String autorizo) {
+		this.autorizo = autorizo;
+	}
+
+	public BigDecimal getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(BigDecimal cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public List<AsGastos> getListAsGastos() {
+		return listAsGastos;
+	}
+
+	public void setListAsGastos(List<AsGastos> listAsGastos) {
+		this.listAsGastos = listAsGastos;
+	}
+
+	public AsGastos getAsGastosForAction() {
+		return asGastosForAction;
+	}
+
+	public void setAsGastosForAction(AsGastos asGastosForAction) {
+		this.asGastosForAction = asGastosForAction;
 	} 
 	
 }
