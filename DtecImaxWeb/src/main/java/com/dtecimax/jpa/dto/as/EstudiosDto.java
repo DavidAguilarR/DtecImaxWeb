@@ -51,6 +51,13 @@ public class EstudiosDto implements Serializable {
 	
 	@Column(name="COLOR_ESTUDIO")
 	private String colorEstudio;
+	
+	@Column(name="COSTO_ANESTESIA")
+	private String costoAnestesia;
+	
+	@Column(name="COSTO_PATOLOGIA")
+	private long costoPatologia;
+	
 
 	public EstudiosDto() {
 	}
@@ -151,4 +158,22 @@ public class EstudiosDto implements Serializable {
 		this.colorEstudio = colorEstudio;
 	}
 
+
+	public String getCostoAnestesia() {
+		return this.costoAnestesia;
+	}
+
+	public void setCostoAnestesia(String costoAnestesia) {
+		this.costoAnestesia = costoAnestesia;
+	}
+	
+	public long getCostoPatologia() {
+		return costoPatologia;
+	}
+
+	public void setCostoPatologia(long costoPatologia) {
+		this.costoPatologia = costoPatologia;
+	}
+
+	
 }

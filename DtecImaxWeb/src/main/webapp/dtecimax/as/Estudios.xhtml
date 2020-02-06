@@ -74,17 +74,32 @@
                                   <h:outputText value="#{estudio.nombreEstudio}" />
                                 </p:column>
                                  <p:column headerText="Categoria estudio">
+                                 <div style="text-align: center;">
                                   <h:outputText value="#{estudio.tipoEstudio}" />
+                                  </div>
                                 </p:column>
                                  <p:column headerText="Costo">
+                                 <div style="text-align: center;">
                                   <h:outputText value="#{estudio.costoEstudio}" />
+                                  </div>
                                 </p:column>
 <!--                                 <p:column headerText="Realiza Estudio"> -->
 <!--                                   <h:outputText value="#{estudio.realizaEstudio}" /> -->
 <!--                                 </p:column> -->
-                               
+								<p:column headerText="Anestesia">
+								<div style="text-align: center;">
+                                  <h:outputText value="#{estudio.costoAnestesia}" />
+                                  </div>
+                                </p:column>
+                                <p:column headerText="Patologia">
+								<div style="text-align: center;">
+                                  <h:outputText value="#{estudio.costoPatologia}" />
+                                  </div>
+                                </p:column>
                                 <p:column headerText="Color Asignado">
+                                <div style="text-align: center;">
                                   <p:colorPicker  value="#{estudio.colorEstudio}" disabled="true" />
+                                  </div>
                                 </p:column>
                                  <p:column headerText="Comentarios">
                                   <h:outputText value="#{estudio.comentarios}" />
@@ -125,6 +140,16 @@
          <p:inputText id="costo_estudio"  style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.costoEstudio}" maxlength="50" />
          <p:message for="costo_estudio"/>
      </div>
+      	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  				<p:outputLabel for="costo_anestesia" value="Costo Anestesia:" /> 
+  				<p:inputText id="costo_anestesia" name="costo_anestesia" style="width: 100%; margin-top: 5px;" value="#{estudios.costoAnestesia}" maxlength="50"  />
+  				<p:message for="costo_anestesia" />
+ 		  </div>
+ 		  	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  				<p:outputLabel for="costo_patologia" value="Costo Patologia:" /> 
+  				<p:inputText id="costo_patologia" name="costo_terapia" style="width: 100%; margin-top: 5px;" value="#{estudios.costoPatologia}" maxlength="50"  />
+  				<p:message for="costo_patologia" />
+ 		  </div>
        <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
           <p:outputLabel  for="tipo_estudio" value="Tipo de Estudio:" />
           <p:selectOneMenu id="tipo_estudio" filter="true" filterMatchMode="contains" style="width: 100%; margin-top: 5px;" required="true" value="#{estudios.tipoEstudio}" >
@@ -153,7 +178,7 @@
     </div>
 <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{estudios.comentarios}" maxlength="200"/>
+   <p:inputTextarea id="comentarios"  value="#{estudios.comentarios}" maxlength="500"/>
    <p:message for="comentarios"/>
 </div>
 
@@ -190,6 +215,11 @@
   				<p:inputText id="costo_estudio" name="costo_estudio" style="width: 100%; margin-top: 5px;" value="#{estudiosForm.estudiosSelected.costoEstudio}" required="true" maxlength="50"  />
   				<p:message for="costo_estudio" />
  		  </div>
+ 		   	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  				<p:outputLabel for="costo_anestesia" value="Costo Anestesia:" /> 
+  				<p:inputText id="costo_anestesia" name="costo_estudio" style="width: 100%; margin-top: 5px;" value="#{estudiosForm.estudiosSelected.costoAnestesia}" maxlength="50"  />
+  				<p:message for="costo_anestesia" />
+ 		  </div>
  		  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
   			<p:outputLabel for="tipo_estudio" value="Tipo Estudio:" /> 
   			<p:selectOneMenu id="tipo_estudio" filter="true" filterMatchMode="contains" style="width: 100%; margin-top: 5px;" required="true" value="#{estudiosForm.estudiosSelected.tipoEstudio}" >
@@ -218,7 +248,7 @@
 
 <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{estudiosForm.estudiosSelected.comentarios}" maxlength="200"/>
+   <p:inputTextarea id="comentarios"  value="#{estudiosForm.estudiosSelected.comentarios}" maxlength="500"/>
    <p:message for="comentarios"/>
 </div>
 
