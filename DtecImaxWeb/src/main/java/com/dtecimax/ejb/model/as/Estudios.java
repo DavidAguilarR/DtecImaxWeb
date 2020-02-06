@@ -27,6 +27,8 @@ public class Estudios implements Serializable {
 	private String tipoEstudio;
 	private long usuarioUltimaActualizacion;
 	private String colorEstudio;
+	private String costoAnestesia;
+	private long costoPatologia;
 	
 	private Date utilFechaCreacion = sysdate;
 	private Date utilFechaUltimaActualizacion = sysdate;
@@ -147,4 +149,22 @@ public class Estudios implements Serializable {
 	public void setColorEstudio(String colorEstudio) {
 		this.colorEstudio = colorEstudio;
 	}
+
+	public String getCostoAnestesia() {
+		return costoAnestesia;
+	}
+
+	public void setCostoAnestesia(String costoAnestesia) {
+		this.costoAnestesia = costoAnestesia;
+	}
+
+	public long getCostoPatologia() {
+		return costoPatologia;
+	}
+
+	public void setCostoPatologia(long costoPatologia) {
+		this.costoPatologia = costoPatologia;
+	}
+
+	
 }

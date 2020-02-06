@@ -111,7 +111,20 @@
             PF('crearPacientesDialog').hide();
             /*$('#RegistrarUbicacionBtn').fadeOut();*/
         }
+        
     }
+    
+    function handleGuardarRequestOD(xhr, status, args) {
+        if(args.validationFailed || !args.loggedIn) {
+            PF('DoctorReferenteDialog').jq.effect("shake", {times:5}, 100);
+        }
+        else {
+            PF('DoctorReferenteDialog').hide();
+            PF('crearDoctorReferenteDialog').hide();
+            /*$('#RegistrarUbicacionBtn').fadeOut();*/
+        }
+    }
+    
 </script>
   <style>
 		.fc-time-grid-container {
@@ -312,6 +325,7 @@
     
     <div class="ui-g">
 			      <div class="ui-g-12 ui-lg-12" style="text-align: right;">
+			      <p:commandButton value="Nuevo Doc Referente" ajax="true" immediate="true"  style="margin-right: 10px;"  oncomplete="PF('DoctorReferenteDialog').show();"/>
 			      <p:commandButton value="Nuevo paciente" ajax="true" immediate="true"  style="margin-right: 10px;"  oncomplete="PF('PacientesDialog').show();"/>
 			        <p:commandButton type="reset"  value="Cancelar" update="panelCreate"  onclick="PF('CitasDialogCreate').hide();" style="margin-right: 10px;"/>
 			        <p:commandButton value="Aplicar" action="#{citasForm.aplicar()}" update="panelCreate CitasScheduleForm" style="margin-right: 10px;"/>
@@ -507,10 +521,10 @@
   </p:inputText>
   <p:message for="fecha_de_nacimiento"/>
   </div>
+  
 </div>
  <div class="ui-g ui-fluid">
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
   		<p:outputLabel value="Nombre Estudio" for="nombre_estudio" /> 
   		<p:inputText id="nombre_estudio"  required="true" value="#{ordenesEstudiosSimples.nombreEstudio}" readonly="true" />
      	<p:message for="nombre_estudio"/>
@@ -521,16 +535,7 @@
   		</p:inputText>
   		<p:message for="costo_estudio"/>
   	</div>
- 
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
-	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosSimples.numeroUbicacion}" >
-	<f:selectItem itemLabel="seleccione" itemValue="" /> 
-	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
-	</p:selectOneMenu>
-	<p:message for="numero_ubicacion"/>
-  </div>
-  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel value="Tipo de Pago" for="tipo_pago" /> 
     <p:selectOneMenu id="tipo_pago"  required="true" value="#{ordenesEstudiosSimples.tipoPago}" >
 	<f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -538,21 +543,30 @@
 	</p:selectOneMenu>
 	<p:message for="tipo_pago"/>
   </div>
-  
  </div>
  
   <div class="ui-g ui-fluid">
+     <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+   <p:outputLabel value="Doctor que refiere" for="nombre_doctor_referente" /> 
+   <p:inputText id="nombre_doctor_referente"  required="true" value="#{ordenesEstudiosSimples.nombreDoctorReferente}" readonly="true" />
+   <p:message for="nombre_doctor_referente"/>
+ </div>
+  
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
    <p:outputLabel value="Nombre Doctor" for="nombre_doctor" /> 
    <p:inputText id="nombre_doctor"  required="true" value="#{ordenesEstudiosSimples.nombreDoctor}" readonly="true" />
    <p:message for="nombre_doctor"/>
  </div>
+
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
+	<p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{ordenesEstudiosSimples.numeroUbicacion}" >
+	<f:selectItem itemLabel="seleccione" itemValue="" /> 
+	<f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+	</p:selectOneMenu>
+	<p:message for="numero_ubicacion"/>
   </div>
- 
- 
- 
- 
- 
+    </div>
  <div class="ui-g ui-fluid">
    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
       <p:outputLabel value="Hora Inicial" for="horaInicialOrden" />
@@ -1047,6 +1061,106 @@
  </p:dialog> 
 </h:form>
 
+<!-- 
+************************************************
+*********Registro de doctor referente***********
+************************************************
+ -->
+
+<h:form id="DoctoresReferentesFormCreate">
+ <p:dialog id="doctores-referentes-dialog-create" widgetVar="DoctorReferenteDialog" modal="true" closable="true" closeOnEscape="true" draggable="true" resizable="false" width="1000" header="Registrar Doctor">
+ <p:panel id="panelCreate">
+ 
+ <div class="ui-g ui-fluid">
+   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+         <p:outputLabel  for="nombre_doctor_referente" value="Nombre:" />
+         <p:inputText id="nombre_doctor_referente"  style="width: 100%; margin-top: 5px;" required="true" value="#{doctoresReferentes.nombreDoctorReferente}" maxlength="50" />
+         <p:message for="nombre_doctor_referente"/>
+   </div>
+   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+         <p:outputLabel for="apellido_paterno_doctor_referente" value="Apellido Paterno:" />
+         <p:inputText  id="apellido_paterno_doctor_referente" style="width: 100%; margin-top: 5px;" required="true" value="#{doctoresReferentes.apellidoPaternoDoctorReferente}" maxlength="50" />
+         <p:message for="apellido_paterno_doctor_referente"/>
+    </div>
+   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+         <p:outputLabel for="apellido_materno_doctor_referente" value="Apellido Materno:" />
+         <p:inputText id="apellido_materno_doctor_referente"  style="width: 100%; margin-top: 5px;" required="true" value="#{doctoresReferentes.apellidoMaternoDoctorReferente}" maxlength="50" />
+         <p:message for="apellido_materno_doctor_referente"/>
+    </div>
+    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+        <p:outputLabel for="fecha_nacimiento_doctor_referente" value="Fecha Nacimiento:" />
+        <p:calendar id="fecha_nacimiento_doctor_referente"  locale="es" style="width: 100%; margin-top: 5px;" navigator="true" yearRange="c-100:c+1" pattern="yyyy-MM-dd" required="true" value="#{doctoresReferentes.utilFechaNacimientoDoctorReferente}" /> 
+        <p:message for="fecha_nacimiento_doctor_referente"/>
+   </div>
+</div>
+
+<div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="celular_doctor_referente" value="Celular:"/>
+     <p:inputNumber id="celular_doctor_referente" style="width: 100%;margin-top: 50px;" value="#{doctoresReferentes.celularDoctorReferente}" required="true" maxlength="10"/>
+     <p:message for="celular_doctor_referente"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="correo_doctor_referente" value="Correo:"/>
+     <p:inputText id="correo_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.correoDoctorReferente}" required="true" maxlength="50"/>
+     <p:message for="correo_doctor_referente"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="curp_doctor_referente" value="CURP:"/>
+     <p:inputText id="curp_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.curpDoctorReferente}" required="true" maxlength="25"/>
+     <p:message for="curp_doctor_referente"/>
+ </div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="domicilio_doctor_referente" value="Domicilio:"/>
+     <p:inputText id="domicilio_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.domicilioDoctorReferente}" required="true" maxlength="50"/>
+     <p:message for="domicilio_doctor_referente"/>
+ </div> 
+</div>
+
+<div class="ui-g ui-fluid">
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="lugar_trabajo" value="Lugar donde Trabaja Dr."/>
+     <p:inputText id="lugar_trabajo" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.lugarTrabajo}" required="true" maxlength="20"/>
+     <p:message for="lugar_trabajo"/>
+ </div>
+       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+		<p:outputLabel for="area_doctor_referente" value="Area Especialidad:" />
+		<p:selectOneMenu id="area_doctor_referente" style="width: 100%; margin-top: 5px;" filter="true" filterMatchMode="contains" required="true" value="#{doctoresReferentes.areaDoctorReferente}">
+ 		<f:selectItem itemLabel="seleccione" itemValue="" /> 
+ 		<f:selectItems value="#{adminHelper.selectDrEspecialidadItems}" />
+		</p:selectOneMenu>
+		<p:message for="area_doctor_referente"/>
+	</div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="cedula_doctor_referente" value="Cedula:"/>
+     <p:inputText id="cedula_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.cedulaDoctorReferente}" required="true" maxlength="20"/>
+     <p:message for="cedula_doctor_referente"/>
+ </div>
+</div>
+
+<div class="ui-g ui-fluid">
+   <p:outputLabel for="comentarios" value="Comentarios:"/>
+   <p:inputTextarea id="comentarios"  value="#{doctoresReferentes.comentarios}" maxlength="200"/>
+   <p:message for="comentarios"/>
+</div>
+  
+   <h:inputHidden id="estatus" name="status" value="#{doctoresReferentes.estatus}" />
+   <h:inputHidden id="fecha_creacion" name="fecha_creacion" type="date" value="#{doctoresReferentes.utilFechaCreacion}"> 
+   <f:convertDateTime type="date" pattern= "yyyy-MM-dd" />
+   </h:inputHidden>
+   <h:inputHidden id="fecha_ultima_actualizacion" name="fecha_ultima_actualizacion" type="date" value="#{doctoresReferentes.utilFechaUltimaActualizacion}" required="true" > 
+   <f:convertDateTime type="date" pattern = "yyyy-MM-dd" />
+   </h:inputHidden>
+
+</p:panel>
+			<div class="ui-g">
+			      <div class="ui-g-12 ui-lg-12" style="text-align: right;">
+			        <p:commandButton value="Cancelar" ajax="true" immediate="true" onclick="PF('DoctorReferenteDialog').hide();"  style="margin-right: 10px;"/>
+			        <p:commandButton value="Guardar" action="#{doctoresReferentesForm.insertDoctoresReferentes()}"  update="panelCreate" oncomplete="handleGuardarRequest(xhr, status, args)" />
+			   </div>
+			</div>
+</p:dialog>   
+ </h:form>
 
 </ui:define>
 

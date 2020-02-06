@@ -60,6 +60,8 @@ public class EstudiosForm {
 			  estudios.setFechaCreacion(estudiosDto.getFechaCreacion());
 			  estudios.setFechaUltimaActualizacion(estudiosDto.getFechaUltimaActualizacion());
 			  estudios.setColorEstudio(estudiosDto.getColorEstudio());
+			  estudios.setCostoAnestesia(estudiosDto.getCostoAnestesia());
+			  estudios.setCostoPatologia(estudiosDto.getCostoPatologia());
 			  
 			  listEstudios.add(estudios); 
 		  }
@@ -85,7 +87,8 @@ public class EstudiosForm {
 		estudiosDto.setFechaCreacion(estudios.getFechaCreacion());
 		estudiosDto.setFechaUltimaActualizacion(estudios.getFechaUltimaActualizacion());
 		estudiosDto.setColorEstudio(estudios.getColorEstudio());
-		
+		estudiosDto.setCostoAnestesia(estudios.getCostoAnestesia());
+		estudiosDto.setCostoPatologia(estudios.getCostoPatologia());
 		estudiosLocal.insertEstudios(estudiosDto);
 
 		loggedIn = true;
@@ -115,6 +118,8 @@ public class EstudiosForm {
 		estudiosSelected.setComentarios(pEstudios.getComentarios());
 		estudiosSelected.setEstatus(pEstudios.getEstatus());
 		estudiosSelected.setColorEstudio(pEstudios.getColorEstudio());
+		estudiosSelected.setCostoAnestesia(pEstudios.getCostoAnestesia());
+		estudiosSelected.setCostoPatologia(pEstudios.getCostoPatologia());
 	}
 	
 	public void delete() {
@@ -141,6 +146,8 @@ public class EstudiosForm {
 			estudiosDto.setEstatus(estudiosSelected.getEstatus());
 			estudiosDto.setFechaUltimaActualizacion(estudiosSelected.getFechaUltimaActualizacion());
 			estudiosDto.setColorEstudio(estudiosSelected.getColorEstudio());
+			estudiosDto.setCostoAnestesia(estudiosSelected.getCostoAnestesia());
+			estudiosDto.setCostoPatologia(estudiosSelected.getCostoPatologia());
 			
 			estudiosLocal.updateEstudios(estudiosSelected.getNumeroEstudio(), estudiosDto);
 			refreshEntity();
@@ -169,7 +176,8 @@ public class EstudiosForm {
    			  estudios.setFechaCreacion(estudiosDto.getFechaCreacion());
    			  estudios.setFechaUltimaActualizacion(estudiosDto.getFechaUltimaActualizacion());
    			  estudios.setColorEstudio(estudiosDto.getColorEstudio());
-   			  
+   			  estudios.setCostoAnestesia(estudiosDto.getCostoAnestesia());
+   			  estudios.setCostoPatologia(estudiosDto.getCostoPatologia());
    			  listEstudios.add(estudios); 
    		  }
     		
