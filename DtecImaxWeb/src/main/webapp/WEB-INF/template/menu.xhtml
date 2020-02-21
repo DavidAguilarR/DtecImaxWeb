@@ -10,7 +10,6 @@
  <div class="layout-menu-container">
         <div class="nano">
             <div class="nano-content menu-scroll-content">
-
                 <div class="layout-menu-title">MENU</div>
 
                 <h:form id="menu-form" enctype="multipart/form-data">
@@ -24,6 +23,8 @@
                       <p:menuitem id="apl_adm_permisos_usuarios" value="Permisos Usuarios" icon="fa fa-lock" outcome="admin-permisos-usuarios" rendered="false" />
                       <p:menuitem id="apl_adm_asignacion_roles" value="Asignacion Roles" icon="fa fa-lock" outcome="admin-asignacion-roles" />
                       <p:menuitem id="apl_adm_tablas_utilitarias" value="Tablas Utilitarias Valores" icon="fa fa-gears" outcome="admin-tablas-utilitarias" />
+                      <p:menuitem id="apl_adm_informacion_ganancias" value="Información Ganancias" icon="fa fa-money" outcome="admin-informacion-ganancias" />
+                      <p:menuitem id="apl_adm_estadisticas_ganancias" value="Estadísticas Ganancias" icon="fa fa-line-chart" outcome="admin-estadisticas-ganancias" />
                     </p:submenu>
                   
                     <p:submenu id="apl_ar" label="Hospital" icon="fa fa-hospital-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}">
