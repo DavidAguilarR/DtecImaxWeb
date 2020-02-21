@@ -14,18 +14,18 @@ public class Pacientes implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private long numeroPaciente;
-	private String apellidoMaternoPaciente = "apellidoMaternoPaciente";
-	private String apellidoPaternoPaciente = "apellidoPaternoPaciente";
-	private String celularPaciente = "123456789";
-	private String comentarios = "comentarios";
-	private String correoPaciente = "correoPaciente";
+	private String apellidoMaternoPaciente;
+	private String apellidoPaternoPaciente;
+	private String celularPaciente;
+	private String comentarios;
+	private String correoPaciente;
 	private String curpPaciente = "curpPaciente";
 	private String domicilioPaciente="domicilioPaciente";
 	private boolean estatus = true;
 	private Timestamp fechaCreacion;
 	private Timestamp fechaNacimientoPaciente;
 	private Timestamp fechaUltimaActualizacion;
-	private String nombrePaciente ="nombrePaciente";
+	private String nombrePaciente;
 	private long usuarioUltimaActualizacion;
 	
 	private Date utilFechaNacimientoPaciente = sysdate;

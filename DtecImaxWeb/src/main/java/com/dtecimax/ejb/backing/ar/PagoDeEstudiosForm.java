@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -69,9 +70,15 @@ public class PagoDeEstudiosForm {
 	
 	 @PostConstruct
 	 public void init() {
+//		 Calendar fecha = Calendar.getInstance();
+//		 System.out.println ("fecha completa "+fecha);
+//		  int diaAct = fecha.get(Calendar.DAY_OF_MONTH);
+//		  int mesAct = fecha.get(Calendar.MONTH);
+//		  System.out.println ("dia act "+diaAct);
+//		  System.out.println ("mes act "+mesAct);
 		 try {
-			searchFechaDesde = sdf.parse("08/08/2019");
-			searchFechaHasta = sdf.parse("08/08/2019");
+			searchFechaDesde = sdf.parse("");
+			searchFechaHasta = sdf.parse("");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

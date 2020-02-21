@@ -219,6 +219,7 @@
 
                         <div class="ui-g">
                             <div class="ui-g-12 ui-lg-12">
+                           
                             
   <h:panelGrid>
    <p:schedule id="scheduleId" widgetVar="myschedule" draggable="false" resizable="false" value="#{citasForm.eventModel}"  locale="es" timeZone="GMT-12" minTime="8:00" slotMinutes="10" maxTime="20:00" view="agendaDay" leftHeaderTemplate="today" rightHeaderTemplate="prev, next" >
@@ -228,7 +229,7 @@
    </h:panelGrid>
    </div>
    </div>
-</div>
+   </div>
 </div>
 </div>
 </h:form>
@@ -238,20 +239,27 @@
 <p:dialog id="citas-dialog-create" widgetVar="CitasDialogCreate" modal="true" closable="true" closeOnEscape="true" draggable="yes" resizable="yes"  header="Registrar Cita">
  <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
    <p:outputLabel value="Paciente" for="numero_paciente" /> 
    <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroPaciente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
+   <p:ajax event="change" update="celular_paciente" listener="#{citasForm.handleTelefonoChange}"/>
  </p:selectOneMenu>
  <p:message for="numero_paciente"/>
  </div>
+<div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
+  <p:outputLabel for="celular_paciente" value="Celular Paciente"/>
+  <p:inputText id="celular_paciente" value="#{citasForm.celularPaciente}" readonly="true">
+  	</p:inputText>
+  	<p:message for="celular_paciente"/>
+  	</div>
  <div class="ui-g-6 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel for="fecha_cita" value="Fecha Cita:" />
     <p:datePicker id="fecha_cita"  locale="es"  monthNavigator="true" pattern="yyyy-MM-dd" required="true" value="#{citas.utilFechaCita}" /> 
     <p:message for="fecha_cita"/>
   </div>
-     <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
   <p:outputLabel value="Ubicacion" for="numero_ubicacion" /> 
    <p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroUbicacion}" >
   <f:selectItem itemLabel="seleccione" itemValue="IMAX" /> 
@@ -259,32 +267,48 @@
  </p:selectOneMenu>
  <p:message for="numero_ubicacion"/>
  </div>
-   <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+
+   <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Estudio" for="numero_estudio" /> 
    <p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroEstudio}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectEstudiosItems}"  />
-  <p:ajax event="change" update="costo_estudio" listener="#{citasForm.handleEstudioChange}"/>
+  <p:ajax event="change" update="costo_estudio comentarios_estudio" listener="#{citasForm.handleEstudioChange}"/>
  </p:selectOneMenu>
  <p:message for="numero_estudio"/>
  </div>
  
- <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+ <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
   <p:outputLabel for="costo_estudio" value="Costo de Estudio"/>
   <p:inputText id="costo_estudio" value="#{citasForm.costoEstudio}" readonly="true">
   	</p:inputText>
   	<p:message for="costo_estudio"/>
   	</div>
-  	
-   <div class="ui-g-6 ui-lg-6" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-5" style="margin-bottom: 5px;">
+  <p:outputLabel for="comentarios_estudio" value="indicaciones"/>
+  <p:inputText id="comentarios_estudio" value="#{citasForm.comentariosE}" readonly="true">
+  	</p:inputText>
+  	<p:message for="comentarios_estudio"/>
+  	</div>
+  
+   <div class="ui-g-6 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Doctor Que Refiere" for="numero_doctor_referente" /> 
   <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChange}"/>
   </p:selectOneMenu>
   <p:message for="numero_doctor_referente"/>
  </div>
- <div class="ui-g-6 ui-lg-6" style="margin-bottom: 5px;">
+ 
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+  <p:outputLabel for="lugar_trabajo" value="Hospital"/>
+  <p:inputText id="lugar_trabajo" value="#{citasForm.lugarTrabajo}" readonly="true">
+  	</p:inputText>
+  	<p:message for="lugar_trabajo"/>
+  	</div>
+ 
+ <div class="ui-g-6 ui-lg-3" style="margin-bottom: 5px;">
   <p:outputLabel value="Doctor" for="numero_doctor" /> 
   <p:selectOneMenu id="numero_doctor" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctor}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -292,8 +316,6 @@
   </p:selectOneMenu>
   <p:message for="numero_doctor"/>
  </div>
- </div>
- 
 
  
  <div class="ui-g ui-fluid">
@@ -310,9 +332,10 @@
     <p:message for="hora_final_cita"/>
   </div>
  </div>
+ 	</div>
  <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{citas.comentarios}" maxlength="200"/>
+   <p:inputTextarea id="comentarios"  value="#{citas.comentariosC}" maxlength="200"/>
    <p:message for="comentarios"/>
 </div>
    <h:inputHidden id="estatus" name="status" value="#{citas.estatus}" />
@@ -340,24 +363,31 @@
 
 <h:form id="CitasFormUpdate">
 <f:passThroughAttribute name="autocomplete" value="off"/>
-<p:dialog id="citas-dialog-update" widgetVar="CitasDialogUpdate" modal="true" closable="true" closeOnEscape="true" draggable="false" resizable="false"  header="Actualizar Cita">
+<p:dialog id="citas-dialog-update" widgetVar="CitasDialogUpdate" modal="true" closable="true" closeOnEscape="true" draggable="true" resizable="false"  header="Actualizar Cita">
  <p:panel id="panelUpdate">
  
   <div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
    <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
    <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroPaciente}" >
    <f:selectItem itemLabel="seleccione" itemValue="" /> 
    <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
+      <p:ajax event="change" update=":CitasFormUpdate:celular_paciente" listener="#{citasForm.handleTelefonoChangeUpd}"/>
    </p:selectOneMenu>
    <p:message for="numero_paciente"/>
   </div>
+  <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
+  <p:outputLabel for="celular_paciente" value="Celular Paciente"/>
+  <p:inputText id="celular_paciente" value="#{citasForm.citasSelected.celularPaciente}" readonly="true">
+  	</p:inputText>
+  	<p:message for="celular_paciente"/>
+  	</div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel for="fecha_cita" value="Fecha Cita:" />
     <p:datePicker id="fecha_cita"  locale="es" style="width: 100%; margin-top: 5px;" monthNavigator="true" pattern="yyyy-MM-dd" required="true" value="#{citasForm.citasSelected.utilFechaCita}" /> 
     <p:message for="fecha_cita"/>
   </div>
-    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+    <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
   <p:outputLabel value="Nombre Ubicacion" for="numero_ubicacion" /> 
    <p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroUbicacion}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -365,12 +395,12 @@
  </p:selectOneMenu>
  <p:message for="numero_ubicacion"/>
  </div>
-  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
-  <p:outputLabel value="Nombre Estudio" for="numero_estudio" /> 
+  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+  <p:outputLabel value="Estudio" for="numero_estudio" /> 
    <p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroEstudio}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectEstudiosItems}"  />
-   <p:ajax event="change" update="costo_estudio" listener="#{citasForm.handleEstudioChangeUpd}"/>
+   <p:ajax event="change" update=":CitasFormUpdate:costo_estudio :CitasFormUpdate:comentarios_estudio" listener="#{citasForm.handleEstudioChangeUpd}"/>
  </p:selectOneMenu>
  <p:message for="numero_estudio"/>
  </div>
@@ -380,18 +410,29 @@
   	</p:inputText>
   	<p:message for="costo_estudio"/>
   	</div>
-  	
-
-  <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+  <div class="ui-g-12 ui-lg-5" style="margin-bottom: 5px;">
+  <p:outputLabel for="comentarios_estudio" value="indicaciones"/>
+  <p:inputText id="comentarios_estudio" value="#{citasForm.citasSelected.comentariosE}" readonly="true">
+  	</p:inputText>
+  	<p:message for="comentarios_estudio"/>
+  	</div>	
+  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Doctor Que Refiere" for="numero_doctor_referente" /> 
   <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+     <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChangeUpd}"/>
   </p:selectOneMenu>
   <p:message for="numero_doctor_referente"/>
  </div>
-
- <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">d
+  <p:outputLabel for="lugar_trabajo" value="Hospital"/>
+  <p:inputText id="lugar_trabajo" value="#{citasForm.citasSelected.lugarTrabajo}" readonly="true">
+  	</p:inputText>
+  	<p:message for="lugar_trabajo"/>
+  	</div>
+ 
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Nombre Doctor" for="numero_ubicacion" /> 
    <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctor}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -418,7 +459,7 @@
  </div>
   <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{citasForm.citasSelected.comentarios}" maxlength="200"/>
+   <p:inputTextarea id="comentarios"  value="#{citasForm.citasSelected.comentariosC}" maxlength="200"/>
    <p:message for="comentarios"/>
 </div>
  </p:panel>
@@ -471,7 +512,7 @@
 </h:form>
 
 <h:form id="OrdenForm">
-  <p:dialog id="crear-orden-dialog" widgetVar="crearOrdenDlg" modal="true" closable="true" closeOnEscape="true" draggable="false" resizable="false" header="Generar Orden">
+  <p:dialog id="crear-orden-dialog" widgetVar="crearOrdenDlg" modal="true" closable="true" closeOnEscape="true" draggable="yes" resizable="false" header="Generar Orden">
    <p:panel id="OrdenPanel">
    <div class="ui-fluid">
      <div class="ui-g">
@@ -504,7 +545,7 @@
 
 <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
- <div class="ui-g-12 ui-lg-6" style="margin-bottom: 5px;">
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Nombre Paciente" for="nombre_paciente" /> 
   <p:inputText id="nombre_paciente"  required="true" value="#{ordenesEstudiosSimples.nombrePaciente}" readonly="true" />
   <p:message for="nombre_paciente"/>
@@ -1123,14 +1164,11 @@
      <p:inputText id="lugar_trabajo" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.lugarTrabajo}" required="true" maxlength="20"/>
      <p:message for="lugar_trabajo"/>
  </div>
-       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-		<p:outputLabel for="area_doctor_referente" value="Area Especialidad:" />
-		<p:selectOneMenu id="area_doctor_referente" style="width: 100%; margin-top: 5px;" filter="true" filterMatchMode="contains" required="true" value="#{doctoresReferentes.areaDoctorReferente}">
- 		<f:selectItem itemLabel="seleccione" itemValue="" /> 
- 		<f:selectItems value="#{adminHelper.selectDrEspecialidadItems}" />
-		</p:selectOneMenu>
-		<p:message for="area_doctor_referente"/>
-	</div>
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="area_doctor_referente" value="Area Especialidad:"/>
+     <p:inputText id="area_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.areaDoctorReferente}" required="true" maxlength="50"/>
+     <p:message for="area_doctor_referente"/>
+ </div>
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="cedula_doctor_referente" value="Cedula:"/>
      <p:inputText id="cedula_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.cedulaDoctorReferente}" required="true" maxlength="20"/>
@@ -1156,7 +1194,7 @@
 			<div class="ui-g">
 			      <div class="ui-g-12 ui-lg-12" style="text-align: right;">
 			        <p:commandButton value="Cancelar" ajax="true" immediate="true" onclick="PF('DoctorReferenteDialog').hide();"  style="margin-right: 10px;"/>
-			        <p:commandButton value="Guardar" action="#{doctoresReferentesForm.insertDoctoresReferentes()}"  update="panelCreate" oncomplete="handleGuardarRequest(xhr, status, args)" />
+			        <p:commandButton value="Guardar" action="#{doctoresReferentesForm.insertDoctoresReferentes()}"  update="panelCreate" oncomplete="handleGuardarRequest(xhr, status, args)" onclick="PF('DoctorReferenteDialog').hide();"/>
 			   </div>
 			</div>
 </p:dialog>   

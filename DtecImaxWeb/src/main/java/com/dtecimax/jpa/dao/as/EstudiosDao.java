@@ -22,7 +22,7 @@ public interface EstudiosDao {
      
      public String findEstudioByNumero(long pNumeroEstudio);
      
-     public List<EstudiosDto> findBySearch(String pSearchNomEstu);
+     public List<EstudiosDto> findBySearch(String pSearchNomEstu, String pSearchTipoEstu);
      
      public List<String> findColorsEstudio(); 
 

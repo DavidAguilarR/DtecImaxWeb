@@ -228,7 +228,7 @@ public class IndexForm {
 		
 		estudiosDto.setFechaCreacion(estudios.getFechaCreacion());
 		estudiosDto.setFechaUltimaActualizacion(estudios.getFechaUltimaActualizacion());
-		estudiosDto.setComentarios(estudios.getComentarios());
+		estudiosDto.setComentariosE(estudios.getComentariosE());
 		
 		estudiosLocal.insertEstudios(estudiosDto);
 	}
@@ -280,7 +280,7 @@ public class IndexForm {
 		citasDto.setEstatus(citas.getEstatus());
 		citasDto.setFechaCreacion(citas.getFechaCreacion());
 		citasDto.setFechaUltimaActualizacion(citas.getFechaUltimaActualizacion());
-		citasDto.setComentarios(citas.getComentarios());
+		citasDto.setComentariosC(citas.getComentariosC());
 		
 		citasLocal.insertCitas(citasDto);
 	}

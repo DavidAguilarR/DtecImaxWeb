@@ -21,7 +21,7 @@ public class CitasDto implements Serializable {
 	private long numeroCita;
 
 	@Column(name="COMENTARIOS")
-	private String comentarios;
+	private String comentariosC;
 
 	@Column(name="ESTATUS")
 	private boolean estatus;
@@ -71,12 +71,12 @@ public class CitasDto implements Serializable {
 		this.numeroCita = numeroCita;
 	}
 
-	public String getComentarios() {
-		return this.comentarios;
+	public String getComentariosC() {
+		return this.comentariosC;
 	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setComentariosC(String comentarios) {
+		this.comentariosC = comentarios;
 	}
 
 	public boolean getEstatus() {

@@ -43,11 +43,12 @@ public class EstudiosDaoImpl implements EstudiosDao {
 		estudiosDto.setCostoEstudio(pEstudiosDto.getCostoEstudio());
 		estudiosDto.setRealizaEstudio(pEstudiosDto.getRealizaEstudio());
 		estudiosDto.setNumeroUbicacion(pEstudiosDto.getNumeroUbicacion());
-		estudiosDto.setComentarios(pEstudiosDto.getComentarios());
+		estudiosDto.setComentariosE(pEstudiosDto.getComentariosE());
 		estudiosDto.setEstatus(pEstudiosDto.getEstatus());
 		estudiosDto.setFechaUltimaActualizacion(pEstudiosDto.getFechaUltimaActualizacion());
 		estudiosDto.setUsuarioUltimaActualizacion(pEstudiosDto.getUsuarioUltimaActualizacion());
 		estudiosDto.setColorEstudio(pEstudiosDto.getColorEstudio());
+		estudiosDto.setCostoAnestesia(pEstudiosDto.getCostoAnestesia());
 		
 		
 		}
@@ -82,10 +83,13 @@ public class EstudiosDaoImpl implements EstudiosDao {
 	}
 
 	@Override
-	public List<EstudiosDto> findBySearch(String pSearchNomEstu) {
+	public List<EstudiosDto> findBySearch(String pSearchNomEstu, String pSearchTipoEstu) {
 		String strQuery = "SELECT e FROM EstudiosDto e where 1=1"; 
 		if(null!=pSearchNomEstu&&!"".equals(pSearchNomEstu)) {
 			strQuery = strQuery+" AND e.nombreEstudio like '%"+pSearchNomEstu+"%'"; 
+		}
+		if(null!=pSearchTipoEstu&&!"".equals(pSearchTipoEstu)) {
+			strQuery = strQuery+" AND e.tipoEstudio like '%"+pSearchTipoEstu+"%'"; 
 		}
 		return em.createQuery(strQuery).getResultList();
 	}
