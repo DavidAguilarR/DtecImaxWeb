@@ -16,7 +16,7 @@ public class Estudios implements Serializable {
 	private Date sysdate = new Date();
 	
 	private long numeroEstudio;
-	private String comentarios ="comentarios";
+	private String comentariosE;
 	private long costoEstudio;
 	private boolean estatus;
 	private Timestamp fechaCreacion;
@@ -44,12 +44,12 @@ public class Estudios implements Serializable {
 		this.numeroEstudio = numeroEstudio;
 	}
 
-	public String getComentarios() {
-		return this.comentarios;
+	public String getComentariosE() {
+		return this.comentariosE;
 	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setComentariosE(String comentariosE) {
+		this.comentariosE = comentariosE;
 	}
 
 	public long getCostoEstudio() {

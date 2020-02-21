@@ -47,8 +47,15 @@
          <p:inputText id="nombre_estudio"  style="width: 100%; margin-top: 5px;" value="#{estudiosForm.searchNomEstu}" maxlength="50" />
          <p:message for="nombre_estudio"/>
        </div>
-       </div>
-       
+ 	<div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+		<p:outputLabel for="tipo_estudio" value="Categoria Estudio:" />
+		<p:selectOneMenu id="tipo_estudio" style="width: 100%; margin-top: 5px;" value="#{estudiosForm.searchTipoEstu}" filter="true"  filterMatchMode="contains" required="true" >
+ 		<f:selectItem itemLabel="seleccione" /> 
+ 		<f:selectItems value="#{adminHelper.selectTipoEstudiosItems}"/>
+		</p:selectOneMenu>
+		<p:message for="tipo_estudio"/>
+	 </div>       
+       </div>    
        <div class="ui-g">
        <div class="ui-g-12 ui-lg-12" style="text-align: right;">
         <p:commandButton value="Cancelar">
@@ -101,8 +108,8 @@
                                   <p:colorPicker  value="#{estudio.colorEstudio}" disabled="true" />
                                   </div>
                                 </p:column>
-                                 <p:column headerText="Comentarios">
-                                  <h:outputText value="#{estudio.comentarios}" />
+                                 <p:column headerText="Indicaciones">
+                                  <h:outputText value="#{estudio.comentariosE}" />
                                 </p:column>
                                <p:column headerText="Opciones:">
                                   <p:commandButton icon="fa fa-edit" update="EstudiosFormUpdate EstudiosFormReadOnly" oncomplete="PF('EstudioDialogUpdate').show();" ajax="true"  style="margin-left: 10px;" actionListener="#{estudiosForm.selectForUpdate(estudio)}" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
@@ -178,7 +185,7 @@
     </div>
 <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{estudios.comentarios}" maxlength="500"/>
+   <p:inputTextarea id="comentarios"  value="#{estudios.comentariosE}" maxlength="500"/>
    <p:message for="comentarios"/>
 </div>
 
@@ -248,7 +255,7 @@
 
 <div class="ui-g ui-fluid">
 <p:outputLabel for="comentarios" value="Comentarios:"/>
-   <p:inputTextarea id="comentarios"  value="#{estudiosForm.estudiosSelected.comentarios}" maxlength="500"/>
+   <p:inputTextarea id="comentarios"  value="#{estudiosForm.estudiosSelected.comentariosE}" maxlength="500"/>
    <p:message for="comentarios"/>
 </div>
 

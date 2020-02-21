@@ -212,17 +212,22 @@
 <div class="ui-g ui-fluid">
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="lugar_trabajo" value="Lugar donde Trabaja Dr."/>
-     <p:inputText id="lugar_trabajo" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.lugarTrabajo}" required="true" maxlength="20"/>
+     <p:inputText id="lugar_trabajo" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.lugarTrabajo}" required="true" maxlength="50"/>
      <p:message for="lugar_trabajo"/>
  </div>
-       <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-		<p:outputLabel for="area_doctor_referente" value="Area Especialidad:" />
-		<p:selectOneMenu id="area_doctor_referente" style="width: 100%; margin-top: 5px;" filter="true" filterMatchMode="contains" required="true" value="#{doctoresReferentes.areaDoctorReferente}">
- 		<f:selectItem itemLabel="seleccione" itemValue="" /> 
- 		<f:selectItems value="#{adminHelper.selectDrEspecialidadItems}" />
-		</p:selectOneMenu>
-		<p:message for="area_doctor_referente"/>
-	</div>
+<!--        <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!-- 		<p:outputLabel for="area_doctor_referente" value="Area Especialidad:" /> -->
+<!-- 		<p:selectOneMenu id="area_doctor_referente" style="width: 100%; margin-top: 5px;" filter="true" filterMatchMode="contains" required="true" value="#{doctoresReferentes.areaDoctorReferente}"> -->
+<!--  		<f:selectItem itemLabel="seleccione" itemValue="" />  -->
+<!--  		<f:selectItems value="#{adminHelper.selectDrEspecialidadItems}" /> -->
+<!-- 		</p:selectOneMenu> -->
+<!-- 		<p:message for="area_doctor_referente"/> -->
+<!-- 	</div> -->
+ <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="area_doctor_referente" value="Area Especialidad:"/>
+     <p:inputText id="area_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.areaDoctorReferente}" required="true" maxlength="50"/>
+     <p:message for="area_doctor_referente"/>
+ </div>
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="cedula_doctor_referente" value="Cedula:"/>
      <p:inputText id="cedula_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentes.cedulaDoctorReferente}" required="true" maxlength="20"/>
@@ -311,9 +316,10 @@
      <p:inputText id="lugar_trabajo" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentesForm.doctoresReferentesSelected.lugarTrabajo}" required="true" maxlength="20"/>
      <p:message for="lugar_trabajo"/>
  </div>
+ 
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="area_doctor_referente" value="Area Especializada Dr."/>
-     <p:inputText id="area_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentesForm.doctoresReferentesSelected.areaDoctorReferente}" required="true" maxlength="20"/>
+     <p:inputText id="area_doctor_referente" style="width: 100%; margin-top: 5px;" value="#{doctoresReferentesForm.doctoresReferentesSelected.areaDoctorReferente}" required="true" maxlength="50"/>
      <p:message for="area_doctor_referente"/>
  </div>
  <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">

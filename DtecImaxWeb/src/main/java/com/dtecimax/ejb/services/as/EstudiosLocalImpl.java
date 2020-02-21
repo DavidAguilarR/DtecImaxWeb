@@ -54,8 +54,8 @@ public class EstudiosLocalImpl implements EstudiosLocal {
 	}
 
 	@Override
-	public List<EstudiosDto> findBySearch(String pSearchNomEstu) {
-		return estudiosDao.findBySearch(pSearchNomEstu);
+	public List<EstudiosDto> findBySearch(String pSearchNomEstu, String pSearchTipoEstu) {
+		return estudiosDao.findBySearch(pSearchNomEstu,pSearchTipoEstu);
 	}
 
 	@Override

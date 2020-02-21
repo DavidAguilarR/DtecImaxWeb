@@ -70,6 +70,7 @@ public class CitasDaoImpl implements CitasDao {
 		citasDto.setHoraInicialCita(pCitasDto.getHoraInicialCita());
 		citasDto.setHoraFinalCita(pCitasDto.getHoraFinalCita());
 		citasDto.setNumeroDoctorReferente(pCitasDto.getNumeroDoctorReferente());
+		citasDto.setComentariosC(pCitasDto.getComentariosC());
 	}
 
 	@Override

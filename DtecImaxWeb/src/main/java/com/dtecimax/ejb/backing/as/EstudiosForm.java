@@ -32,6 +32,7 @@ public class EstudiosForm {
 	EstudiosLocal estudiosLocal;
 
 	private String searchNomEstu; 
+	private String searchTipoEstu;
 	
 
 
@@ -55,7 +56,7 @@ public class EstudiosForm {
 			  estudios.setCostoEstudio(estudiosDto.getCostoEstudio());
 			  estudios.setRealizaEstudio(estudiosDto.getRealizaEstudio());
 			  estudios.setNumeroUbicacion(estudiosDto.getNumeroUbicacion());
-			  estudios.setComentarios(estudiosDto.getComentarios());
+			  estudios.setComentariosE(estudiosDto.getComentariosE());
 			  estudios.setEstatus(estudiosDto.getEstatus());
 			  estudios.setFechaCreacion(estudiosDto.getFechaCreacion());
 			  estudios.setFechaUltimaActualizacion(estudiosDto.getFechaUltimaActualizacion());
@@ -83,7 +84,7 @@ public class EstudiosForm {
 		estudiosDto.setRealizaEstudio(estudios.getRealizaEstudio());
 		estudiosDto.setNumeroUbicacion(estudios.getNumeroUbicacion());
 		estudiosDto.setEstatus(estudios.getEstatus());
-		estudiosDto.setComentarios(estudios.getComentarios());
+		estudiosDto.setComentariosE(estudios.getComentariosE());
 		estudiosDto.setFechaCreacion(estudios.getFechaCreacion());
 		estudiosDto.setFechaUltimaActualizacion(estudios.getFechaUltimaActualizacion());
 		estudiosDto.setColorEstudio(estudios.getColorEstudio());
@@ -115,7 +116,7 @@ public class EstudiosForm {
 		estudiosSelected.setCostoEstudio(pEstudios.getCostoEstudio());
 		estudiosSelected.setRealizaEstudio(pEstudios.getRealizaEstudio());
 		estudiosSelected.setNumeroUbicacion(pEstudios.getNumeroUbicacion());
-		estudiosSelected.setComentarios(pEstudios.getComentarios());
+		estudiosSelected.setComentariosE(pEstudios.getComentariosE());
 		estudiosSelected.setEstatus(pEstudios.getEstatus());
 		estudiosSelected.setColorEstudio(pEstudios.getColorEstudio());
 		estudiosSelected.setCostoAnestesia(pEstudios.getCostoAnestesia());
@@ -142,7 +143,7 @@ public class EstudiosForm {
 			estudiosDto.setCostoEstudio(estudiosSelected.getCostoEstudio());
 			estudiosDto.setRealizaEstudio(estudiosSelected.getRealizaEstudio());
 			estudiosDto.setNumeroUbicacion(estudiosSelected.getNumeroUbicacion());
-			estudiosDto.setComentarios(estudiosSelected.getComentarios());
+			estudiosDto.setComentariosE(estudiosSelected.getComentariosE());
 			estudiosDto.setEstatus(estudiosSelected.getEstatus());
 			estudiosDto.setFechaUltimaActualizacion(estudiosSelected.getFechaUltimaActualizacion());
 			estudiosDto.setColorEstudio(estudiosSelected.getColorEstudio());
@@ -156,10 +157,11 @@ public class EstudiosForm {
 	    }		
 	 
     public void search() {
-    	if(null!=this.searchNomEstu&&!"".equals(this.searchNomEstu)) {
+    	if(null!=this.searchNomEstu&&!"".equals(this.searchNomEstu) || (null!=this.searchTipoEstu&&!"".equals(this.searchTipoEstu)))
+    	{
     	   	
     	  listEstudios = new ArrayList<Estudios>();	  
-   		  List<EstudiosDto> listEstudiosDto = estudiosLocal.findBySearch(this.searchNomEstu);
+   		  List<EstudiosDto> listEstudiosDto = estudiosLocal.findBySearch(this.searchNomEstu ,this.searchTipoEstu);
    		  Iterator<EstudiosDto> iterEstudiosDto = listEstudiosDto.iterator();
    		  while(iterEstudiosDto.hasNext()) { 
    			  EstudiosDto estudiosDto =iterEstudiosDto.next(); 
@@ -171,7 +173,7 @@ public class EstudiosForm {
    			  estudios.setCostoEstudio(estudiosDto.getCostoEstudio());
    			  estudios.setRealizaEstudio(estudiosDto.getRealizaEstudio());
    			  estudios.setNumeroUbicacion(estudiosDto.getNumeroUbicacion());
-   			  estudios.setComentarios(estudiosDto.getComentarios());
+   			  estudios.setComentariosE(estudiosDto.getComentariosE());
    			  estudios.setEstatus(estudiosDto.getEstatus());
    			  estudios.setFechaCreacion(estudiosDto.getFechaCreacion());
    			  estudios.setFechaUltimaActualizacion(estudiosDto.getFechaUltimaActualizacion());
@@ -220,7 +222,14 @@ public class EstudiosForm {
 	public void setSearchNomEstu(String searchNomEstu) {
 		this.searchNomEstu = searchNomEstu;
 	}
+	
+	public String getSearchTipoEstu() {
+		return searchTipoEstu;
+	}
 
+	public void setSearchTipoEstu(String searchTipoEstu) {
+		this.searchTipoEstu = searchTipoEstu;
+	}
 	
 
 

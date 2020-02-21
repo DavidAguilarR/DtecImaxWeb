@@ -218,9 +218,8 @@ public class AdminHelper {
 		List<SelectItem> lselectTipoPagoItems = new ArrayList<SelectItem>();
 		
 		SelectItem selectItem = new SelectItem(1,"Efectivo");
-		SelectItem selectItem2 = new SelectItem(2,"Tarjeta Bancaria");
+		SelectItem selectItem2 = new SelectItem(2,"Tarjeta de debito");
 		SelectItem selectItem3 = new SelectItem(3,"Tarjeta de credito");
-		
 		lselectTipoPagoItems.add(selectItem);
 		lselectTipoPagoItems.add(selectItem2);
 		lselectTipoPagoItems.add(selectItem3);

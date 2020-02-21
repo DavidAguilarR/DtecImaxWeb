@@ -14,7 +14,7 @@ public class Citas implements Serializable {
 	private Date sysdate = new Date();
 	
 	private long numeroCita;
-	private String comentarios;
+	private String comentariosC;
 	private boolean estatus;
 	private Timestamp fechaCita;
 	private Timestamp fechaCreacion;
@@ -35,7 +35,10 @@ public class Citas implements Serializable {
     private Date utilHoraFinalCita;
     
 
-    private long costoEstudio; 
+    private long costoEstudio;
+    private String lugarTrabajo;
+    private String celularPaciente;
+    private String comentariosE;
     
 	public Citas() {
 	}
@@ -48,12 +51,12 @@ public class Citas implements Serializable {
 		this.numeroCita = numeroCita;
 	}
 
-	public String getComentarios() {
-		return this.comentarios;
+	public String getComentariosC() {
+		return this.comentariosC;
 	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setComentariosC(String comentariosC) {
+		this.comentariosC = comentariosC;
 	}
 
 	public boolean getEstatus() {
@@ -213,7 +216,30 @@ public class Citas implements Serializable {
 	public void setCostoEstudio(long costoEstudio) {
 		this.costoEstudio = costoEstudio;
 	}
-	
-	
+
+	public String getLugarTrabajo() {
+		return lugarTrabajo;
+	}
+
+	public void setLugarTrabajo(String lugarTrabajo) {
+		this.lugarTrabajo = lugarTrabajo;
+	}
+
+	public String getCelularPaciente() {
+		return celularPaciente;
+	}
+
+	public void setCelularPaciente(String celularPaciente) {
+		this.celularPaciente = celularPaciente;
+	}
+
+	public String getComentariosE() {
+		return this.comentariosE;
+	}
+
+	public void setComentariosE(String comentariosE) {
+		this.comentariosE = comentariosE;
+	}
+
 
 }

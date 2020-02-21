@@ -20,7 +20,7 @@ public class EstudiosDto implements Serializable {
 	private long numeroEstudio;
 
 	@Column(name="COMENTARIOS")
-	private String comentarios;
+	private String comentariosE;
 
 	@Column(name="COSTO_ESTUDIO")
 	private long costoEstudio;
@@ -70,12 +70,12 @@ public class EstudiosDto implements Serializable {
 		this.numeroEstudio = numeroEstudio;
 	}
 
-	public String getComentarios() {
-		return this.comentarios;
+	public String getComentariosE() {
+		return this.comentariosE;
 	}
 
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setComentariosE(String comentariosE) {
+		this.comentariosE = comentariosE;
 	}
 
 	public long getCostoEstudio() {
