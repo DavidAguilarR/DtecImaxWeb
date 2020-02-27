@@ -75,6 +75,16 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
+   <from-outcome>admin-informacion-ganancias</from-outcome>
+   <to-view-id>/dtecimax/admin/ar/InformacionGanancias.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>admin-estadisticas-ganancias</from-outcome>
+   <to-view-id>/dtecimax/admin/ar/EstadisticasGanancias.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
    <from-outcome>hr-doctores</from-outcome>
    <to-view-id>/dtecimax/hr/Doctores.xhtml</to-view-id>
    <redirect/>
