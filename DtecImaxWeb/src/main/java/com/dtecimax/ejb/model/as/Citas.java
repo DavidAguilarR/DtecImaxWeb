@@ -38,6 +38,7 @@ public class Citas implements Serializable {
     private long costoEstudio;
     private String lugarTrabajo;
     private String celularPaciente;
+    private String celularAlternoPaciente;
     private String comentariosE;
     
 	public Citas() {
@@ -240,6 +241,16 @@ public class Citas implements Serializable {
 	public void setComentariosE(String comentariosE) {
 		this.comentariosE = comentariosE;
 	}
+
+	public String getCelularAlternoPaciente() {
+		return celularAlternoPaciente;
+	}
+
+	public void setCelularAlternoPaciente(String celularAlternoPaciente) {
+		this.celularAlternoPaciente = celularAlternoPaciente;
+	}
+
+	
 
 
 }
