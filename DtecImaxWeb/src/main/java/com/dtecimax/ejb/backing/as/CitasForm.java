@@ -81,6 +81,7 @@ public class CitasForm {
 	private long costoEstudio;
 	private String lugarTrabajo;
 	private String celularPaciente;
+	private String celularAlternoPaciente;
 	private String comentariosE;
 	
 	/***************************************************************************
@@ -299,6 +300,7 @@ public class CitasForm {
         citasSelected.setCostoEstudio(estudiosDto.getCostoEstudio());
         citasSelected.setLugarTrabajo(doctoresReferentesDto.getLugarTrabajo());
         citasSelected.setCelularPaciente(pacientesDto.getCelularPaciente());
+        citasSelected.setCelularAlternoPaciente(pacientesDto.getCelularAlternoPaciente());
         citasSelected.setComentariosC(citasDto.getComentariosC());
         citasSelected.setComentariosE(estudiosDto.getComentariosE());
 	} 
@@ -365,6 +367,7 @@ public class CitasForm {
 			DoctoresReferentesDto doctoresReferentesDto = doctoresReferentesLocal.findByNumeroDoctorReferente(citas.getNumeroDoctorReferente());
 			if(null!=doctoresReferentesDto) {
 			setLugarTrabajo(doctoresReferentesDto.getLugarTrabajo());
+			
 			}
 		}
 	 
@@ -379,6 +382,7 @@ public class CitasForm {
 			PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(citas.getNumeroPaciente());
 			if(null!=pacientesDto) {
 			setCelularPaciente(pacientesDto.getCelularPaciente());
+			setCelularAlternoPaciente(pacientesDto.getCelularAlternoPaciente());
 			}
 		}
 	   
@@ -386,6 +390,7 @@ public class CitasForm {
 			PacientesDto pacientesDto = pacientesLocal.findByNumeroPaciente(citasSelected.getNumeroPaciente());
 			if(null!=pacientesDto) {
 			citasSelected.setCelularPaciente(pacientesDto.getCelularPaciente());
+			citasSelected.setCelularAlternoPaciente(pacientesDto.getCelularAlternoPaciente());
 			}
 		}
 	
@@ -847,6 +852,16 @@ public class CitasForm {
 	
 	public void setComentariosE (String comentariosE) {
 		this.comentariosE = comentariosE;
+	}
+
+
+	public String getCelularAlternoPaciente() {
+		return celularAlternoPaciente;
+	}
+
+
+	public void setCelularAlternoPaciente(String celularAlternoPaciente) {
+		this.celularAlternoPaciente = celularAlternoPaciente;
 	}
 	
 	

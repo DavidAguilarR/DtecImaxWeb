@@ -60,6 +60,10 @@ public class PacientesDto implements Serializable {
 
 	@Column(name="USUARIO_ULTIMA_ACTUALIZACION")
 	private long usuarioUltimaActualizacion;
+	
+	@Column(name="CELULAR_ALTERNO_PACIENTE")
+	private String celularAlternoPaciente;
+	
 
 	public PacientesDto() {
 	}
@@ -182,6 +186,13 @@ public class PacientesDto implements Serializable {
 		this.usuarioUltimaActualizacion = usuarioUltimaActualizacion;
 	}
 
+	public String getCelularAlternoPaciente() {
+		return this.celularAlternoPaciente;
+	}
+
+	public void setCelularAlternoPaciente(String celularAlternoPaciente) {
+		this.celularAlternoPaciente = celularAlternoPaciente;
+	}
 	
 
 }

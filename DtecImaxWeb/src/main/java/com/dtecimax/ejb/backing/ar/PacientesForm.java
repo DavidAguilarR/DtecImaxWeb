@@ -61,6 +61,7 @@ public class PacientesForm {
 			pacientes.setFechaCreacion(pacientesDto.getFechaCreacion());
 			pacientes.setFechaUltimaActualizacion(pacientesDto.getFechaUltimaActualizacion());
 			pacientes.setComentarios(pacientesDto.getComentarios());
+			pacientes.setCelularAlternoPaciente(pacientesDto.getCelularAlternoPaciente());
 			listPacientes.add(pacientes);	
 		}
 	}
@@ -82,6 +83,7 @@ public class PacientesForm {
 	      pacientesDto.setFechaCreacion(pacientes.getFechaCreacion());
 	      pacientesDto.setFechaUltimaActualizacion(pacientes.getFechaUltimaActualizacion());
 	      pacientesDto.setComentarios(pacientes.getComentarios());
+	      pacientesDto.setCelularAlternoPaciente(pacientes.getCelularAlternoPaciente());
 			
 	      pacientesLocal.insertPacientes(pacientesDto);
 	      refreshEntity();
@@ -105,6 +107,7 @@ public class PacientesForm {
 		pacientesSelected.setFechaCreacion(pPacientes.getFechaCreacion());
 		pacientesSelected.setFechaUltimaActualizacion(pPacientes.getFechaUltimaActualizacion());
 		pacientesSelected.setComentarios(pPacientes.getComentarios());
+		pacientesSelected.setCelularAlternoPaciente(pPacientes.getCelularAlternoPaciente());
 	    
 	}
 	
@@ -123,6 +126,7 @@ public class PacientesForm {
 		pacientesSelected.setFechaCreacion(pPacientes.getFechaCreacion());
 		pacientesSelected.setFechaUltimaActualizacion(pPacientes.getFechaUltimaActualizacion());
 		pacientesSelected.setComentarios(pPacientes.getComentarios());
+		pacientesSelected.setCelularAlternoPaciente(pPacientes.getCelularAlternoPaciente());
 	    
 	}
 	
@@ -163,6 +167,8 @@ public class PacientesForm {
 	      pacientesDto.setFechaCreacion(pacientesSelected.getFechaCreacion());
 	      pacientesDto.setFechaUltimaActualizacion(pacientesSelected.getFechaUltimaActualizacion());
 	      pacientesDto.setComentarios(pacientesSelected.getComentarios());
+	      pacientesDto.setCelularAlternoPaciente(pacientesSelected.getCelularAlternoPaciente());
+	      
 	      pacientesLocal.updatePacientes(pacientesSelected.getNumeroPaciente(), pacientesDto);
 	      refreshEntity(); 
 	      updatedIn = true;
@@ -202,6 +208,7 @@ public class PacientesForm {
 			pacientes.setFechaCreacion(pacientesDto.getFechaCreacion());
 			pacientes.setFechaUltimaActualizacion(pacientesDto.getFechaUltimaActualizacion());
 			pacientes.setComentarios(pacientesDto.getComentarios());
+			pacientes.setCelularAlternoPaciente(pacientesDto.getCelularAlternoPaciente());
 			listPacientes.add(pacientes);	
 		}
 		

@@ -116,14 +116,14 @@
 						       <p:column headerText="Celular">
 						       <h:outputText value="#{paciente.celularPaciente}" />
 						     </p:column> 
+						     <p:column headerText="Celular Alterno">
+						       <h:outputText value="#{paciente.celularAlternoPaciente}" />
+						     </p:column> 
 						      <p:column headerText="Correo">
 						       <h:outputText value="#{paciente.correoPaciente}" />
 						     </p:column> 
-						      <p:column headerText="CURP">
+						      <p:column headerText="RFC">
 						       <h:outputText value="#{paciente.curpPaciente}" />
-						     </p:column> 
-						      <p:column headerText="Domicilio">
-						       <h:outputText value="#{paciente.domicilioPaciente}" />
 						     </p:column> 
 						      <p:column headerText="Opciones:" style="text-overflow: ellipsis; white-space: nowrap;">
 						       <p:commandButton icon="fa fa-edit" update="PacientesFormUpdate PacientesFormReadOnly" oncomplete="PF('PacientesDialogUpdate').show();" ajax="true"  style="margin-left: 15px;" actionListener="#{pacientesForm.selectForUpdate(paciente)}"/>
@@ -176,21 +176,26 @@
      <p:inputNumber id="celular_paciente" style="width: 100%; margin-top: 5px;" required="true"  value="#{pacientes.celularPaciente}" maxlength="10"/>
      <p:message for="celular_paciente"/>
      </div>
+      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="celular_alterno_paciente" value="Celular Alterno:"/>
+     <p:inputNumber id="celular_alterno_paciente" style="width: 100%; margin-top: 5px;" required="true"  value="#{pacientes.celularAlternoPaciente}" maxlength="10"/>
+     <p:message for="celular_alterno_paciente"/>
+     </div>
      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="correo_paciente" value="Correo:"/>
      <p:inputText id="correo_paciente" style="width: 100%; margin-top: 5px;" required="true" value="#{pacientes.correoPaciente}" maxlength="50"/>
      <p:message for="correo_paciente"/>
      </div>
      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-     <p:outputLabel for="curp_paciente" value="CURP:"/>
-     <p:inputText id="curp_paciente" style="width: 100%; margin-top: 5px;" required="true" value="#{pacientes.curpPaciente}" maxlength="25"/>
+     <p:outputLabel for="curp_paciente" value="RFC:"/>
+     <p:inputText id="curp_paciente" style="width: 100%; margin-top: 5px;" required="true" value="#{pacientes.curpPaciente}" maxlength="15"/>
      <p:message for="curp_paciente"/>
      </div>
-     <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
-     <p:outputLabel for="domicilio_paciente" value="Domicilio:"/>
-     <p:inputText id="domicilio_paciente" style="width: 100%; margin-top: 5px;" required="true" value="#{pacientes.domicilioPaciente}" maxlength="50"/>
-     <p:message for="domicilio_paciente"/>
-     </div>
+<!--      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;"> -->
+<!--      <p:outputLabel for="domicilio_paciente" value="Domicilio:"/> -->
+<!--      <p:inputText id="domicilio_paciente" style="width: 100%; margin-top: 5px;" required="true" value="#{pacientes.domicilioPaciente}" maxlength="50"/> -->
+<!--      <p:message for="domicilio_paciente"/> -->
+<!--      </div> -->
   </div>
 
   <div class="ui-g ui-fluid">
@@ -249,6 +254,11 @@
      <p:outputLabel for="celular_paciente" value="Celular:"/>
      <p:inputNumber id="celular_paciente" style="width: 100%; margin-top: 5px;" required="true"  value="#{pacientesForm.pacientesSelected.celularPaciente}" maxlength="10"/>
      <p:message for="celular_paciente"/>
+     </div>
+          <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+     <p:outputLabel for="celular_paciente_alterno" value="Celular Alterno:"/>
+     <p:inputNumber id="celular_paciente_alterno" style="width: 100%; margin-top: 5px;" required="true"  value="#{pacientesForm.pacientesSelected.celularAlternoPaciente}" maxlength="10"/>
+     <p:message for="celular_paciente_alterno"/>
      </div>
      <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
      <p:outputLabel for="correo_paciente" value="Correo:"/>

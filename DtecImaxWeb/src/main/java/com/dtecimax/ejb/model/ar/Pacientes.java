@@ -19,14 +19,15 @@ public class Pacientes implements Serializable {
 	private String celularPaciente;
 	private String comentarios;
 	private String correoPaciente;
-	private String curpPaciente = "curpPaciente";
-	private String domicilioPaciente="domicilioPaciente";
+	private String curpPaciente = "RFC";
+	private String domicilioPaciente="Dom";
 	private boolean estatus = true;
 	private Timestamp fechaCreacion;
 	private Timestamp fechaNacimientoPaciente;
 	private Timestamp fechaUltimaActualizacion;
 	private String nombrePaciente;
 	private long usuarioUltimaActualizacion;
+	private String celularAlternoPaciente;
 	
 	private Date utilFechaNacimientoPaciente = sysdate;
 	private Date utilFechaCreacion = sysdate;
@@ -175,6 +176,14 @@ public class Pacientes implements Serializable {
 	public void setUtilFechaUltimaActualizacion(Date utilFechaUltimaActualizacion) {
 		this.utilFechaUltimaActualizacion = utilFechaUltimaActualizacion;
 		this.setFechaUltimaActualizacion(new Timestamp(utilFechaUltimaActualizacion.getTime()));
+	}
+
+	public String getCelularAlternoPaciente() {
+		return celularAlternoPaciente;
+	}
+
+	public void setCelularAlternoPaciente(String celularAlternoPaciente) {
+		this.celularAlternoPaciente = celularAlternoPaciente;
 	}
 
 	

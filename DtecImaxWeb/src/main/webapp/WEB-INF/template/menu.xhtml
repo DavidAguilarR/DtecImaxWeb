@@ -25,6 +25,9 @@
                       <p:menuitem id="apl_adm_tablas_utilitarias" value="Tablas Utilitarias Valores" icon="fa fa-gears" outcome="admin-tablas-utilitarias" />
                       <p:menuitem id="apl_adm_informacion_ganancias" value="Información Ganancias" icon="fa fa-money" outcome="admin-informacion-ganancias" />
                       <p:menuitem id="apl_adm_estadisticas_ganancias" value="Estadísticas Ganancias" icon="fa fa-line-chart" outcome="admin-estadisticas-ganancias" />
+                      <p:menuitem id="apl_chart_estudios_agendados" value="Estudios Agendados" icon="fa fa-line-chart" outcome="chart-estudios-agendados" />
+                      <p:menuitem id="apl_chart_citas_agendadas" value="Citas Agendadas" icon="fa fa-line-chart" outcome="chart-citas-agendadas" />
+                     
                     </p:submenu>
                   
                     <p:submenu id="apl_ar" label="Hospital" icon="fa fa-hospital-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}">
@@ -49,10 +52,6 @@
                          <p:menuitem id="apl_email_ntfs_out" value="Enviados" icon="fa fa-sign-out" outcome="email-notificaciones"/>
                       </p:submenu>
                   
-                      <p:submenu id="apl_charts" label="Estadisticas" icon="fa fa-bar-chart" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
-                       <p:menuitem id="apl_chart_estudios_agendados" value="Estudios Agendados" icon="fa fa-line-chart" outcome="chart-estudios-agendados" />
-                       <p:menuitem id="apl_chart_citas_agendadas" value="Citas Agendadas" icon="fa fa-line-chart" outcome="chart-citas-agendadas" />
-                      </p:submenu>
                        <p:submenu id="apl_charges" label="Cobros" icon="fa fa-usd" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
                        <p:menuitem id="apl_charges_pago_de_estudios" value="Pago de Estudios" icon="fa fa-money" outcome="charges-pago-de-estudios" />
                        <p:menuitem id="apl_charges_historial_de_pagos" value="Historial de Pagos" icon="fa fa-money" outcome="charges-historial-de-pagos" />
