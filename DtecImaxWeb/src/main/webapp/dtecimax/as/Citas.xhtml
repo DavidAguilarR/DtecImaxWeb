@@ -237,6 +237,9 @@
 <h:form id="CitasFormCreate">
 <f:passThroughAttribute name="autocomplete" value="off"/>
 <p:dialog id="citas-dialog-create" widgetVar="CitasDialogCreate" modal="true" closable="true" closeOnEscape="true" draggable="yes" resizable="yes"  header="Registrar Cita">
+  <p:messages id="messages" showDetail="true" closable="true">
+  <p:autoUpdate />
+</p:messages>
  <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
@@ -296,7 +299,7 @@
   <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChange}"/>
+   <p:ajax event="change" update="lugar_trabajo numero_doctor" listener="#{citasForm.handleLugarChange}"/>
   </p:selectOneMenu>
   <p:message for="numero_doctor_referente"/>
  </div>
@@ -312,7 +315,7 @@
   <p:outputLabel value="Doctor" for="numero_doctor" /> 
   <p:selectOneMenu id="numero_doctor" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctor}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+  <f:selectItems value="#{citasForm.selectDoctoresItems}"  />
   </p:selectOneMenu>
   <p:message for="numero_doctor"/>
  </div>
@@ -421,7 +424,7 @@
   <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-     <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChangeUpd}"/>
+     <p:ajax event="change" update="lugar_trabajo numero_doctor" listener="#{citasForm.handleLugarChangeUpd}"/>
   </p:selectOneMenu>
   <p:message for="numero_doctor_referente"/>
  </div>
@@ -436,7 +439,7 @@
   <p:outputLabel value="Nombre Doctor" for="numero_ubicacion" /> 
    <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctor}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+  <f:selectItems value="#{citasForm.selectDoctoresItemsUpd}"  />
  </p:selectOneMenu>
  <p:message for="numero_doctor"/>
  </div>

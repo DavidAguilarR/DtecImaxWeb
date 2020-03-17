@@ -95,6 +95,11 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
+   <from-outcome>hr-doc-ref-vs-doc</from-outcome>
+   <to-view-id>/dtecimax/hr/DocRefVsDoc.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
    <from-outcome>ar-alergias-pacientes</from-outcome>
    <to-view-id>/dtecimax/ar/AlergiasPacientes.xhtml</to-view-id>
    <redirect/>

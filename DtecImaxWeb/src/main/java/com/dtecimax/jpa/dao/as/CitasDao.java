@@ -1,5 +1,7 @@
 package com.dtecimax.jpa.dao.as;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.dtecimax.jpa.dto.as.CitasDto;
@@ -21,5 +23,11 @@ public interface CitasDao {
 	public void actualizaCitas(CitasDto pCitasDto,long pNumeroCita);
 	
 	public void deleteCita(long pNumeroCita);
+
+	public int validaDuplicados(long pNumeroDoctor
+			                  , Timestamp pFechaCita
+			                  , Time pHoraInicialCita
+			                  , Time pHoraFinalCita
+			                  );
 	
 }

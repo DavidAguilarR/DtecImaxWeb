@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.primefaces.PrimeFaces;
@@ -34,6 +35,7 @@ import com.dtecimax.ejb.services.as.CitasLocal;
 import com.dtecimax.ejb.services.as.EstudiosLocal;
 import com.dtecimax.ejb.services.as.NotasCitasLocal;
 import com.dtecimax.ejb.services.as.OrdenesEstudiosLocal;
+import com.dtecimax.ejb.services.hr.DocRefVsDocLocal;
 import com.dtecimax.ejb.services.hr.DoctoresLocal;
 import com.dtecimax.ejb.services.hr.DoctoresReferentesLocal;
 import com.dtecimax.jpa.dto.ar.PacientesDto;
@@ -41,6 +43,7 @@ import com.dtecimax.jpa.dto.as.CitasDto;
 import com.dtecimax.jpa.dto.as.EstudiosDto;
 import com.dtecimax.jpa.dto.as.NotasCitasDto;
 import com.dtecimax.jpa.dto.as.OrdenesEstudiosDto;
+import com.dtecimax.jpa.dto.hr.DocRefVsDocV1Dto;
 import com.dtecimax.jpa.dto.hr.DoctoresDto;
 import com.dtecimax.jpa.dto.hr.DoctoresReferentesDto;
 
@@ -112,11 +115,12 @@ public class CitasForm {
 	
 	@Inject
 	OrdenesEstudiosLocal ordenesEstudiosLocal;
-	
+
+	@Inject 
+	DocRefVsDocLocal docRefVsDocLocal; 
 	
 	private String[] selectedAlergiasPacientes;
 
-	
 	
 	@PostConstruct
 	public void init() {
@@ -217,6 +221,20 @@ public class CitasForm {
 		citasDto.setFechaUltimaActualizacion(citas.getFechaUltimaActualizacion());
 		citasDto.setComentariosC(citas.getComentariosC());
 		
+		int numeroRegistros = citasLocal.validaDuplicados(citasDto.getNumeroDoctor()
+				                                         ,citasDto.getFechaCita()
+				                                         ,citasDto.getHoraInicialCita()
+				                                         ,citasDto.getHoraFinalCita()
+				                                         );
+		
+		System.out.println("numeroRegistros:"+numeroRegistros);
+		if(0!=numeroRegistros) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo crear la cita.", "Ya existen citas para el doctor, fecha y horarios.");
+	        PrimeFaces.current().dialog().showMessageDynamic(message);
+			PrimeFaces.current().ajax().addCallbackParam("loggedIn", loggedIn);
+			return; 
+		}
+		
 		citasLocal.insertCitas(citasDto);
 		
 		refreshEntity();
@@ -242,6 +260,19 @@ public class CitasForm {
 		citasDto.setComentariosC(citas.getComentariosC());
 		//Agreagado 121219
 		citasDto.setNumeroDoctorReferente(citas.getNumeroDoctorReferente());
+		
+		int numeroRegistros = citasLocal.validaDuplicados(citasDto.getNumeroDoctor()
+                ,citasDto.getFechaCita()
+                ,citasDto.getHoraInicialCita()
+                ,citasDto.getHoraFinalCita()
+                );
+
+		System.out.println("numeroRegistros:"+numeroRegistros);
+		if(0!=numeroRegistros) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo crear la cita.", "Ya existen citas para el doctor, fecha y horarios.");
+		PrimeFaces.current().dialog().showMessageDynamic(message);
+		return; 
+		}
 		
 		citasLocal.insertCitas(citasDto);
 		refreshEntity();
@@ -320,6 +351,20 @@ public class CitasForm {
 		 //Agregado
 		 citasDto.setNumeroDoctorReferente(citasSelected.getNumeroDoctorReferente());
 		 citasDto.setComentariosC(citasSelected.getComentariosC());
+		 
+		 int numeroRegistros = citasLocal.validaDuplicados(citasDto.getNumeroDoctor()
+	                ,citasDto.getFechaCita()
+	                ,citasDto.getHoraInicialCita()
+	                ,citasDto.getHoraFinalCita()
+	                );
+
+			System.out.println("numeroRegistros:"+numeroRegistros);
+			if(0!=numeroRegistros) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se pudo crear la cita.", "Ya existen citas para el doctor, fecha y horarios.");
+			PrimeFaces.current().dialog().showMessageDynamic(message);
+			return; 
+			}
+		 
 		 citasLocal.actualizaCitas(citasDto, citasSelected.getNumeroCita());
 		 
 		 refreshEntity();
@@ -655,6 +700,56 @@ public class CitasForm {
 	public void deleteNotasCitas() {
 		notasCitasLocal.deleteNotasCitas(notasCitasSelected.getNumeroNota());
 		refreshEntityNotas();
+	}
+	
+	public List<SelectItem> getSelectDoctoresItems(){
+		List<SelectItem> lselectDoctoresItems = new ArrayList<SelectItem>();
+		if(0==this.getCitas().getNumeroDoctorReferente()) {
+			return lselectDoctoresItems; 
+		}
+		
+		long longCount = docRefVsDocLocal.countByNumeroDoctorRef(this.getCitas().getNumeroDoctorReferente()); 
+		if(0!=longCount) {
+			List<DocRefVsDocV1Dto> listDocRefVsDocV1Dto =  docRefVsDocLocal.findByNumeroDoctorRef(this.getCitas().getNumeroDoctorReferente());
+			for(DocRefVsDocV1Dto docRefVsDocV1Dto:listDocRefVsDocV1Dto) {
+				SelectItem selectItem = new SelectItem(docRefVsDocV1Dto.getNumeroDoctor(),docRefVsDocV1Dto.getNombreCompletoDoctor());
+				lselectDoctoresItems.add(selectItem);
+			}
+		}else {
+			List<DoctoresDto> lisDoctoresDto = doctoresLocal.findSelectItems();
+			Iterator<DoctoresDto> iterDoctoresDto = lisDoctoresDto.iterator();
+			while(iterDoctoresDto.hasNext()) {
+				DoctoresDto doctoresDto =iterDoctoresDto.next();
+				SelectItem selectItem = new SelectItem(doctoresDto.getNumeroDoctor(),doctoresDto.getNombreDoctor()+" "+doctoresDto.getApellidoPaternoDoctor()+" "+doctoresDto.getApellidoMaternoDoctor());
+				lselectDoctoresItems.add(selectItem);
+			}	
+		}
+		return lselectDoctoresItems;
+	}
+	
+	public List<SelectItem> getSelectDoctoresItemsUpd(){
+		List<SelectItem> lselectDoctoresItems = new ArrayList<SelectItem>();
+		if(0==this.getCitasSelected().getNumeroDoctorReferente()) {
+			return lselectDoctoresItems; 
+		}
+		
+		long longCount = docRefVsDocLocal.countByNumeroDoctorRef(this.getCitasSelected().getNumeroDoctorReferente()); 
+		if(0!=longCount) {
+			List<DocRefVsDocV1Dto> listDocRefVsDocV1Dto =  docRefVsDocLocal.findByNumeroDoctorRef(this.getCitasSelected().getNumeroDoctorReferente());
+			for(DocRefVsDocV1Dto docRefVsDocV1Dto:listDocRefVsDocV1Dto) {
+				SelectItem selectItem = new SelectItem(docRefVsDocV1Dto.getNumeroDoctor(),docRefVsDocV1Dto.getNombreCompletoDoctor());
+				lselectDoctoresItems.add(selectItem);
+			}
+		}else {
+			List<DoctoresDto> lisDoctoresDto = doctoresLocal.findSelectItems();
+			Iterator<DoctoresDto> iterDoctoresDto = lisDoctoresDto.iterator();
+			while(iterDoctoresDto.hasNext()) {
+				DoctoresDto doctoresDto =iterDoctoresDto.next();
+				SelectItem selectItem = new SelectItem(doctoresDto.getNumeroDoctor(),doctoresDto.getNombreDoctor()+" "+doctoresDto.getApellidoPaternoDoctor()+" "+doctoresDto.getApellidoMaternoDoctor());
+				lselectDoctoresItems.add(selectItem);
+			}	
+		}
+		return lselectDoctoresItems;
 	}
 	
 	public Citas getCitas() {

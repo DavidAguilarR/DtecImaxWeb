@@ -1,5 +1,7 @@
 package com.dtecimax.ejb.services.as;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -23,6 +25,12 @@ public interface CitasLocal {
 	
 	public void actualizaCitas(CitasDto pCitasDto,long pNumeroCita);
 	
-	public void deleteCita(long pNumeroCita); 
+	public void deleteCita(long pNumeroCita);
+
+	public int validaDuplicados(long pNumeroDoctor
+			                  , Timestamp pFechaCita
+			                  , Time pHoraInicialCita
+			                  , Time pHoraFinalCita
+			                  ); 
 	
 }

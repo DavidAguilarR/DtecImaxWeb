@@ -112,6 +112,7 @@ public class AdminHelper {
 		}
 		return lselectDoctoresItems;
 	}
+	
 	public List<SelectItem> getSelectDoctoresReferentesItems(){
 		List<SelectItem> lselectDoctoresReferentesItems = new ArrayList<SelectItem>();
 		List<DoctoresReferentesDto> lisDoctoresReferentesDto = doctoresReferentesLocal.findSelectItems();

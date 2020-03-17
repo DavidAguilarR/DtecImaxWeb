@@ -35,6 +35,7 @@
                      <p:menuitem id="apl_ar_pacientes" value="Pacientes" icon="fa fa-group" outcome="ar-pacientes"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
                      <p:menuitem id="apl_hr_doctores" value="Doctores" icon="fa fa-user-md" outcome="hr-doctores"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"/>
                      <p:menuitem id="apl_hr_doctores_referentes" value="Doctores Referentes" icon="fa fa-user-md" outcome="hr-doctores-referentes" />
+                     <p:menuitem id="apl_hr_doc_ref_vs_doc" value="Doctores Referentes Vs Doctores" icon="fa fa-user-md" outcome="hr-doc-ref-vs-doc"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"/>
                     </p:submenu>
                     
                      <p:submenu id="apl_as" label="Citas y Ordenes" icon="fa fa-pencil-square-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}">
