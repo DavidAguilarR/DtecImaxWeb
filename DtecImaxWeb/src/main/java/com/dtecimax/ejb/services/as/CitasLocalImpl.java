@@ -1,5 +1,7 @@
 package com.dtecimax.ejb.services.as;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -51,6 +53,18 @@ public class CitasLocalImpl implements CitasLocal{
 	@Override
 	public void deleteCita(long pNumeroCita) {
 		citasDao.deleteCita(pNumeroCita);
+	}
+
+	@Override
+	public int validaDuplicados(long pNumeroDoctor
+			                  , Timestamp pFechaCita
+			                  , Time pHoraInicialCita
+			                  , Time pHoraFinalCita) {
+		return citasDao.validaDuplicados(pNumeroDoctor
+				                        ,pFechaCita
+				                        ,pHoraInicialCita
+				                        ,pHoraFinalCita
+				                        );
 	}
 
 }

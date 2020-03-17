@@ -7,10 +7,8 @@
     <persistence-unit name="DTECIMAXPU" transaction-type="JTA">
         <jta-data-source>java:/DTECIMAX</jta-data-source>
         <class>com.dtecimax.jpa.dto.ar.AsGastosDto</class>
-         <!--  
          <properties> 
           <property name = "hibernate.show_sql" value = "true" />
          </properties>
-        -->
     </persistence-unit>
 </persistence>

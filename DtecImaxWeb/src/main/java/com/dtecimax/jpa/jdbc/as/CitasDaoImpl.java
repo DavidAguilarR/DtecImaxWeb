@@ -1,12 +1,15 @@
 package com.dtecimax.jpa.jdbc.as;
 
 import java.math.BigInteger;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import com.dtecimax.jpa.dao.as.CitasDao;
 import com.dtecimax.jpa.dto.as.CitasDto;
@@ -77,6 +80,41 @@ public class CitasDaoImpl implements CitasDao {
 	public void deleteCita(long pNumeroCita) {
 		CitasDto citasDto = em.find(CitasDto.class, pNumeroCita); 
 		em.remove(citasDto);
+	}
+
+
+
+
+	@Override
+	public int validaDuplicados(long pNumeroDoctor
+			                  , Timestamp pFechaCita
+			                  , Time pHoraInicialCita
+			                  , Time pHoraFinalCita) {
+		/**
+		String strQuery = "SELECT COUNT(1)\r\n" + 
+				"  FROM CitasDto c \r\n" + 
+				" WHERE c.numeroDoctor ="+pNumeroDoctor+
+				"   AND c.fechaCita  = :pFechaCita"+
+			    "   AND ( (:pHoraInicialCita BETWEEN c.horaInicialCita AND c.horaFinalCita) OR (:pHoraFinalCita BETWEEN c.horaInicialCita AND c.horaFinalCita) )"; 
+		**/
+   	    System.out.println(pFechaCita);
+	 	System.out.println(pHoraInicialCita);
+		System.out.println(pHoraFinalCita);
+		String strpFechaCita = pFechaCita.toString(); 
+		strpFechaCita = strpFechaCita.substring(0, 10); 
+		System.out.println("strpFechaCita:"+strpFechaCita);
+		String strQuery = "SELECT COUNT(1)\r" + 
+				"  FROM [dbo].[CITAS]\r" + 
+				" WHERE NUMERO_DOCTOR = "+pNumeroDoctor+"\r" + 
+				" AND FECHA_CITA = :pFechaCita \r" + 
+				"  AND (('"+pHoraInicialCita+"' BETWEEN HORA_INICIAL_CITA AND HORA_FINAL_CITA)\r" + 
+				"    OR ('"+pHoraFinalCita+"' BETWEEN HORA_INICIAL_CITA AND HORA_FINAL_CITA)\r" + 
+				"	  )"; 
+		Query query = em.createNativeQuery(strQuery);
+		query.setParameter("pFechaCita", pFechaCita, TemporalType.TIMESTAMP);
+		Integer integer = (Integer)query.getSingleResult(); 
+		
+		return integer.intValue();
 	}
 
 }
