@@ -16,7 +16,7 @@
                  <pa:menu>
                     <p:menuitem id="apl_inicio" value="Inicio" icon="fa fa-home" outcome="home"/>
                   
-                    <p:submenu id="apl_administracion" label="Administración" icon="fa fa-gear" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
+                   <p:submenu id="apl_administracion" label="Administración" icon="fa fa-gear" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_ADMINISTRACION')}">
                       <p:menuitem id="apl_global_ubicaciones" value="Ubicaciones" icon="fa fa-suitcase" outcome="global-ubicaciones" />
                       <p:menuitem id="apl_adm_usuarios" value="Usuarios" icon="fa fa-group" outcome="admin-usuarios" />
                       <p:menuitem id="apl_adm_permisos" value="Permisos" icon="fa fa-lock" outcome="admin-permisos" rendered="false"/>
@@ -30,19 +30,19 @@
                      
                     </p:submenu>
                   
-                    <p:submenu id="apl_ar" label="Hospital" icon="fa fa-hospital-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}">
-                     <p:menuitem id="apl_ar_alergias_pacientes" value="Padecimientos Pacientes" icon="fa fa-ambulance" outcome="ar-alergias-pacientes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
-                     <p:menuitem id="apl_ar_pacientes" value="Pacientes" icon="fa fa-group" outcome="ar-pacientes"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
-                     <p:menuitem id="apl_hr_doctores" value="Doctores" icon="fa fa-user-md" outcome="hr-doctores"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"/>
-                     <p:menuitem id="apl_hr_doctores_referentes" value="Doctores Referentes" icon="fa fa-user-md" outcome="hr-doctores-referentes" />
-                     <p:menuitem id="apl_hr_doc_ref_vs_doc" value="Doctores Referentes Vs Doctores" icon="fa fa-user-md" outcome="hr-doc-ref-vs-doc"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}"/>
+                   <p:submenu id="apl_ar" label="Doctores y Pacientes" icon="fa fa-hospital-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_ADMINISTRACION') or request.isUserInRole('ROLE_CAJA') or request.isUserInRole('ROLE_RP')}">
+                     <p:menuitem id="apl_ar_alergias_pacientes" value="Padecimientos Pacientes" icon="fa fa-ambulance" outcome="ar-alergias-pacientes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_ADMINISTRACION')}"/>
+                     <p:menuitem id="apl_ar_pacientes" value="Pacientes" icon="fa fa-group" outcome="ar-pacientes"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_CAJA') or request.isUserInRole('ROLE_ADMINISTRACION')}"/>
+                     <p:menuitem id="apl_hr_doctores" value="Doctores" icon="fa fa-user-md" outcome="hr-doctores"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_CAJA') or request.isUserInRole('ROLE_ADMINISTRACION')}"/>
+                     <p:menuitem id="apl_hr_doctores_referentes" value="Doctores Referentes" icon="fa fa-user-md" outcome="hr-doctores-referentes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_CAJA')  or request.isUserInRole('ROLE_RP')  or request.isUserInRole('ROLE_ADMINISTRACION')}"/>
+                     <p:menuitem id="apl_hr_doc_ref_vs_doc" value="Doctores Referentes Vs Doctores" icon="fa fa-user-md" outcome="hr-doc-ref-vs-doc"  rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_ADMINISTRACION')}"/>
                     </p:submenu>
                     
-                     <p:submenu id="apl_as" label="Citas y Ordenes" icon="fa fa-pencil-square-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}">
-                        <p:menuitem id="apl_as_citas" value="Citas" icon="fa fa-stethoscope" outcome="as-citas" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}" />
+                    <p:submenu id="apl_as" label="Citas y Ordenes" icon="fa fa-pencil-square-o" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_CAJA')}">
+                        <p:menuitem id="apl_as_citas" value="Citas" icon="fa fa-stethoscope" outcome="as-citas" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_CAJA')}" />
                         <p:menuitem id="apl_as_resumen_citas" value="Resumen Citas" icon="fa fa-stethoscope" outcome="as-resumen-citas" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
-                       <p:menuitem id="apl_as_estudios" value="Estudios" icon="fa fa-flask" outcome="as-estudios" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
-                        <p:menuitem id="apl_as_historial_ordenes" value="Historial Ordenes" icon="fa fa-flask" outcome="as-historial-ordenes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR')}"/>
+                       <p:menuitem id="apl_as_estudios" value="Estudios" icon="fa fa-flask" outcome="as-estudios" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_CAJA')}"/>
+                        <p:menuitem id="apl_as_historial_ordenes" value="Historial Ordenes" icon="fa fa-flask" outcome="as-historial-ordenes" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_CAJA') or request.isUserInRole('ROLE_RECEPCION') or request.isUserInRole('ROLE_RP') or request.isUserInRole('ROLE_TECNICO')}"/>
                         <p:menuitem id="apl_as_ordenes_simples" value="Ordenes Simples" icon="fa fa-flask" outcome="as-ordenes-simples" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
                         <p:menuitem id="apl_as_ordenes_especiales" value="Ordenes Especiales" icon="fa fa-flask" outcome="as-ordenes-especiales" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
                         <p:menuitem id="apl_as_ordenes_contrastados" value="Ordenes Contrastados" icon="fa fa-flask" outcome="as-ordenes-contrastados" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_DOCTOR') or request.isUserInRole('ROLE_RECEPCION')}"/>
@@ -53,7 +53,7 @@
                          <p:menuitem id="apl_email_ntfs_out" value="Enviados" icon="fa fa-sign-out" outcome="email-notificaciones"/>
                       </p:submenu>
                   
-                       <p:submenu id="apl_charges" label="Cobros" icon="fa fa-usd" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR')}">
+                       <p:submenu id="apl_charges" label="Cobros" icon="fa fa-usd" rendered="#{request.isUserInRole('ROLE_ADMINISTRADOR') or request.isUserInRole('ROLE_CAJA') or request.isUserInRole('ROLE_ADMINISTRACION')}">
                        <p:menuitem id="apl_charges_pago_de_estudios" value="Pago de Estudios" icon="fa fa-money" outcome="charges-pago-de-estudios" />
                        <p:menuitem id="apl_charges_historial_de_pagos" value="Historial de Pagos" icon="fa fa-money" outcome="charges-historial-de-pagos" />
                       </p:submenu>

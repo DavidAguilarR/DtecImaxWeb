@@ -237,41 +237,35 @@
 <h:form id="CitasFormCreate">
 <f:passThroughAttribute name="autocomplete" value="off"/>
 <p:dialog id="citas-dialog-create" widgetVar="CitasDialogCreate" modal="true" closable="true" closeOnEscape="true" draggable="yes" resizable="yes"  header="Registrar Cita">
-  <p:messages id="messages" showDetail="true" closable="true">
-  <p:autoUpdate />
-</p:messages>
  <p:panel id="panelCreate">
  <div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
-   <p:outputLabel value="Paciente" for="numero_paciente" /> 
-   <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroPaciente}" >
+  <div class="ui-g-6 ui-lg-4" style="margin-bottom: 5px;">
+  <p:outputLabel value="Doctor Que Refiere" for="numero_doctor_referente" /> 
+  <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
-   <p:ajax event="change" update="celular_paciente" listener="#{citasForm.handleTelefonoChange}"/>
- </p:selectOneMenu>
- <p:message for="numero_paciente"/>
+  <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
+   <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChange}"/>
+  </p:selectOneMenu>
+  <p:message for="numero_doctor_referente"/>
  </div>
-<div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
-  <p:outputLabel for="celular_paciente" value="Celular Paciente"/>
-  <p:inputText id="celular_paciente" value="#{citasForm.celularPaciente}" readonly="true">
+ 
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+  <p:outputLabel for="lugar_trabajo" value="Hospital"/>
+  <p:inputText id="lugar_trabajo" value="#{citasForm.lugarTrabajo}" readonly="true">
   	</p:inputText>
-  	<p:message for="celular_paciente"/>
+  	<p:message for="lugar_trabajo"/>
   	</div>
+ 
  <div class="ui-g-6 ui-lg-3" style="margin-bottom: 5px;">
-    <p:outputLabel for="fecha_cita" value="Fecha Cita:" />
-    <p:datePicker id="fecha_cita"  locale="es"  monthNavigator="true" pattern="yyyy-MM-dd" required="true" value="#{citas.utilFechaCita}" /> 
-    <p:message for="fecha_cita"/>
-  </div>
-     <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
-  <p:outputLabel value="Ubicacion" for="numero_ubicacion" /> 
-   <p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroUbicacion}" >
-  <f:selectItem itemLabel="seleccione" itemValue="IMAX" /> 
-  <f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
- </p:selectOneMenu>
- <p:message for="numero_ubicacion"/>
+  <p:outputLabel value="Doctor" for="numero_doctor" /> 
+  <p:selectOneMenu id="numero_doctor" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctor}" >
+  <f:selectItem itemLabel="seleccione" itemValue="" /> 
+  <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
+  </p:selectOneMenu>
+  <p:message for="numero_doctor"/>
  </div>
-
-   <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+ 
+ <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
   <p:outputLabel value="Estudio" for="numero_estudio" /> 
    <p:selectOneMenu id="numero_estudio" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroEstudio}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -294,32 +288,49 @@
   	<p:message for="comentarios_estudio"/>
   	</div>
   
-   <div class="ui-g-6 ui-lg-4" style="margin-bottom: 5px;">
-  <p:outputLabel value="Doctor Que Refiere" for="numero_doctor_referente" /> 
-  <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctorReferente}" >
+ 
+  <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+   <p:outputLabel value="Paciente" for="numero_paciente" /> 
+   <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroPaciente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-   <p:ajax event="change" update="lugar_trabajo numero_doctor" listener="#{citasForm.handleLugarChange}"/>
-  </p:selectOneMenu>
-  <p:message for="numero_doctor_referente"/>
+  <f:selectItems value="#{adminHelper.selectPacientesItems}"  />
+   <p:ajax event="change" update="celular_paciente" listener="#{citasForm.handleTelefonoChange}"/>
+ </p:selectOneMenu>
+ <p:message for="numero_paciente"/>
  </div>
  
- <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
-  <p:outputLabel for="lugar_trabajo" value="Hospital"/>
-  <p:inputText id="lugar_trabajo" value="#{citasForm.lugarTrabajo}" readonly="true">
+<div class="ui-g-12 ui-lg-1" style="margin-bottom: 5px;">
+  <p:outputLabel for="celular_paciente" value="Celular Px"/>
+  <p:inputText id="celular_paciente" value="#{citasForm.celularPaciente}" readonly="true">
   	</p:inputText>
-  	<p:message for="lugar_trabajo"/>
+  	<p:message for="celular_paciente"/>
   	</div>
- 
+  	
+  <div class="ui-g-12 ui-lg-1" style="margin-bottom: 5px;">
+  <p:outputLabel for="celular_alterno_paciente" value="Celular Alterno"/>
+  <p:inputText id="celular_alterno_paciente" value="#{citasForm.celularAlternoPaciente}" readonly="true">
+  	</p:inputText>
+  	<p:message for="celular_alterno_paciente"/>
+  	</div>	
+  
+  	
  <div class="ui-g-6 ui-lg-3" style="margin-bottom: 5px;">
-  <p:outputLabel value="Doctor" for="numero_doctor" /> 
-  <p:selectOneMenu id="numero_doctor" filter="true"  filterMatchMode="contains" required="true" value="#{citas.numeroDoctor}" >
-  <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{citasForm.selectDoctoresItems}"  />
-  </p:selectOneMenu>
-  <p:message for="numero_doctor"/>
+    <p:outputLabel for="fecha_cita" value="Fecha Cita:" />
+    <p:datePicker id="fecha_cita"  locale="es"  monthNavigator="true" pattern="yyyy-MM-dd" required="true" value="#{citas.utilFechaCita}" /> 
+    <p:message for="fecha_cita"/>
+  </div>
+  
+     <div class="ui-g-12 ui-lg-2" style="margin-bottom: 5px;">
+  <p:outputLabel value="Ubicacion" for="numero_ubicacion" /> 
+   <p:selectOneMenu id="numero_ubicacion" filter="true" filterMatchMode="contains" required="true" value="#{citas.numeroUbicacion}" >
+  <f:selectItem itemLabel="seleccione" itemValue="IMAX" /> 
+  <f:selectItems value="#{adminHelper.selectUbicacionesItems}"  />
+ </p:selectOneMenu>
+ <p:message for="numero_ubicacion"/>
  </div>
 
+   
+  
  
  <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
@@ -334,6 +345,13 @@
     <!-- <p:datePicker id="hora_final_cita"  locale="es" style="width: 100%; margin-top: 5px;" monthNavigator="true" pattern="HH:mm" required="true" timeOnly="true" value="#{citas.utilHoraFinalCita}" />  -->
     <p:message for="hora_final_cita"/>
   </div>
+    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  <p:outputLabel for="agendado" value="Agendado por:"/>
+  <p:inputText id="agendado" value="" readonly="true">
+  	</p:inputText>
+  	<p:message for="agendado"/>
+  	</div>
+  
  </div>
  	</div>
  <div class="ui-g ui-fluid">
@@ -368,9 +386,9 @@
 <f:passThroughAttribute name="autocomplete" value="off"/>
 <p:dialog id="citas-dialog-update" widgetVar="CitasDialogUpdate" modal="true" closable="true" closeOnEscape="true" draggable="true" resizable="false"  header="Actualizar Cita">
  <p:panel id="panelUpdate">
- 
   <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-4" style="margin-bottom: 5px;">
+  
    <p:outputLabel value="Nombre Paciente" for="numero_paciente" /> 
    <p:selectOneMenu id="numero_paciente" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroPaciente}" >
    <f:selectItem itemLabel="seleccione" itemValue="" /> 
@@ -424,7 +442,7 @@
   <p:selectOneMenu id="numero_doctor_referente" filter="true"  filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctorReferente}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
   <f:selectItems value="#{adminHelper.selectDoctoresReferentesItems}"  />
-     <p:ajax event="change" update="lugar_trabajo numero_doctor" listener="#{citasForm.handleLugarChangeUpd}"/>
+     <p:ajax event="change" update="lugar_trabajo" listener="#{citasForm.handleLugarChangeUpd}"/>
   </p:selectOneMenu>
   <p:message for="numero_doctor_referente"/>
  </div>
@@ -439,7 +457,7 @@
   <p:outputLabel value="Nombre Doctor" for="numero_ubicacion" /> 
    <p:selectOneMenu id="numero_doctor" filter="true" filterMatchMode="contains" required="true" value="#{citasForm.citasSelected.numeroDoctor}" >
   <f:selectItem itemLabel="seleccione" itemValue="" /> 
-  <f:selectItems value="#{citasForm.selectDoctoresItemsUpd}"  />
+  <f:selectItems value="#{adminHelper.selectDoctoresItems}"  />
  </p:selectOneMenu>
  <p:message for="numero_doctor"/>
  </div>
@@ -447,16 +465,23 @@
 <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel for="hora_inicial_cita" value="Hora Inicial:" />
-    <pe:timePicker id="hora_inicial_cita" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaInicialOrdenWidget" value="#{citasForm.citasSelected.utilHoraInicialCita}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
+    <pe:timePicker id="hora_inicial_cita" style="width: 100%; margin-top: 5px;" mode="popup"  readonly="true"  required="true" widgetVar="horaInicialOrdenWidget" value="#{citasForm.citasSelected.utilHoraInicialCita}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
     <!-- <p:datePicker id="hora_inicial_cita"  locale="es" style="width: 100%; margin-top: 5px;" monthNavigator="true" pattern="HH:mm" required="true"  timeOnly="true" value="#{citasForm.citasSelected.utilHoraInicialCita}" />  -->
     <p:message for="hora_inicial_cita"/>
   </div>
   <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
     <p:outputLabel for="hora_final_cita" value="Hora Final:" />
-    <pe:timePicker id="hora_final_cita" style="width: 100%; margin-top: 5px;" mode="popup"  required="true" widgetVar="horaFinalOrdenWidget" value="#{citasForm.citasSelected.utilHoraFinalCita}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
+    <pe:timePicker id="hora_final_cita" style="width: 100%; margin-top: 5px;" mode="popup" readonly="true" required="true" widgetVar="horaFinalOrdenWidget" value="#{citasForm.citasSelected.utilHoraFinalCita}" startHours="8" endHours="20" minHour="8" maxHour="20"/>
     <!--  <p:datePicker id="hora_final_cita"  locale="es" style="width: 100%; margin-top: 5px;" monthNavigator="true" pattern="HH:mm" required="true" timeOnly="true" value="#{citasForm.citasSelected.utilHoraFinalCita}" /> -->
     <p:message for="hora_final_cita"/>
   </div>
+    <div class="ui-g-12 ui-lg-3" style="margin-bottom: 5px;">
+  <p:outputLabel for="agendado" value="Agendado por:"/>
+  <p:inputText id="agendado" value="" readonly="true">
+  	</p:inputText>
+  	<p:message for="agendado"/>
+  	</div>
+  
  </div>
 
  </div>

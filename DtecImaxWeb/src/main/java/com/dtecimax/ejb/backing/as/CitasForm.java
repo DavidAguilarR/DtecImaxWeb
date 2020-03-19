@@ -346,8 +346,7 @@ public class CitasForm {
 		 citasDto.setNumeroPaciente(citasSelected.getNumeroPaciente());
 		 citasDto.setNumeroEstudio(citasSelected.getNumeroEstudio());
 		 citasDto.setFechaCita(citasSelected.getFechaCita());
-		 citasDto.setHoraInicialCita(citasSelected.getHoraInicialCita());
-		 citasDto.setHoraFinalCita(citasSelected.getHoraFinalCita());
+
 		 //Agregado
 		 citasDto.setNumeroDoctorReferente(citasSelected.getNumeroDoctorReferente());
 		 citasDto.setComentariosC(citasSelected.getComentariosC());

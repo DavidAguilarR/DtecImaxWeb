@@ -38,17 +38,17 @@
        <security:http use-expressions="true">
 
         <security:intercept-url pattern="/faces/login.xhtml" access="permitAll"/>
-        <security:intercept-url pattern="/faces/tester.xhtml*" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/admin/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/admin/as/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/ar/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/as/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/chart/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/email/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/faces/dtecimax/hr/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
+        <security:intercept-url pattern="/faces/tester.xhtml*" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/admin/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/admin/as/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/ar/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/as/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/chart/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/email/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/faces/dtecimax/hr/**" access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
         <security:intercept-url pattern="/timeout*" access="permitAll"/>
-        <security:intercept-url pattern="/Formato1CO"  access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
-        <security:intercept-url pattern="/Formato2CO"  access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION')"/>
+        <security:intercept-url pattern="/Formato1CO"  access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
+        <security:intercept-url pattern="/Formato2CO"  access="hasAnyRole('ROLE_ADMINISTRADOR','ROLE_DOCTOR','ROLE_RECEPCION','ROLE_ADMINISTRACION','ROLE_CAJA','ROLE_RP')"/>
         
         <security:intercept-url pattern="/*" access="denyAll"/>
         
